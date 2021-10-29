@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+    <game_key>406</game_key>
+    <game_id>406</game_id>
+    <name>Football</name>
+    <code>nfl</code>
+    <type>full</type>
+    <url>https://football.fantasysports.yahoo.com/f1</url>
+    <season>2021</season>
+    <is_registration_over>1</is_registration_over>
+    <is_game_over>0</is_game_over>
+    <is_offseason>0</is_offseason>
+    <roster_positions>
+        <roster_position>
+            <position>QB</position>
+            <abbreviation>QB</abbreviation>
+            <display_name>Quarterback</display_name>
+            <position_type>O</position_type>
+        </roster_position>
+        <roster_position>
+            <position>WR</position>
+            <abbreviation>WR</abbreviation>
+            <display_name>Wide Receiver</display_name>
+            <position_type>O</position_type>
+        </roster_position>
+        <roster_position>
+            <position>RB</position>
+            <abbreviation>RB</abbreviation>
+            <display_name>Running Back</display_name>
+            <position_type>O</position_type>
+        </roster_position>
+        <roster_position>
+            <position>TE</position>
+            <abbreviation>TE</abbreviation>
+            <display_name>Tight End</display_name>
+            <position_type>O</position_type>
+        </roster_position>
+        <roster_position>
+            <position>W/T</position>
+            <abbreviation>W/T</abbreviation>
+            <display_name>Wide Receiver/Tight End</display_name>
+            <position_type>O</position_type>
+        </roster_position>
+        <roster_position>
+            <position>W/R</position>
+            <abbreviation>W/R</abbreviation>
+            <display_name>Wide Receiver/Running Back</display_name>
+            <position_type>O</position_type>
+        </roster_position>
+        <roster_position>
+            <position>W/R/T</position>
+            <abbreviation>W/R/T</abbreviation>
+            <display_name>Wide Receiver/Running Back/Tight End</display_name>
+            <position_type>O</position_type>
+        </roster_position>
+        <roster_position>
+            <position>Q/W/R/T</position>
+            <abbreviation>Q/W/R/T</abbreviation>
+            <display_name>Quarterback/Wide Receiver/Running Back/Tight End</display_name>
+            <position_type>O</position_type>
+        </roster_position>
+        <roster_position>
+            <position>K</position>
+            <abbreviation>K</abbreviation>
+            <display_name>Kicker</display_name>
+            <position_type>K</position_type>
+        </roster_position>
+        <roster_position>
+            <position>DEF</position>
+            <abbreviation>DEF</abbreviation>
+            <display_name>Defense/Special Teams</display_name>
+            <position_type>DT</position_type>
+        </roster_position>
+        <roster_position>
+            <position>D</position>
+            <abbreviation>D</abbreviation>
+            <display_name>Defensive Player</display_name>
+            <position_type>DP</position_type>
+        </roster_position>
+        <roster_position>
+            <position>DB</position>
+            <abbreviation>DB</abbreviation>
+            <display_name>Defensive Back</display_name>
+            <position_type>DP</position_type>
+        </roster_position>
+        <roster_position>
+            <position>DL</position>
+            <abbreviation>DL</abbreviation>
+            <display_name>Defensive Lineman</display_name>
+            <position_type>DP</position_type>
+        </roster_position>
+        <roster_position>
+            <position>LB</position>
+            <abbreviation>LB</abbreviation>
+            <display_name>Linebacker</display_name>
+            <position_type>DP</position_type>
+        </roster_position>
+        <roster_position>
+            <position>DT</position>
+            <abbreviation>DT</abbreviation>
+            <display_name>Defensive Tackle</display_name>
+            <position_type>DP</position_type>
+        </roster_position>
+        <roster_position>
+            <position>DE</position>
+            <abbreviation>DE</abbreviation>
+            <display_name>Defensive End</display_name>
+            <position_type>DP</position_type>
+        </roster_position>
+        <roster_position>
+            <position>CB</position>
+            <abbreviation>CB</abbreviation>
+            <display_name>Cornerback</display_name>
+            <position_type>DP</position_type>
+        </roster_position>
+        <roster_position>
+            <position>S</position>
+            <abbreviation>S</abbreviation>
+            <display_name>Safety</display_name>
+            <position_type>DP</position_type>
+        </roster_position>
+        <roster_position>
+            <position>BN</position>
+            <abbreviation>BN</abbreviation>
+            <display_name>Bench</display_name>
+            <is_bench>1</is_bench>
+        </roster_position>
+        <roster_position>
+            <position>IR</position>
+            <abbreviation>IR</abbreviation>
+            <display_name>Injured Reserve</display_name>
+        </roster_position>
+    </roster_positions>
+</game>

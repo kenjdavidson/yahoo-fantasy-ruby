@@ -1,17 +1,16 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "yahoo_fantasy/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "yahoo_fantasy"
-  spec.version       = YahooFantasy::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["TODO: Write your email address"]
+  spec.version       = "2.0.0-rc1"
+  spec.authors       = ["Ken Davidson"]
+  spec.email         = ["ken.j.davidson@live.ca"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Provide access to Yahoo Fantasy API v2}
+  spec.description   = %q{Perform standard or custom functionality using the Yahoo Fantasy API.}
+  spec.homepage      = "https://www.github.com/kenjdavidson/yahoo-fantasy-ruby"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -20,8 +19,8 @@ Gem::Specification.new do |spec|
     spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
     spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-    spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+    spec.metadata["source_code_uri"] = spec.homepage
+    spec.metadata["changelog_uri"] = spec.homepage
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
       "public gem pushes."
@@ -36,7 +35,13 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "oauth2", "~>1.2"
+  spec.add_dependency "representable", "~>3.1"
+  spec.add_dependency "nokogiri", "~>1.12"
+
   spec.add_development_dependency "bundler", "~> 1.17"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "rspec", "~> 3.0"  
+  spec.add_development_dependency "solargraph", "~>0.44"
+  spec.add_development_dependency "rubocop", "~>1.22"
 end
