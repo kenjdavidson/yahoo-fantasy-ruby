@@ -1,2 +1,8 @@
 Layout/EndOfLine:
-   Enabled: False
+  Enabled: False
+
+Metrics/BlockLength:
+  IgnoredMethods: 
+    - 'describe'
+    - 'context'
+    - 'it'

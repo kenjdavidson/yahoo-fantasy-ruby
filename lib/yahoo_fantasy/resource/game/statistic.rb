@@ -3,7 +3,7 @@
 module YahooFantasy
   module Resource
     class Game < YahooFantasy::Resource::Base
-      RosterPosition = Struct.new(:position, :abbreviation, :display_name, :position_type)
+      Statistic = Struct.new(:stat_id, :name, :display_name, :sort_order, :position_types)
     end
   end
 end

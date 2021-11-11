@@ -1,21 +1,36 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/docker-existing-dockerfile
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/ruby
 {
 	"name": "Yahoo Fantasy Ruby Dev Container",
 	"runArgs": ["--init"],
-
-	// Build object instead of direct properties
 	"build": {
-		"context": "..",
-		"dockerfile": "../Dockerfile",
-		"args": {
-
+		"dockerfile": "Dockerfile",
+		"args": { 
+			// Update 'VARIANT' to pick a Ruby version: 3, 3.0, 2, 2.7, 2.6
+			// Append -bullseye or -buster to pin to an OS version.
+			// Use -bullseye variants on local on arm64/Apple Silicon.
+			"VARIANT": "2.7",
+			
+			// Options
+			"NODE_VERSION": "none"
 		}
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
-	
+	"settings": {
+		"ruby.useBundler": true,
+		"ruby.rubocop.onSave": true,
+		"ruby.rubocop.useBundler": true,
+		"ruby.format": "rubocop",
+		"solargraph.useBundler": true,
+		"solargraph.completion": true,
+		"solargraph.hover": true,
+		"solargraph.autoformat": true,
+		"solargraph.formatting": true,
+		"solargraph.definitions": true,
+		"solargraph.references": true
+	},
+
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"rebornix.Ruby",
@@ -27,20 +42,14 @@
 		"miguel-savignano.ruby-symbols",
 		"wingrunr21.vscode-ruby",
 		"connorshea.vscode-ruby-test-adapter"
-	]
-
+	],
+	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	// Uncomment the next line to run commands after the container is created - for example installing curl.
-	// "postCreateCommand": "apt-get update && apt-get install -y curl",
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "bundle install",
 
-	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
-	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
-
-	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
-	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
-
-	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
 }

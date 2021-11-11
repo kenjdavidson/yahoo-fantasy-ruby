@@ -1,0 +1,10 @@
+client:
+  client_id:
+  client_secret:
+  redirect_uri:
+  scope:  
+
+token:
+  access_token:
+  refresh_token:
+  expiry_time:

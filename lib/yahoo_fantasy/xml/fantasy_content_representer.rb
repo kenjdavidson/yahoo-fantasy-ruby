@@ -1,19 +1,24 @@
+# frozen_string_literal: true
+
 module YahooFantasy
   module XML
-    class FantasyContentRepresenter < Representable::Decorator
-      include Representable::XML
+    # Represents the main XML structure for all Yahoo Fantasy API requests.  All requrests
+    # return a <fantasy_content> XML containing the requested resources.  These resources
+    # need to be parsed and mapped accordingly based on the requested content.
+    class FantasyContentRepresenter < YahooFantasy::XML::BaseRepresenter
+      # namespace YahooFantasy::XML::XMLNS_NS
+      # namespace_def xmlns: YahooFantasy::XML::XMLNS_NS
+      # namespace_def yahoo: YahooFantasy::XML::YAHOO_NS
+      remove_namespaces!
 
-      property :lang, attribute: true, as: "xml:lang"
-      property :uri, attribute: true, as: "yahoo:uri"
+      property :lang, attribute: true
+      property :uri, attribute: true
       property :copyright, attribute: true
       property :refresh_rate, attribute: true
-      property :xmlns, attribute: true 
 
-      collection :users, decorator: YahooFantasy::XML::UserRepresenter, class: YahooFantasy::Resource::User
-      collection :games, decorator: YahooFantasy::XML::GameRepresenter, class: YahooFantasy::Resource::Game
-      collection :leagues, decorator: YahooFantasy::XML::LeagueRepresenter, class: YahooFantasy::Resource::League
-            
-      property :game, decorator: YahooFantasy::XML::GameRepresenter, class: YahooFantasy::Resource::Game
-      property :league, decorator: YahooFantasy::XML::LeagueRepresenter, class: YahooFantasy::Resource::League      
-  end 
-end 
+      property :game, decorator: YahooFantasy::XML::GameRepresenter,
+                      class: YahooFantasy::Resource::Game
+      property :league, decorator: YahooFantasy::XML::LeagueRepresenter, class: YahooFantasy::Resource::League
+    end
+  end
+end

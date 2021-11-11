@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
-require 'yahoo_fantasy/version'
-require 'yahoo_fantasy/resource'
-require 'yahoo_fantasy/xml'
-
+# YahooFantasy module.
+#
+# @author kenjdavidson
+#
 module YahooFantasy
+  require 'yahoo_fantasy/version'
+
+  # Yahoo Fantasy API specific error to be extended and thrown as needed
+  #
   class YahooFantasyError < StandardError; end
+
+  autoload :Client, 'yahoo_fantasy/client'
+  autoload :Resource, 'yahoo_fantasy/resource'
+  autoload :XML, 'yahoo_fantasy/xml'
 end
