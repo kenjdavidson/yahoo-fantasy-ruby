@@ -43,9 +43,19 @@ module YahooFantasy
   #   # Now apply the token
   #   YahooFantasy::Resource::Base.access_token = access_token
   #
+  # @author kenjdavidson
+  # @since 1.0.0
+  #
   class Client < OAuth2::Client
     # Instantiates a new YahooFantasy::Client, passing through the client_id, client_secret,
-    # options and block to the OAuth2::Client.
+    # options and block to the OAuth2::Client.  Defaults the configuration for
+    # `authorization_url`, `token_url`, `scope` and `redirect_uri=oob` (all of which can
+    # be overwritten if required).
+    #
+    # @param client_id [String]
+    # @param client_secret [String]
+    # @param options (see OAuth2::Client::new)
+    #
     def initialize(client_id, client_secret, options = {}, &block)
       yahoo_options = {
         site: SITE,
@@ -60,11 +70,11 @@ module YahooFantasy
 
     # Overrides OAuth2::Client#authorize_url ensuring that the application scope
     # is provide in the parameters.  Required Yahoo OAuth2 parameters are:
-    # - scope
+    # - `scope`
     #
-    # If the provided scope doesn't match the authorize_url, the users will get an
+    # If the provided `scope` doesn't match the `authorize_url`, the users will get an
     # error page stating that something went wrong (with not much else) which is
-    # almost always non matching scope.
+    # almost always non matching `scope`.
     def authorize_url(params = {})
       auth_params = {
         'scope' => options[:scope]

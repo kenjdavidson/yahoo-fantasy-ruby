@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require 'yahoo_fantasy/resource/base'
-
 module YahooFantasy
   module Resource
-    class League < YahooFantasy::Resource::Base
+    class League
       # League Settings subresource
       # Available at the uri /league/{league_key}/settings or /league/{league_key};out=settings
       #

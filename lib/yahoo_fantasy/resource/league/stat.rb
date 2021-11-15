@@ -1,19 +1,31 @@
 # frozen_string_literal: true
 
-require 'yahoo_fantasy/resource/base'
-
 module YahooFantasy
   module Resource
-    class League < YahooFantasy::Resource::Base
-      # League Stats Position Type
-      # Each statistic will have their own position type - this is used to display the position type for which this
-      # position is active and whether it's a display only stat. For example the Team Defense Points For is a display
-      # only stat due to it being a range
-      #
-      StatPositionType = Struct.new(:position_type, :is_only_display_stat)
-
+    class League
       # League Stats (Stat Categories)
       # Available at the uri /league/{league_key}/stat_categories or /league/{league_key};out=stat_categories
+      #
+      # @!attribute [rw] stat_id
+      #   @return [Numeric] the stat id
+      #
+      # @!attribute [rw] enabled
+      #   @return [Numeric] whether the league has this stat set (1) or not (0)
+      #
+      # @!attribute [rw] name
+      #   @return [String] stat name
+      #
+      # @!attribute [rw] display_name
+      #   @return [String] stat display name/abbreviation
+      #
+      # @!attribute [rw] sort_order
+      #   @return [Numeric] order in which Yahoo displays stats
+      #
+      # @!attribute [rw] position_type
+      #   @return [League::RosterPosition]
+      #
+      # @!attribute [rw] stat_position_type
+      #   @return [League::StatPositionType]
       #
       Stat = Struct.new(:stat_id, :enabled, :name, :display_name, :sort_order, :position_type,
                         :stat_position_types)
