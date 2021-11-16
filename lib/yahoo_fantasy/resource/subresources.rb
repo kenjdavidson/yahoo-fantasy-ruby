@@ -18,6 +18,8 @@ module YahooFantasy
       module ClassMethods
         def subresource(name, klass)
           subresources[name] = klass
+
+          attr_accessor name
         end
 
         def subresources

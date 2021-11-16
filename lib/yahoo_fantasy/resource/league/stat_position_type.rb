@@ -2,7 +2,7 @@
 
 module YahooFantasy
   module Resource
-    class League
+    module League
       # League Stats Position Type
       # Each statistic will have their own position type - this is used to display the position type for which this
       # position is active and whether it's a display only stat. For example the Team Defense Points For is a display

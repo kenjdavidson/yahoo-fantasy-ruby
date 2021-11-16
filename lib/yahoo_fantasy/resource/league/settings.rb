@@ -2,7 +2,7 @@
 
 module YahooFantasy
   module Resource
-    class League
+    module League
       # League Settings subresource
       # Available at the uri /league/{league_key}/settings or /league/{league_key};out=settings
       #

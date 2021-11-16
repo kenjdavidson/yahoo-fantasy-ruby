@@ -4,9 +4,18 @@ require 'oauth2'
 
 module YahooFantasy
   SITE = 'https://api.login.yahoo.com/'
+
   AUTHORIZE_URL = '/oauth2/request_auth'
+
   TOKEN_URL = '/oauth2/get_token'
-  SCOPE = 'fspt-w,profile,email'
+
+  USERINFO_URL = '/openid/v1/userinfo'
+
+  # The default scope used to require to match exactly that configured
+  # in the Yahoo Developer Console.  But recently that stopped working
+  # and only allowing `fspt-w` (or `fspt-r`) even with `profile` and
+  # `email` configured in the app definition.
+  DEFAULT_SCOPE = 'fspt-w'
 
   # YahooFantasy::Client
   #
@@ -47,6 +56,10 @@ module YahooFantasy
   # @since 1.0.0
   #
   class Client < OAuth2::Client
+    # User info details return from the OAuth2/OpenId request
+    #
+    UserInfo = Struct.new(:id, :name, :given_name, :family_name, :locale, :email, :birthdate, :picture, :nickname)
+
     # Instantiates a new YahooFantasy::Client, passing through the client_id, client_secret,
     # options and block to the OAuth2::Client.  Defaults the configuration for
     # `authorization_url`, `token_url`, `scope` and `redirect_uri=oob` (all of which can
@@ -61,7 +74,7 @@ module YahooFantasy
         site: SITE,
         authorize_url: AUTHORIZE_URL,
         token_url: TOKEN_URL,
-        scope: SCOPE,
+        scope: DEFAULT_SCOPE,
         redirect_uri: 'oob',
         connection_build: block
       }.merge!(options)

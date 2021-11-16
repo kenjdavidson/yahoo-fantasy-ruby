@@ -10,9 +10,12 @@ module YahooFantasy
   # custom request logic.
   #
   module Resource
+    autoload :Filters, 'yahoo_fantasy/resource/filters'
+    autoload :Subresources, 'yahoo_fantasy/resource/subresources'
     autoload :Base, 'yahoo_fantasy/resource/base'
     autoload :FantasyContent, 'yahoo_fantasy/resource/fantasy_content'
     autoload :Game, 'yahoo_fantasy/resource/game'
     autoload :League, 'yahoo_fantasy/resource/league'
+    autoload :Team, 'yahoo_fantasy/resource/team'
   end
 end

@@ -24,4 +24,24 @@ RSpec.describe YahooFantasy::Resource::Subresources do
       expect(SubResourcedClass.subresources[:subresource2]).to eq Array
     end
   end
+
+  context 'instance of ResourcedClass' do
+    subject { SubResourcedClass.new }
+
+    it 'responds to subresource1' do
+      expect(subject.respond_to?(:subresource1)).to eq(true)
+    end
+
+    it 'responds to subresource1=' do
+      expect(subject.respond_to?('subresource1=')).to eq(true)
+    end
+
+    it 'responds to subresource2' do
+      expect(subject.respond_to?(:subresource2)).to eq(true)
+    end
+
+    it 'responds to subresource2=' do
+      expect(subject.respond_to?('subresource2=')).to eq(true)
+    end
+  end
 end

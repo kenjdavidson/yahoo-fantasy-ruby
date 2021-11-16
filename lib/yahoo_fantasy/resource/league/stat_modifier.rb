@@ -2,7 +2,7 @@
 
 module YahooFantasy
   module Resource
-    class League
+    module League
       # League Stat Modifiers
       # Stat modifiers are the numerical value used as a multiplier based on the statistic value. For
       # example the default QB Passing Touchdown modifier is 4 - meaning that a QB gets 4 pts for

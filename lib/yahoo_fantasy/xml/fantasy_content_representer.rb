@@ -16,9 +16,10 @@ module YahooFantasy
       property :copyright, attribute: true
       property :refresh_rate, attribute: true
 
-      property :game, decorator: YahooFantasy::XML::GameRepresenter,
-                      class: YahooFantasy::Resource::Game
-      property :league, decorator: YahooFantasy::XML::LeagueRepresenter, class: YahooFantasy::Resource::League
+      property :game, decorator: YahooFantasy::XML::Game::GameRepresenter,
+                      class: YahooFantasy::Resource::Game::Game
+      property :league, decorator: YahooFantasy::XML::League::LeagueRepresenter,
+                        class: YahooFantasy::Resource::League::League
     end
   end
 end

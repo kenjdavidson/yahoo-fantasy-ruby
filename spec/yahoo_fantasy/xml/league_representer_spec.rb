@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe YahooFantasy::XML::LeagueRepresenter do
+RSpec.describe YahooFantasy::XML::League::LeagueRepresenter do
   context 'request contains out=settings,standings,scoreboard' do
     load_fantasy_content "#{__dir__}/league/fantasy_content_league.xml"
 
@@ -116,6 +116,19 @@ RSpec.describe YahooFantasy::XML::LeagueRepresenter do
       expect(stat_modifiers.count).to eq(44)
       expect(stat_modifiers[0].stat_id).to eq(4)
       expect(stat_modifiers[0].value).to eq(0.04)
+    end
+
+    it 'should parse <standings>' do
+      standings = fantasy_content.league.standings
+
+      expect(standings).not_to eq(nil)
+      expect(standings.count).to eq(16)
+    end
+
+    it 'should parse <scoreboard>' do
+      scoreboard = fantasy_content.league.scoreboard
+
+      expect(scoreboard).not_to eq(nil)
     end
   end
 end

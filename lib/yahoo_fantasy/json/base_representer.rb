@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module YahooFantasy
-  module XML
+  module JSON
     class BaseRepresenter < Representable::Decorator
       feature Representable::JSON
     end

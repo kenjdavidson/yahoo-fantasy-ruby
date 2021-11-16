@@ -13,30 +13,22 @@ module YahooFantasy
       # properties, but when using collections with as they don't seem to work.
       remove_namespaces!
 
-      # Define basic properties
-      #
-      # @param props [Array<Symbol>] property name(s)
-      def self.string_properties(*props)
-        props.each do |prop|
-          property prop
-        end
-      end
-
-      # Define properties using Integer parser
-      #
-      # @param props [Array<Symbol>] property name(s) to be defined as Integer
-      def self.integer_properties(*props)
-        props.each do |prop|
-          property prop, parse_filter: XML::Parsers::IntegerFilter
-        end
-      end
-
-      # Define propreties using Float Parser
-      #
-      # @param props [Array<Symbol>] property name(s) to be defined as Float
-      def self.float_properties(*props)
-        props.each do |prop|
-          property prop, parse_filter: XML::Parsers::FloatFilter
+      class << self
+        # @!method string_properties
+        # @!method integer_properties
+        # @!method float_properties
+        # @!method boolean_properties
+        {
+          string: Parsers::StringFilter,
+          integer: Parsers::IntegerFilter,
+          float: Parsers::FloatFilter,
+          boolean: Parsers::BooleanFilter
+        }.each do |k, v|
+          define_method "#{k}_properties" do |*props|
+            props.each do |prop|
+              property prop, parse_filter: v
+            end
+          end
         end
       end
     end

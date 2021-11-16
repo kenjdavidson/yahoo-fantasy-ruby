@@ -23,16 +23,20 @@ module YahooFantasy
       def self.access_token=(access_token)
         unless access_token.respond_to?(:request)
           raise ArgumentError,
-                'Access token provided does not respond to #request method'
+                'access_token must respond to #request method'
         end
 
         Thread.current[:yahoo_fantasy_access_token] = access_token
       end
 
+      # @return [OAuth2::AccessToken] the current threads access token
+      #
       def self.access_token
         Thread.current[:yahoo_fantasy_access_token]
       end
 
+      # @return [Boolean] whether there is a current access token
+      #
       def self.access_token?
         Thread.current.key? :yahoo_fantasy_access_token
       end
@@ -45,13 +49,12 @@ module YahooFantasy
       # @param [String] path passed to the access_token#request
       # @param [Hash] opts passed to the access_token#request
       # @param [Block] if a block is provided the response is filtered through it
-      #
-      # @return [YahooContent] the yahoo content response
+      # @return [YahooContent,YahooFantasy::Resource::Base] the yahoo content response
       #
       def self.api(verb, path, opts = {})
         response = access_token.request(verb, path, opts)
         response = response.parsed
-        response = yield(repsonse) if block_given?
+        response = yield(response) if block_given?
         response
       end
     end

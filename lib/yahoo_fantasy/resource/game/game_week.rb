@@ -2,20 +2,14 @@
 
 module YahooFantasy
   module Resource
-    class Game < YahooFantasy::Resource::Base
+    module Game
       # Game week definition
       #
-      # @!attribute [rw] week
-      #   @return [Numeric] the week number
+      # @!attribute week the week number
+      # @!attribute display_name the week number string
+      # @!attribute start [String,Date] the start date this week
+      # @!attribute end [String,Date] the end date of this week
       #
-      # @!attribute [rw] display_name
-      #   @return [String] the week number
-      #
-      # @!attribute [rw] start
-      #   @return [String,Date] the start date this week
-      #
-      # @!attribute [rw] end
-      #   @return [String,Date] the end date of this week
       GameWeek = Struct.new(:week, :display_name, :start, :end)
     end
   end

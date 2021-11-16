@@ -1,5 +1,15 @@
+AllCops:
+  NewCops: enable
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
 Layout/EndOfLine:
   Enabled: False
+
+Layout/LineLength:
+  AllowURI: true
+  Enabled: false
 
 Metrics/BlockLength:
   IgnoredMethods: 

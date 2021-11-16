@@ -10,7 +10,7 @@ module YahooFantasy
     autoload :Parsers, 'yahoo_fantasy/xml/parsers'
     autoload :BaseRepresenter, 'yahoo_fantasy/xml/base_representer'
     autoload :FantasyContentRepresenter, 'yahoo_fantasy/xml/fantasy_content_representer'
-    autoload :GameRepresenter, 'yahoo_fantasy/xml/game_representer'
-    autoload :LeagueRepresenter, 'yahoo_fantasy/xml/league_representer'
+    autoload :Game, 'yahoo_fantasy/xml/game'
+    autoload :League, 'yahoo_fantasy/xml/league'
   end
 end
