@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    yahoo_fantasy (2.0.1.pre.rc1)
+    yahoo-fantasy-ruby (2.0.1.pre.rc1)
       nokogiri (~> 1.12)
       oauth2 (~> 1.2)
       omniauth-oauth2 (~> 1.7)
@@ -134,7 +134,7 @@ DEPENDENCIES
   rspec (~> 3.0)
   rubocop (~> 1.22)
   solargraph (~> 0.44)
-  yahoo_fantasy!
+  yahoo-fantasy-ruby!
 
 BUNDLED WITH
    2.2.31
