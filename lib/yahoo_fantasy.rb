@@ -7,9 +7,11 @@
 module YahooFantasy
   require 'yahoo_fantasy/version'
 
-  # Yahoo Fantasy API specific error to be extended and thrown as needed
-  #
-  class YahooFantasyError < StandardError; end
+  class YahooFantasyError < StandardError
+  end
+
+  class MissingAccessTokenError < YahooFantasyError
+  end
 
   autoload :Client, 'yahoo_fantasy/client'
   autoload :Resource, 'yahoo_fantasy/resource'

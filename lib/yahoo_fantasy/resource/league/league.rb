@@ -15,8 +15,8 @@ module YahooFantasy
 
         subresource :settings, Settings
         subresource :scoreboard, Scoreboard
-        subresource :standings, Team
-        subresource :teams, Team
+        subresource :standings, Team::Team
+        subresource :teams, Team::Team
         # subresoure :players,
         # subresource :transactions,
 
@@ -24,7 +24,13 @@ module YahooFantasy
                       :league_update_timestamp, :scoring_type, :league_type, :renew, :renewed, :iris_group_chat_id, :allow_add_to_dl_extra_pos,
                       :is_pro_league, :is_cash_league, :current_week, :start_week, :start_date, :end_week, :end_date, :game_code, :season
 
-        def self.all; end
+        def game_key
+          league_key.split('.').first
+        end
+
+        def game_id
+          league_key.split('.').first.to_i
+        end
       end
     end
   end

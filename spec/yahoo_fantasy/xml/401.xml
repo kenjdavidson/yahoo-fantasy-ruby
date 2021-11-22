@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<yahoo:error xmlns:yahoo='http://yahooapis.com/v1/base.rng'
+  xml:lang='en-US'>
+    <yahoo:description>Please provide valid credentials. OAuth oauth_problem="token_expired", realm="yahooapis.com"</yahoo:description>
+</yahoo:error>

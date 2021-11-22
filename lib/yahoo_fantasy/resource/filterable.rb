@@ -10,7 +10,7 @@ module YahooFantasy
     # The end goal is provide "type checking" (solely because I haven't wrapped my head around
     # non type checking yet) and Resource request validation.  Although, at this point the
     # Yahoo Fantasy API just ignores unknown filters.
-    module Filters
+    module Filterable
       class InvalidFilterError < StandardError; end
 
       def self.included(base)

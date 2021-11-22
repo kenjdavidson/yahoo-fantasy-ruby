@@ -11,6 +11,13 @@ module YahooFantasy
       # namespace_def yahoo: YahooFantasy::XML::YAHOO_NS
       remove_namespaces!
 
+      # This is a hack.  The response with an error is <yahoo:error> while the good
+      # response is <fantasy_content>; it would be awesome if you could switch the type
+      # during deserialization without doing funky things, but for now
+      # since we know that fantasy_content never has a description child, if we find it
+      # it's an error.
+      property :error, as: :description
+
       property :lang, attribute: true
       property :uri, attribute: true
       property :copyright, attribute: true

@@ -3,10 +3,17 @@
 require 'oauth2'
 
 RSpec.describe YahooFantasy::Resource::Base do
-  context 'no access_token is provided' do
-    it 'should respond negatively to access_token method(s)' do
-      expect(YahooFantasy::Resource::Base.access_token?).to eq(false)
+  after(:each) do
+    YahooFantasy::Resource::Base.access_token = nil
+  end
+
+  context 'access_token definition' do
+    it 'should respond negatively to #access_token method' do
       expect(YahooFantasy::Resource::Base.access_token).to eq(nil)
+    end
+
+    it 'should respond negatively to #access_token?' do
+      expect(YahooFantasy::Resource::Base.access_token?).to eq(false)
     end
   end
 
@@ -35,8 +42,20 @@ RSpec.describe YahooFantasy::Resource::Base do
     end
   end
 
-  context 'an access token is provided' do
-    it 'should receive #request method for GET /path with no options' do
+  context '#api' do
+    it 'raises YahooFantasy::MissingAccessTokenError when no AccessToken' do
+      # expect { raise YahooFantasy::MissingAccessTokenError }.to raise_error(YahooFantasy::MissingAccessTokenError)
+      expect { subject.class.api(:get, '/games') }.to raise_error(YahooFantasy::MissingAccessTokenError)
+    end
+  end
+
+  context '.api' do
+    it 'raises YahooFantasy::MissingAccessTokenError when no AccessToken' do
+      # expect { raise YahooFantasy::MissingAccessTokenError }.to raise_error(YahooFantasy::MissingAccessTokenError)
+      expect { subject.class.api(:get, '/games') }.to raise_error(YahooFantasy::MissingAccessTokenError)
+    end
+
+    it 'should call OAuth2::AccessToken#request method for GET /path with no options' do
       access_token = spy(OAuth2::AccessToken)
 
       YahooFantasy::Resource::Base.access_token = access_token

@@ -8,20 +8,25 @@ module YahooFantasy
     # Unsure at this point whether using Subresource to define methods adds much benefit over just adding
     # the small set of Subresource methods to the concrete classes
     #
-    module Subresources
+    module Subresourceable
       def self.included(base)
         base.extend ClassMethods
       end
 
-      # ClassMethods applied to Subresources
-      #
+      # Subresources class methods
       module ClassMethods
+        # Applies a new subresource, which performs the following:
+        # - adds the provided Subresource to the available @subresources
+        # - adds the appropriate subresource attribute writer
+        # - generates the appropriate subresource attribute reader
+        #
         def subresource(name, klass)
           subresources[name] = klass
 
           attr_accessor name
         end
 
+        # @return [Array] the available subresources
         def subresources
           @subresources ||= {}
         end

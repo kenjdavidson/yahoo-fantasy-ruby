@@ -3,20 +3,6 @@
 require 'oauth2'
 
 module YahooFantasy
-  SITE = 'https://api.login.yahoo.com/'
-
-  AUTHORIZE_URL = '/oauth2/request_auth'
-
-  TOKEN_URL = '/oauth2/get_token'
-
-  USERINFO_URL = '/openid/v1/userinfo'
-
-  # The default scope used to require to match exactly that configured
-  # in the Yahoo Developer Console.  But recently that stopped working
-  # and only allowing `fspt-w` (or `fspt-r`) even with `profile` and
-  # `email` configured in the app definition.
-  DEFAULT_SCOPE = 'fspt-w'
-
   # YahooFantasy::Client
   #
   # Provides some standarized (and opinionated) OAuth2::Client configuration with regards to the
@@ -56,25 +42,51 @@ module YahooFantasy
   # @since 1.0.0
   #
   class Client < OAuth2::Client
+    SITE = 'https://api.login.yahoo.com/'
+
+    AUTHORIZE_URL = '/oauth2/request_auth'
+
+    TOKEN_URL = '/oauth2/get_token'
+
+    USERINFO_URL = '/openid/v1/userinfo'
+
+    # Yahoo Fantasy write scope (default)
+    #
+    WRITE_SCOPE = 'fspt-w'
+
+    # Yahoo Fantasy read scope
+    #
+    READ_SCOPE = 'fspt-r'
+
+    # Out of Bounds redirect uri
+    # Setting out of bounds causes Yahoo to provide the token code on screen instead
+    # of through a redirect.
+    #
+    OOB = 'oob'
+
     # User info details return from the OAuth2/OpenId request
     #
     UserInfo = Struct.new(:id, :name, :given_name, :family_name, :locale, :email, :birthdate, :picture, :nickname)
 
-    # Instantiates a new YahooFantasy::Client, passing through the client_id, client_secret,
-    # options and block to the OAuth2::Client.  Defaults the configuration for
-    # `authorization_url`, `token_url`, `scope` and `redirect_uri=oob` (all of which can
-    # be overwritten if required).
+    # Instantiates a new YahooFantasy::Client, passing through the
+    # client_id, client_secret, options and block to the OAuth2::Client.
+    # Includes Yahoo OAuth2 specific options (which can be overwritten):
+    # - `authorization_url` {Client::AUTHORIZE_URL}
+    # - `token_url` {Client::TOKEN_URL}
+    # - `scope` {Client::DEFAULT_SCOPE}
+    # - `options[site]` {Client::SITE}
+    # - `options[redirect_uri]` = `oob`
     #
     # @param client_id [String]
     # @param client_secret [String]
-    # @param options (see OAuth2::Client::new)
+    # @param options [Hash] {OAuth2::Client.new}
     #
     def initialize(client_id, client_secret, options = {}, &block)
       yahoo_options = {
         site: SITE,
         authorize_url: AUTHORIZE_URL,
         token_url: TOKEN_URL,
-        scope: DEFAULT_SCOPE,
+        scope: WRITE_SCOPE,
         redirect_uri: 'oob',
         connection_build: block
       }.merge!(options)
@@ -94,5 +106,24 @@ module YahooFantasy
       }.merge!(params)
       super(auth_params)
     end
+
+    # Sets the default Response parser to `:yahoo_content` to ensure that `Response#parsed`
+    # returns appropriately.
+    #
+    # @see OAuth2::Client#request
+    # @see OAuth2::Response
+    #
+    def request(verb, url, opts = {})
+      request_options = {
+        parse: :yahoo_content
+      }.merge!(opts)
+
+      super(verb, url, request_options)
+    end
   end
+end
+
+OAuth2::Response.register_parser(:yahoo_content, ['text/xml', 'application/rss+xml', 'application/rdf+xml', 'application/atom+xml', 'application/xml']) do |body|
+  fc = YahooFantasy::Resource::FantasyContent.new
+  YahooFantasy::XML::FantasyContentRepresenter.new(fc).from_xml(body)
 end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'representable'
+
 module YahooFantasy
   module XML
     # Base XML Representer

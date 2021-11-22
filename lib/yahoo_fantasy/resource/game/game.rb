@@ -17,7 +17,7 @@ module YahooFantasy
       # to be called Meta.
       #
       class Game < YahooFantasy::Resource::Base
-        subresource :leagues, YahooFantasy::Resource::League
+        subresource :leagues, YahooFantasy::Resource::League::League
         subresource :game_weeks, YahooFantasy::Resource::Game::GameWeek
         subresource :stat_categories, YahooFantasy::Resource::Game::Statistic
         subresource :position_types, YahooFantasy::Resource::Game::PositionType
@@ -30,18 +30,6 @@ module YahooFantasy
 
         attr_accessor :game_key, :game_id, :name, :code, :type, :url, :season, :is_registration_over, :is_game_over,
                       :is_offseason
-
-        def registration_over?
-          is_registration_over == 1
-        end
-
-        def game_over?
-          is_game_over == 1
-        end
-
-        def offseason?
-          is_offseason == 1
-        end
 
         def resource_path
           "/game/#{game_key}"
