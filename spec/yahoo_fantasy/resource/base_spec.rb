@@ -42,10 +42,13 @@ RSpec.describe YahooFantasy::Resource::Base do
     end
   end
 
-  context '#api' do
-    it 'raises YahooFantasy::MissingAccessTokenError when no AccessToken' do
-      # expect { raise YahooFantasy::MissingAccessTokenError }.to raise_error(YahooFantasy::MissingAccessTokenError)
-      expect { subject.class.api(:get, '/games') }.to raise_error(YahooFantasy::MissingAccessTokenError)
+  context '.build_uri' do
+    it 'should prefix path with base_endpoint' do
+      expect(YahooFantasy::Resource::Base.build_uri('/games')).to eq('https://fantasysports.yahooapis.com/fantasy/v2/games')
+    end
+
+    it 'shouldn not prefix path with base_endpoint when full uri' do
+      expect(YahooFantasy::Resource::Base.build_uri('https://yahoofantasy.com/games')).to eq('https://yahoofantasy.com/games')
     end
   end
 
@@ -62,6 +65,13 @@ RSpec.describe YahooFantasy::Resource::Base do
       YahooFantasy::Resource::Base.api(:get, '/path')
 
       expect(access_token).to have_received(:request).with(:get, '/path', {})
+    end
+  end
+
+  context '#api' do
+    it 'raises YahooFantasy::MissingAccessTokenError when no AccessToken' do
+      # expect { raise YahooFantasy::MissingAccessTokenError }.to raise_error(YahooFantasy::MissingAccessTokenError)
+      expect { subject.class.api(:get, '/games') }.to raise_error(YahooFantasy::MissingAccessTokenError)
     end
   end
 end

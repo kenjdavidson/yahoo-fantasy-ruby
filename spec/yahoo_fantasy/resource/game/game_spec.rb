@@ -94,7 +94,7 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
 
     it '#game_weeks! should call /game_weeks' do
       subject.game_weeks!
-      expect(@access_token).to have_received(:request).with(:get, '/game/404/game_weeks', {})
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/game_weeks', {})
     end
   end
 
@@ -108,7 +108,7 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
 
     it '#stat_categories! should call /stat_categories' do
       subject.stat_categories!
-      expect(@access_token).to have_received(:request).with(:get, '/game/404/stat_categories', {})
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/stat_categories', {})
     end
   end
 
@@ -122,7 +122,7 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
 
     it '#position_types! should call /position_types' do
       subject.position_types!
-      expect(@access_token).to have_received(:request).with(:get, '/game/404/position_types', {})
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/position_types', {})
     end
   end
 
@@ -136,7 +136,7 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
 
     it '#roster_positions! should call /roster_positions' do
       subject.roster_positions!
-      expect(@access_token).to have_received(:request).with(:get, '/game/404/roster_positions', {})
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/roster_positions', {})
     end
   end
 end

@@ -13,12 +13,12 @@ The library may:
 
 ## Installation
 
-> At this point in time the name `yahoo-fantasy-ruby` may change.   I guess the ruby part is a little superfluous, but it was the name of the folder I needed so I rolled with it.
+> At this point in time the name `yahoo-fantasy` may change.   I guess the ruby part is a little superfluous, but it was the name of the folder I needed so I rolled with it.
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'yahoo-fantasy-ruby'
+gem 'yahoo-fantasy'
 ```
 
 or add to your `gemspec`:
@@ -36,7 +36,7 @@ $ bundle install
 Or install it yourself as:
 
 ```
-$ gem install yahoo-fantasy-ruby
+$ gem install yahoo-fantasy
 ```
 
 ## Usage

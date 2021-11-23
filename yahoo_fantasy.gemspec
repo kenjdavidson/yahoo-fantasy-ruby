@@ -6,7 +6,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'yahoo_fantasy/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'yahoo-fantasy-ruby'
+  spec.name          = 'yahoo-fantasy'
   spec.version       = YahooFantasy::VERSION
   spec.authors       = ['Ken Davidson']
   spec.email         = ['ken.j.davidson@live.ca']

@@ -13,6 +13,8 @@ module YahooFantasy
       include YahooFantasy::Resource::Subresourceable
       include YahooFantasy::Resource::Filterable
 
+      BASE_ENDPOINT = 'https://fantasysports.yahooapis.com/fantasy/v2'
+
       class << self
         # Set the OAuth2 (or #request) access token to be used for all requests by the current thread.
         #
@@ -50,10 +52,17 @@ module YahooFantasy
         def api(verb, path, opts = {}, &block)
           raise YahooFantasy::MissingAccessTokenError, 'An OAuth2::AccessToken or {}#request must be provided' if access_token.nil?
 
-          response = access_token.request(verb, path, opts)
+          response = access_token.request(verb, build_uri(path), opts)
           response = response.parsed
           response = block.call(response) if block_given?
           response
+        end
+
+        # Prefix the requested path with the endpoin
+        def build_uri(path)
+          return [BASE_ENDPOINT, path].join unless path.start_with? 'http'
+
+          path
         end
       end
 

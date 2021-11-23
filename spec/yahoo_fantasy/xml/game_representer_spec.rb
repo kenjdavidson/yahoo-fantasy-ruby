@@ -25,11 +25,8 @@ RSpec.describe YahooFantasy::XML::Game::GameRepresenter do
       expect(game.url).to eq('https://football.fantasysports.yahoo.com/f1')
       expect(game.season).to eq(2021)
       expect(game.is_registration_over).to eq(1)
-      expect(game.registration_over?).to eq(true)
       expect(game.is_game_over).to eq(0)
-      expect(game.game_over?).to eq(false)
       expect(game.is_offseason).to eq(0)
-      expect(game.offseason?).to eq(false)
     end
 
     it 'should parse <game_weeks>' do
