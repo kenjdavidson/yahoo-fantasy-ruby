@@ -44,10 +44,17 @@ module YahooFantasy
   class Client < OAuth2::Client
     SITE = 'https://api.login.yahoo.com/'
 
+    # Yahoo OAuth2 authorize url - users are/shoudl be directed here when they are requesting
+    # a login
+    #
     AUTHORIZE_URL = '/oauth2/request_auth'
 
+    # Yahoo OAuth2 token url - url in which an access code is exchanged for an access token
+    #
     TOKEN_URL = '/oauth2/get_token'
 
+    # Open Id user info url
+    #
     USERINFO_URL = '/openid/v1/userinfo'
 
     # Yahoo Fantasy write scope (default)
@@ -63,10 +70,6 @@ module YahooFantasy
     # of through a redirect.
     #
     OOB = 'oob'
-
-    # User info details return from the OAuth2/OpenId request
-    #
-    UserInfo = Struct.new(:id, :name, :given_name, :family_name, :locale, :email, :birthdate, :picture, :nickname)
 
     # Instantiates a new YahooFantasy::Client, passing through the
     # client_id, client_secret, options and block to the OAuth2::Client.
@@ -107,23 +110,35 @@ module YahooFantasy
       super(auth_params)
     end
 
-    # Sets the default Response parser to `:yahoo_content` to ensure that `Response#parsed`
-    # returns appropriately.
+    # Sets the default Response parser to `:yahoo_content_xml` to ensure that `Response#parsed`
+    # returns appropriately.  Content can be overwritten by passing in a { parse: :type }
+    # option - this will skip the XML to FantasyContent parsing and return back the parsed
+    # object you've requested.
+    #
+    # Note - this could cause issues if you're using the YahooFantasy::Resource::Base subclasses
+    # as they assume that an FantasyContent will be provided for filtering.
     #
     # @see OAuth2::Client#request
     # @see OAuth2::Response
     #
+    # @raise YahooFantasy::YahooFantasyError if an OAuth2::Error occurs during the request process
+    #   providing the error message from the yahoo servers.
+    #
+    # @todo Perform bettering handling and retrying of requests based on future configuration
+    #
     def request(verb, url, opts = {})
       request_options = {
-        parse: :yahoo_content
+        parse: :yahoo_content_xml
       }.merge!(opts)
 
       super(verb, url, request_options)
+    rescue OAuth2::Error => e
+      raise YahooFantasy::YahooFantasyError, e.response.parsed
     end
   end
 end
 
-OAuth2::Response.register_parser(:yahoo_content, ['text/xml', 'application/rss+xml', 'application/rdf+xml', 'application/atom+xml', 'application/xml']) do |body|
+OAuth2::Response.register_parser(:yahoo_content_xml, ['text/xml', 'application/rss+xml', 'application/rdf+xml', 'application/atom+xml', 'application/xml']) do |body|
   fc = YahooFantasy::Resource::FantasyContent.new
   YahooFantasy::XML::FantasyContentRepresenter.new(fc).from_xml(body)
 end

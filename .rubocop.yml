@@ -11,7 +11,7 @@ Layout/LineLength:
   AllowURI: true
   Enabled: false
 
-Metrics/BlockLength:
+Metrics/BlockLength:  
   IgnoredMethods: 
     - 'describe'
     - 'context'

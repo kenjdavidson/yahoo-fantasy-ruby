@@ -129,7 +129,25 @@ RSpec.describe YahooFantasy::Client do
 
       @client.connection = connection
 
-      expect { @client.request(:get, url) }.to raise_error(OAuth2::Error)
+      # Expected message 'Please provide valid credentials. OAuth oauth_problem="token_rejected", realm="yahooapis.com"'
+      # Although the internal quotes are causing issues with \"
+      expect { @client.request(:get, url) }.to raise_error(YahooFantasy::YahooFantasyError)
+    end
+
+    it 'raises error on 400 invalid request' do
+      url = 'http://yahoo-fantasy-test'
+      body = File.read("#{__dir__}/xml/400.xml")
+      response = double('Faraday::Response',
+                        status: 400,
+                        headers: {},
+                        body: body)
+      connection = double('Faraday::Connection',
+                          build_url: url,
+                          run_request: response)
+
+      @client.connection = connection
+
+      expect { @client.request(:get, url) }.to raise_error(YahooFantasy::YahooFantasyError, 'Invalid game key provided - 1111111')
     end
   end
 end

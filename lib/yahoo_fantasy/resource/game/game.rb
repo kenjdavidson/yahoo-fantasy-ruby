@@ -17,50 +17,23 @@ module YahooFantasy
       # to be called Meta.
       #
       class Game < YahooFantasy::Resource::Base
-        subresource :leagues, YahooFantasy::Resource::League::League
-        subresource :game_weeks, YahooFantasy::Resource::Game::GameWeek
-        subresource :stat_categories, YahooFantasy::Resource::Game::Statistic
-        subresource :position_types, YahooFantasy::Resource::Game::PositionType
-        subresource :roster_positions, YahooFantasy::Resource::Game::RosterPosition
-
         filter :is_available
         filter :game_types
         filter :game_codes
         filter :seasons
+
+        subresource :leagues, parser: ->(fc) { fc.game.leagues },
+                              resource: YahooFantasy::Resource::League::League
+        subresource :game_weeks, parser: ->(fc) { fc.game.game_weeks }
+        subresource :stat_categories, parser: ->(fc) { fc.game.stats }
+        subresource :position_types, parser: ->(fc) { fc.game.position_types }
+        subresource :roster_positions, parser: ->(fc) { fc.game.roster_positions }
 
         attr_accessor :game_key, :game_id, :name, :code, :type, :url, :season, :is_registration_over, :is_game_over,
                       :is_offseason
 
         def resource_path
           "/game/#{game_key}"
-        end
-
-        def leagues!
-          @leagues ||= YahooFantasy::Resource::League.all
-        end
-
-        def game_weeks!
-          @game_weeks ||= self.class.api(:get, "#{resource_path}/game_weeks") do |fc|
-            fc.game.game_weeks
-          end
-        end
-
-        def stat_categories!
-          @stat_categories ||= self.class.api(:get, "#{resource_path}/stat_categories") do |fc|
-            fc.game.stats
-          end
-        end
-
-        def position_types!
-          @position_types ||= self.class.api(:get, "#{resource_path}/position_types") do |fc|
-            fc.game.game_weeks
-          end
-        end
-
-        def roster_positions!
-          @roster_positions ||= self.class.api(:get, "#{resource_path}/roster_positions") do |fc|
-            fc.game.game_weeks
-          end
         end
       end
     end

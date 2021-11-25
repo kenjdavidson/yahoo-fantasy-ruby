@@ -3,12 +3,19 @@
 require 'omniauth-oauth2'
 require 'yahoo_fantasy/client'
 
-puts 'loaded omniauth file'
-
 module OmniAuth
   module Strategies
     # Implementation of (@see OmniAuth::Strategies::OAuth2) following the Yahoo OAuth2
-    # specification.
+    # specification.  One of the key features of the Yahoo OAuth2 login is that the
+    # redirect_uri allows for `oob` as an option (regardless of configuration).
+    #
+    # When providing `oob` as the redirect_uri this strategy will not redirect, it will set the
+    # `session['omniauth.redirect_uri']` and call through to the next middleware.  If `oob` is
+    # set, then you must provide either an `OmniAuth::Form` or handle the `/auth/yahoo` within
+    # your application accordingly
+    #
+    # @example
+    #
     #
     # @see https://developer.yahoo.com/oauth2/guide/
     #
@@ -27,11 +34,6 @@ module OmniAuth
       # (generally an OmniAuth::Form).  The only difference here is that Yahoo Fantasy provides
       # the call back `oob` (Out of Bounds) which will present the user with the code on the
       # screen and require it to be entered manually.
-      #
-      # When providing `oob` as the redirect_uri this strategy will not redirect, it will set the
-      # `session['omniauth.redirect_uri']` and call through to the next middleware.  If `oob` is
-      # set, then you must provide either an `OmniAuth::Form` or handle the `/auth/yahoo` within
-      # your application accordingly
       #
       def request_phase
         if options.client_options[:redirect_uri] == 'oob' # redirect

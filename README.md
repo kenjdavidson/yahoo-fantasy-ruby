@@ -75,6 +75,10 @@ within the same `client` that the users were making for requests.
 
 Once you've got your `access_token` you supply the users token to the resources:
 
+#### Base
+
+The `YahooFantasy::Resource::Base` class provides access to the `access_token`:
+
 ```
 # With the access_token above
 YahooFantasy::Resource::Base.access_token = access_token
@@ -82,11 +86,23 @@ YahooFantasy::Resource::Base.access_token = access_token
 
 > The `access_token` is stored at the `Thread[]` level so you need to ensure that it's removed after the request (server based).  One of the next steps is providing the `Rails` specific classes to assist with this.
 
-### Games
+Once the access token is provided, requests can be made through the `.api` method:
 
-### Leagues
+```
+fantasy_content = YahooFantasy::Resource::Base.api(:get, '/users;use_login=1/games/leagues)
+fantasy_content.games.each do |game|
+  puts "#{game.code.upcase}"                            # => NFL
+  game.leagues.each do |league|
+    puts "- #{league.name} (#{league.league_key})"      # => - League Name (404.l.12345)
+  end 
+end
+```
 
-### Teams
+#### Games
+
+#### Leagues
+
+#### Teams
 
 ## XML 
 

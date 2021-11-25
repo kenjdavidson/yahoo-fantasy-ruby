@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<error xml:lang="en-us" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/game/1111111" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://www.yahooapis.com/v1/base.rng">
+    <description>Invalid game key provided - 1111111</description>
+    <detail/>
+</error>

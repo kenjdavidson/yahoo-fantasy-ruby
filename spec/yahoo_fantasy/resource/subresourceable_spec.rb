@@ -5,8 +5,8 @@ RSpec.describe YahooFantasy::Resource::Subresourceable do
     Class.new do
       include YahooFantasy::Resource::Subresourceable
 
-      subresource :subresource1, String
-      subresource :subresource2, Array
+      subresource :subresource1
+      subresource :subresource2
     end
   end
 
@@ -17,14 +17,12 @@ RSpec.describe YahooFantasy::Resource::Subresourceable do
       expect(resourced_class.subresources.keys.length).to eq 2
     end
 
-    it 'has a subresource named :subresource1 defined by String' do
+    it 'has a subresource named :subresource1 defined' do
       expect(resourced_class.subresources.keys.include?(:subresource1)).to eq true
-      expect(resourced_class.subresources[:subresource1]).to eq String
     end
 
-    it 'has a subresource named :subresource2 defined by Array' do
+    it 'has a subresource named :subresource2 defined' do
       expect(resourced_class.subresources.keys.include?(:subresource2)).to eq true
-      expect(resourced_class.subresources[:subresource2]).to eq Array
     end
   end
 

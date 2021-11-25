@@ -55,7 +55,7 @@ RSpec.describe YahooFantasy::Resource::Base do
   context '.api' do
     it 'raises YahooFantasy::MissingAccessTokenError when no AccessToken' do
       # expect { raise YahooFantasy::MissingAccessTokenError }.to raise_error(YahooFantasy::MissingAccessTokenError)
-      expect { subject.class.api(:get, '/games') }.to raise_error(YahooFantasy::MissingAccessTokenError)
+      expect { YahooFantasy::Resource::Base.api(:get, '/games') }.to raise_error(YahooFantasy::MissingAccessTokenError)
     end
 
     it 'should call OAuth2::AccessToken#request method for GET /path with no options' do
@@ -64,7 +64,17 @@ RSpec.describe YahooFantasy::Resource::Base do
       YahooFantasy::Resource::Base.access_token = access_token
       YahooFantasy::Resource::Base.api(:get, '/path')
 
-      expect(access_token).to have_received(:request).with(:get, '/path', {})
+      expect(access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/path', {})
+    end
+  end
+
+  context '.resource_prefix' do
+    before do
+      test_resource = Class.new(YahooFantasy::Resource::Base)
+      stub_const('TestResource', test_resource)
+    end
+    it 'should return snake downcase class name' do
+      expect(TestResource.resource_prefix).to eq('/test_resource')
     end
   end
 

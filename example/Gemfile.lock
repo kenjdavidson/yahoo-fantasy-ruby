@@ -1,7 +1,8 @@
 PATH
   remote: ..
   specs:
-    yahoo-fantasy-ruby (2.0.1.pre.rc1)
+    yahoo-fantasy (2.0.1.pre.rc2)
+      activesupport (~> 6.1)
       nokogiri (~> 1.12)
       oauth2 (~> 1.2)
       omniauth-oauth2 (~> 1.7)
@@ -10,6 +11,13 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (6.1.4.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
+    concurrent-ruby (1.1.9)
     declarative (0.0.20)
     faraday (1.8.0)
       faraday-em_http (~> 1.0)
@@ -31,8 +39,11 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     hashie (5.0.0)
+    i18n (1.8.11)
+      concurrent-ruby (~> 1.0)
     jwt (2.3.0)
     mini_portile2 (2.6.1)
+    minitest (5.14.4)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
@@ -62,13 +73,16 @@ GEM
       uber (< 0.2.0)
     ruby2_keywords (0.0.5)
     trailblazer-option (0.1.2)
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
     uber (0.1.0)
+    zeitwerk (2.5.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  yahoo-fantasy-ruby!
+  yahoo-fantasy!
 
 BUNDLED WITH
    1.17.2

@@ -13,10 +13,10 @@ module YahooFantasy
       class League < YahooFantasy::Resource::Base
         filter :league_keys
 
-        subresource :settings, Settings
-        subresource :scoreboard, Scoreboard
-        subresource :standings, Team::Team
-        subresource :teams, Team::Team
+        subresource :settings, parser: ->(fc) { fc.league.settings }
+        subresource :scoreboard, parser: ->(fc) { fc.league.scoreboard }
+        subresource :standings, parser: ->(fc) { fc.league.standings }
+        subresource :teams, parser: ->(fc) { fc.league.teams }
         # subresoure :players,
         # subresource :transactions,
 
@@ -30,6 +30,10 @@ module YahooFantasy
 
         def game_id
           league_key.split('.').first.to_i
+        end
+
+        def resource_path
+          "/league/#{league_key}"
         end
       end
     end

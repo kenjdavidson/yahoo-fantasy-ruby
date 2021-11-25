@@ -4,19 +4,15 @@ require 'oauth2'
 
 RSpec.describe YahooFantasy::Resource::Game::Game do
   context 'class definition' do
-    subject { YahooFantasy::Resource::Game::Game.new }
+    subject { YahooFantasy::Resource::Game::Game }
 
     it 'has all accessors' do
+      @game = subject.new
       %i[game_key game_id name code type url season is_registration_over is_game_over is_offseason].each do |a|
-        expect(subject.respond_to?(a)).to eql(true), "expect respond to #{a}"
-        expect(subject.respond_to?("#{a}=")).to eql(true), "expect respond to #{a}="
+        expect(@game.respond_to?(a)).to eql(true), "expect respond to #{a}"
+        expect(@game.respond_to?("#{a}=")).to eql(true), "expect respond to #{a}="
       end
     end
-  end
-
-  context 'subresource definition(s)' do
-    subject { YahooFantasy::Resource::Game::Game }
-    let(:game) { YahooFantasy::Resource::Game::Game.new }
 
     it 'has five (5) subresources' do
       expect(subject.subresources.length).to eq 5
@@ -29,27 +25,8 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
         [:position_types, YahooFantasy::Resource::Game::PositionType]
       ].each do |sub|
         expect(subject.subresources.keys.include?(sub[0])).to eq(true), "expected #{sub[0]} subresource"
-        expect(subject.subresources[sub[0]]).to eq(sub[1]), "expected #{sub[0]} subresource to be #{sub[1].class}"
       end
     end
-
-    it 'responds to subresource accessors' do
-      [
-        [:leagues, YahooFantasy::Resource::League::League],
-        [:game_weeks, YahooFantasy::Resource::Game::GameWeek],
-        [:roster_positions, YahooFantasy::Resource::Game::RosterPosition],
-        [:stat_categories, YahooFantasy::Resource::Game::Statistic],
-        [:position_types, YahooFantasy::Resource::Game::PositionType]
-      ].each do |sub|
-        expect(game.respond_to?(sub[0].to_s)).to eq(true), "expected respond to ##{sub[0]}"
-        expect(game.respond_to?("#{sub[0]}=")).to eq(true), "expected respond to ##{sub[0]}="
-        expect(game.respond_to?("#{sub[0]}!")).to eq(true), "expected respond to ##{sub[0]}!"
-      end
-    end
-  end
-
-  context 'filter definition(s)' do
-    subject { YahooFantasy::Resource::Game::Game }
 
     it 'has four (4) filters' do
       expect(subject.filters.length).to eq 4
@@ -84,7 +61,7 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
     end
   end
 
-  context '#game_weeks!' do
+  context 'subresource game_weeks' do
     subject { YahooFantasy::Resource::Game::Game.new(game_key: '404', game_id: 404, code: 'nfl') }
 
     before(:each) do
@@ -92,7 +69,13 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
       YahooFantasy::Resource::Base.access_token = @access_token
     end
 
-    it '#game_weeks! should call /game_weeks' do
+    it 'should respond_to accessor methods' do
+      ['game_weeks', 'game_weeks=', 'game_weeks!'].each do |m|
+        expect(subject.respond_to?(m)).to eq(true), "expected respond to ##{m}"
+      end
+    end
+
+    it 'should call /game_weeks' do
       subject.game_weeks!
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/game_weeks', {})
     end
@@ -104,6 +87,12 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
     before(:each) do
       @access_token = spy(OAuth2::AccessToken)
       YahooFantasy::Resource::Base.access_token = @access_token
+    end
+
+    it 'should respond_to accessor methods' do
+      ['stat_categories', 'stat_categories=', 'stat_categories!'].each do |m|
+        expect(subject.respond_to?(m)).to eq(true), "expected respond to ##{m}"
+      end
     end
 
     it '#stat_categories! should call /stat_categories' do
@@ -120,6 +109,12 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
       YahooFantasy::Resource::Base.access_token = @access_token
     end
 
+    it 'should respond_to accessor methods' do
+      ['position_types', 'position_types=', 'position_types!'].each do |m|
+        expect(subject.respond_to?(m)).to eq(true), "expected respond to ##{m}"
+      end
+    end
+
     it '#position_types! should call /position_types' do
       subject.position_types!
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/position_types', {})
@@ -132,6 +127,12 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
     before(:each) do
       @access_token = spy(OAuth2::AccessToken)
       YahooFantasy::Resource::Base.access_token = @access_token
+    end
+
+    it 'should respond_to accessor methods' do
+      ['roster_positions', 'roster_positions=', 'roster_positions!'].each do |m|
+        expect(subject.respond_to?(m)).to eq(true), "expected respond to ##{m}"
+      end
     end
 
     it '#roster_positions! should call /roster_positions' do
