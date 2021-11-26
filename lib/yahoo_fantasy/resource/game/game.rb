@@ -32,10 +32,12 @@ module YahooFantasy
         attr_accessor :game_key, :game_id, :name, :code, :type, :url, :season, :is_registration_over, :is_game_over,
                       :is_offseason
 
-        def self.all(keys, options = {})
-          super(keys, options, &:games)
+        # @todo There's got to be a meta way to do this
+        def self.all(filters, options = {})
+          super(filters, options, &:games)
         end
 
+        # @todo There's got to be a meta way to do this
         def self.get(key, options = {})
           super(key, options, &:game)
         end

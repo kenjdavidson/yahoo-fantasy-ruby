@@ -37,6 +37,9 @@ module YahooFantasy
   autoload :Client, 'yahoo_fantasy/client'
   autoload :Resource, 'yahoo_fantasy/resource'
   autoload :XML, 'yahoo_fantasy/xml'
+
+  Games = YahooFantasy::Resource::Game::Game
+  Leagues = YahooFantasy::Resource::League::League
 end
 
 # We don't want to overwrite the defaults for the mime types

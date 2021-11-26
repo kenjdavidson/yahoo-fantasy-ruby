@@ -46,7 +46,8 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
       allow(access_token).to receive(:request).and_return(OAuth2::Response.new(response, parse: :yahoo_fantasy_content))
 
       YahooFantasy::Resource::Game::Game.access_token = access_token
-      games = YahooFantasy::Resource::Game::Game.all(%w[371 406])
+
+      games = YahooFantasy::Resource::Game::Game.all(game_keys: %w[371 406])
 
       expect(games.size).to be(2)
       expect(games[0].game_key).to eq('371')

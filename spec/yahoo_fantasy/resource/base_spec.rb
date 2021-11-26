@@ -98,7 +98,7 @@ RSpec.describe YahooFantasy::Resource::Base do
       access_token = spy(OAuth2::AccessToken)
       YahooFantasy::Resource::Base.access_token = access_token
 
-      TestResource.get(1, subresource: 'sub1,sub2')
+      TestResource.get(1, subresources: 'sub1,sub2')
 
       expect(access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1;out=sub1,sub2', {})
     end
@@ -107,7 +107,7 @@ RSpec.describe YahooFantasy::Resource::Base do
       access_token = spy(OAuth2::AccessToken)
       YahooFantasy::Resource::Base.access_token = access_token
 
-      TestResource.get(1, subresource: %w[sub1 sub2])
+      TestResource.get(1, subresources: %w[sub1 sub2])
 
       expect(access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1;out=sub1,sub2', {})
     end

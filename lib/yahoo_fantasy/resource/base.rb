@@ -15,6 +15,9 @@ module YahooFantasy
     # that it should be refactored into a module ::Resource.  Which would mean the Resource module
     # should probably become ::Api.
     #
+    # @todo from my understanding "abstract" classes are bad form.  This needs to be split into different
+    #   modules.  Maybe: Api (access_token and call), Resource (get), Collection (all), etc??
+    #
     class Base
       include YahooFantasy::Resource::Subresourceable
       include YahooFantasy::Resource::Filterable
@@ -82,16 +85,21 @@ module YahooFantasy
 
         # Gets a collection of resources and subresources (outable).
         #
-        # @todo maybe move this into a ::Collections module
+        # @todo maybe move this into a ::Collections
+        # @todo fix for rubocop
         #
-        # @param keys [Array<String>] the resource key
-        # @param options [Hash] request options
+        # @param options [Hash] request options (@see OAuth2::AccessToken#request)
         # @option options [Hash{String => Array<String,Numeric>}] filters
-        # @option options [Array<String>] out
+        # @option options [Array<String>] :keys
+        # @option options [Hash{String => String}] :filters
+        # @option options [Array<String>] :out
         #
-        def all(keys, options = {}, &block)
-          request_path = "#{collection_path}#{key_params(keys)}#{filter_params(options.delete(:filters))}#{out_params(options.delete(:out))}"
-          api(:get, request_path, options, &block)
+        def all(filters, options = {}, &block)
+          opts = options.dup
+          request_path = collection_path
+          request_path << filter_params(filters)
+          request_path << out_params(options.delete(:subresources)) if opts.key?(:subresources)
+          api(:get, request_path, opts, &block)
         end
 
         # Gets a single resource and subresources (outable).  At this point in
@@ -107,7 +115,9 @@ module YahooFantasy
         # @return [YahooFantasy::Resource::FantasyContent] the yahoo fantasy result
         #
         def get(key, options = {}, &block)
-          request_path = "#{resource_path}/#{key}#{out_params(options.delete(:subresource))}"
+          opts = options.dup
+          request_path = "#{resource_path}/#{key}".dup # Annoying frozen String
+          request_path << out_params(options.delete(:subresources)) if opts.key?(:subresources)
           api(:get, request_path, options, &block)
         end
 
@@ -121,28 +131,45 @@ module YahooFantasy
           @collection_path ||= "/#{to_s.split('::').last}".pluralize.underscore.downcase
         end
 
-        # @return [String] thre resource path, at this point this is just the lowercase name
+        # @return [String] the resource path, at this point this is just the lowercase name
         #   of the resource class but eventually it should be customizable
-        # @todo this probably needs to be customizable
         #
         def resource_path
           @resource_path ||= "/#{to_s.split('::').last}".underscore.downcase
         end
 
+        # @return [String] the resource key filter.  This filter uses the appropriate key_name
+        #   to build the keys
+        #
         def key_params(keys = [])
           return ";#{key_name}=#{keys.join(',')}" unless keys.empty?
 
           ''
         end
 
+        # Each resource is responsible for providing it's own key name, otherwise it will default
+        # to the class name.
+        #
+        # @example
+        #   class Game < Resource::Base; end
+        #   key_name = Game.key_name # => "game_keys"
+        #
+        # @return [String] they resources key name
+        #
         def key_name
-          @key_name ||= to_s.split('::').last.to_s.pluralize.underscore.downcase
+          @key_name ||= to_s.split('::').last.to_s.underscore.downcase.to_sym
         end
 
-        def filter_params(filters)
-          return '' if filters.empty?
+        # Builds the filter String, which is pretty much the same as the key string.  Basically
+        # a semi-colon separated list key/value pairs of comma separated values.
+        #
+        # @param filters [Hash{String => Array<String>}]
+        # @return [String]
+        #
+        def filter_params(filters = {})
+          return '' if filters.nil? || filters.empty?
 
-          filter_string = filters.select { |k| subresource.filters.key?(k) }
+          filter_string = filters.select { |k| self.filters.key?(k) }
                                  .map { |k, v| "#{k}=#{[v].join(',')}" }
                                  .join(';')
           filter_string = ";#{filter_string}" unless filter_string.empty?
@@ -189,8 +216,8 @@ module YahooFantasy
         self.class.api(verb, path, opts, &block)
       end
 
-      # Default implementation provides the classes `resource_path` value, this should generally
-      # be abstract for overwriting but
+      # Default implementation provides the classes `resource_path` value.  This would generally be
+      # an abstract/interface method in Java and would require overridding in all subclasses.
       #
       # @return [String] the resource path
       #

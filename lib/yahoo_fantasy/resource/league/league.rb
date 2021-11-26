@@ -25,6 +25,16 @@ module YahooFantasy
                       :league_update_timestamp, :scoring_type, :league_type, :renew, :renewed, :iris_group_chat_id, :allow_add_to_dl_extra_pos,
                       :is_pro_league, :is_cash_league, :current_week, :start_week, :start_date, :end_week, :end_date, :game_code, :season
 
+        # @todo There's got to be a meta way to do this
+        def self.all(filters, options = {})
+          super(filters, options, &:leagues)
+        end
+
+        # @todo There's got to be a meta way to do this
+        def self.get(key, options = {})
+          super(key, options, &:league)
+        end
+
         def game_key
           league_key.split('.').first
         end
