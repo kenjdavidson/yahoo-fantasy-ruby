@@ -11,6 +11,10 @@ module YahooFantasy
     # when performing queries - the AccessToken is a thread specific value which needs to be managed
     # appropriately.
     #
+    # Coming from the Java world this would be an `abstract class Base` although with Ruby I believe
+    # that it should be refactored into a module ::Resource.  Which would mean the Resource module
+    # should probably become ::Api.
+    #
     class Base
       include YahooFantasy::Resource::Subresourceable
       include YahooFantasy::Resource::Filterable
@@ -20,7 +24,7 @@ module YahooFantasy
       class << self
         # Set the OAuth2 (or #request) access token to be used for all requests by the current thread.
         #
-        # @param [AccessToken] access_token the access token providing a #request method
+        # @param [OAuth2::AccessToken] access_token the access token providing a #request method
         #
         def access_token=(access_token)
           raise ArgumentError, 'access_token must respond to #request method' unless access_token.respond_to?(:request) || access_token.nil?
@@ -52,13 +56,12 @@ module YahooFantasy
         # @param [Block] if a block is provided the response is filtered through it
         # @return [FantasyContent,YahooFantasy::Resource::Base] the yahoo content response
         #
-        # @raise [MissingAccessTokenError]
+        # @raise [MissingAccessTokenError] if no OAuth2::AccessToken has been provided
         #
         def api(verb, path, opts = {}, &block)
           raise YahooFantasy::MissingAccessTokenError, 'An OAuth2::AccessToken or #request class must be provided' if access_token.nil?
 
-          response = access_token.request(verb, build_uri(path), opts)
-          response = response.parsed
+          response = access_token.request(verb, build_uri(path), opts).parsed
           response = block.call(response) if block_given?
           response
         end
@@ -77,43 +80,91 @@ module YahooFantasy
           BASE_PATH
         end
 
-        # @return [String] thre resource path prefix, at this point this is just the lowercase name
-        #   of the resource class but eventually it should be customizable
-        # @todo this probably needs to be customizable
-        #
-        def resource_prefix
-          "/#{to_s.split('::').last}".underscore.downcase
-        end
-
         # Gets a collection of resources and subresources (outable).
         #
-        # @param key [String] the resource key
-        # @param out [Array<String>] outable subresources
+        # @todo maybe move this into a ::Collections module
         #
-        def all(filters: [], out: []); end
+        # @param keys [Array<String>] the resource key
+        # @param options [Hash] request options
+        # @option options [Hash{String => Array<String,Numeric>}] filters
+        # @option options [Array<String>] out
+        #
+        def all(keys, options = {}, &block)
+          request_path = "#{collection_path}#{key_params(keys)}#{filter_params(options.delete(:filters))}#{out_params(options.delete(:out))}"
+          api(:get, request_path, options, &block)
+        end
 
         # Gets a single resource and subresources (outable).  At this point in
         # time major subresources and filters are not available, if you're looking
         # for a custom request you can query the api directly through the
         # YahooFantasy::Resource::Game.api() method directly.
         #
-        # @param key [String] the resource key
-        # @param out [Array<String>] outable subresources
+        # @todo maybe move this into a ::Collections module
         #
-        def get(key, out: [], options: {})
-          resource_path = "#{resource_prefix}/#{key}#{build_out(out)}"
-          api(:get, resource_path, options)
+        # @param key [String] the resource key
+        # @param options [Hash] @see OAuth2::AccessToken#request
+        # @option options [String,Array<String>] :subresource list of outable subresources
+        # @return [YahooFantasy::Resource::FantasyContent] the yahoo fantasy result
+        #
+        def get(key, options = {}, &block)
+          request_path = "#{resource_path}/#{key}#{out_params(options.delete(:subresource))}"
+          api(:get, request_path, options, &block)
         end
 
-        private
+        protected
 
-        # @param out [Array<String>] list of outable subresources
-        # @return [String] compiled out string
+        # @return [String] thre resource path, at this point this is just the lowercase name
+        #   of the resource class but eventually it should be customizable
+        # @todo this probably needs to be customizable
         #
-        def build_out(out = [])
-          return ";out=#{out.join(',')}" unless out.empty?
+        def collection_path
+          @collection_path ||= "/#{to_s.split('::').last}".pluralize.underscore.downcase
+        end
+
+        # @return [String] thre resource path, at this point this is just the lowercase name
+        #   of the resource class but eventually it should be customizable
+        # @todo this probably needs to be customizable
+        #
+        def resource_path
+          @resource_path ||= "/#{to_s.split('::').last}".underscore.downcase
+        end
+
+        def key_params(keys = [])
+          return ";#{key_name}=#{keys.join(',')}" unless keys.empty?
 
           ''
+        end
+
+        def key_name
+          @key_name ||= to_s.split('::').last.to_s.pluralize.underscore.downcase
+        end
+
+        def filter_params(filters)
+          return '' if filters.empty?
+
+          filter_string = filters.select { |k| subresource.filters.key?(k) }
+                                 .map { |k, v| "#{k}=#{[v].join(',')}" }
+                                 .join(';')
+          filter_string = ";#{filter_string}" unless filter_string.empty?
+          filter_string
+        end
+
+        # Builds the `;out=` string based on the provided out values.  At this point
+        # they should only be Strings.
+        #
+        # @param out [String,Array<String>] list of outable subresources
+        # @return [String] compiled out string
+        #
+        def out_params(out = [])
+          out_params = case out
+                       when String
+                         ";out=#{out}" unless out.empty?
+                       when Array
+                         ";out=#{out.join(',')}" unless out.empty?
+                       end
+
+          out_params = '' if out_params.nil?
+          out_params
         end
       end
 
@@ -138,11 +189,14 @@ module YahooFantasy
         self.class.api(verb, path, opts, &block)
       end
 
-      # Provide the resources own path.. This is also used by Subresourceable when creating full paths.
+      # Default implementation provides the classes `resource_path` value, this should generally
+      # be abstract for overwriting but
       #
       # @return [String] the resource path
       #
-      def resource_path; end
+      def resource_path
+        self.class.resource_path
+      end
     end
   end
 end

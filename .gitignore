@@ -10,4 +10,7 @@
 
 # rspec failure tracking
 .rspec_status
-.client.yml
+
+# example/demo
+example/node_modules
+example/.client.yml

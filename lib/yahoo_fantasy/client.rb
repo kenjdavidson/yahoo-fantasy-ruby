@@ -128,7 +128,7 @@ module YahooFantasy
     #
     def request(verb, url, opts = {})
       request_options = {
-        parse: :yahoo_content_xml
+        parse: :yahoo_fantasy_content
       }.merge!(opts)
 
       super(verb, url, request_options)
@@ -136,9 +136,4 @@ module YahooFantasy
       raise YahooFantasy::YahooFantasyError, e.response.parsed
     end
   end
-end
-
-OAuth2::Response.register_parser(:yahoo_content_xml, ['text/xml', 'application/rss+xml', 'application/rdf+xml', 'application/atom+xml', 'application/xml']) do |body|
-  fc = YahooFantasy::Resource::FantasyContent.new
-  YahooFantasy::XML::FantasyContentRepresenter.new(fc).from_xml(body)
 end

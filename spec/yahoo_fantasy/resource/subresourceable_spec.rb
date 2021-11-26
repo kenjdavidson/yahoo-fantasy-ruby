@@ -2,11 +2,14 @@
 
 RSpec.describe YahooFantasy::Resource::Subresourceable do
   let(:resourced_class) do
-    Class.new do
+    Class.new(YahooFantasy::Resource::Base) do
       include YahooFantasy::Resource::Subresourceable
 
-      subresource :subresource1
-      subresource :subresource2
+      subresource :subresource, filters: { filter1: {}, filter2: {} }
+
+      def resource_path
+        '/resource/1'
+      end
     end
   end
 
@@ -14,35 +17,57 @@ RSpec.describe YahooFantasy::Resource::Subresourceable do
     subject { resourced_class }
 
     it 'has two subresources' do
-      expect(resourced_class.subresources.keys.length).to eq 2
+      expect(resourced_class.subresources.keys.length).to eq 1
     end
 
     it 'has a subresource named :subresource1 defined' do
-      expect(resourced_class.subresources.keys.include?(:subresource1)).to eq true
-    end
-
-    it 'has a subresource named :subresource2 defined' do
-      expect(resourced_class.subresources.keys.include?(:subresource2)).to eq true
+      expect(resourced_class.subresources.keys.include?(:subresource)).to eq true
     end
   end
 
-  context 'instance of SubresourcedClass' do
+  context 'subresource accessor methods' do
     subject { resourced_class.new }
 
-    it 'responds to subresource1' do
-      expect(subject.respond_to?(:subresource1)).to eq(true)
+    it 'responds to subresource' do
+      expect(subject.respond_to?(:subresource)).to eq(true)
     end
 
-    it 'responds to subresource1=' do
-      expect(subject.respond_to?('subresource1=')).to eq(true)
+    it 'responds to subresource=' do
+      expect(subject.respond_to?('subresource=')).to eq(true)
     end
 
-    it 'responds to subresource2' do
-      expect(subject.respond_to?(:subresource2)).to eq(true)
+    it 'responds to subresource!' do
+      expect(subject.respond_to?('subresource!')).to eq(true)
+    end
+  end
+
+  context '.subresource_path' do
+    subject { resourced_class.new }
+
+    it 'creates appropriate Subresource path' do
+      subresource = resourced_class.subresources[:subresource]
+      expect(subject.subresource_path(subresource)).to eq('/resource/1/subresource')
+    end
+  end
+
+  context '.subresource_filters' do
+    subject { resourced_class.new }
+
+    it 'creates empty resource filters' do
+      subresource = resourced_class.subresources[:subresource]
+
+      expect(subject.subresource_filters(subresource)).to eq('')
     end
 
-    it 'responds to subresource2=' do
-      expect(subject.respond_to?('subresource2=')).to eq(true)
+    it 'creates appropriate resource filters' do
+      subresource = resourced_class.subresources[:subresource]
+      filters = {
+        filter1: 'filter1',
+        filter2: 'filter2',
+        filter3: 'filter3'
+      }
+
+      expect(subject.subresource_filters(subresource, filters)).to eq(';filter1=filter1;filter2=filter2')
     end
   end
 end

@@ -12,6 +12,7 @@ module YahooFantasy
       #
       class League < YahooFantasy::Resource::Base
         filter :league_keys
+        filter :league_ids
 
         subresource :settings, parser: ->(fc) { fc.league.settings }
         subresource :scoreboard, parser: ->(fc) { fc.league.scoreboard }

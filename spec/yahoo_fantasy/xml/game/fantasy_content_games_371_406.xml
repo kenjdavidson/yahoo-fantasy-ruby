@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fantasy_content xml:lang="en-US" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/games;game_keys=371,406" time="29.73198890686ms" copyright="Data provided by Yahoo! and STATS, LLC" refresh_rate="60" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
+    <games count="2">
+        <game>
+            <game_key>371</game_key>
+            <game_id>371</game_id>
+            <name>Football</name>
+            <code>nfl</code>
+            <type>full</type>
+            <url>https://football.fantasysports.yahoo.com/2017/f1</url>
+            <season>2017</season>
+            <is_registration_over>1</is_registration_over>
+            <is_game_over>1</is_game_over>
+            <is_offseason>1</is_offseason>
+        </game>
+        <game>
+            <game_key>406</game_key>
+            <game_id>406</game_id>
+            <name>Football</name>
+            <code>nfl</code>
+            <type>full</type>
+            <url>https://football.fantasysports.yahoo.com/f1</url>
+            <season>2021</season>
+            <is_registration_over>1</is_registration_over>
+            <is_game_over>0</is_game_over>
+            <is_offseason>0</is_offseason>
+        </game>
+    </games>
+</fantasy_content>
+<!-- fantasy-sports-api- -public-production-bf1-7965c59994-5z6b8 Fri Nov 26 18:13:53 UTC 2021 -->

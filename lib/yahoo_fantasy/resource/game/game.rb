@@ -22,8 +22,8 @@ module YahooFantasy
         filter :game_codes
         filter :seasons
 
-        subresource :leagues, parser: ->(fc) { fc.game.leagues },
-                              resource: YahooFantasy::Resource::League::League
+        subresource :leagues, filters: YahooFantasy::Resource::League::League.filters,
+                              parser: ->(fc) { fc.game.leagues }
         subresource :game_weeks, parser: ->(fc) { fc.game.game_weeks }
         subresource :stat_categories, parser: ->(fc) { fc.game.stats }
         subresource :position_types, parser: ->(fc) { fc.game.position_types }
@@ -31,6 +31,14 @@ module YahooFantasy
 
         attr_accessor :game_key, :game_id, :name, :code, :type, :url, :season, :is_registration_over, :is_game_over,
                       :is_offseason
+
+        def self.all(keys, options = {})
+          super(keys, options, &:games)
+        end
+
+        def self.get(key, options = {})
+          super(key, options, &:game)
+        end
 
         def resource_path
           "/game/#{game_key}"

@@ -3,6 +3,11 @@
 require 'oauth2'
 
 RSpec.describe YahooFantasy::Resource::Base do
+  before do
+    test_resource = Class.new(YahooFantasy::Resource::Base)
+    stub_const('TestResource', test_resource)
+  end
+
   after(:each) do
     YahooFantasy::Resource::Base.access_token = nil
   end
@@ -54,7 +59,6 @@ RSpec.describe YahooFantasy::Resource::Base do
 
   context '.api' do
     it 'raises YahooFantasy::MissingAccessTokenError when no AccessToken' do
-      # expect { raise YahooFantasy::MissingAccessTokenError }.to raise_error(YahooFantasy::MissingAccessTokenError)
       expect { YahooFantasy::Resource::Base.api(:get, '/games') }.to raise_error(YahooFantasy::MissingAccessTokenError)
     end
 
@@ -68,20 +72,58 @@ RSpec.describe YahooFantasy::Resource::Base do
     end
   end
 
-  context '.resource_prefix' do
-    before do
-      test_resource = Class.new(YahooFantasy::Resource::Base)
-      stub_const('TestResource', test_resource)
-    end
-    it 'should return snake downcase class name' do
-      expect(TestResource.resource_prefix).to eq('/test_resource')
-    end
-  end
+  # context '.collection_path' do
+  #   it 'should return /test_resources for TestResource' do
+  #     expect(TestResource.collection_path).to eq('/test_resources')
+  #   end
+  # end
 
-  context '#api' do
-    it 'raises YahooFantasy::MissingAccessTokenError when no AccessToken' do
-      # expect { raise YahooFantasy::MissingAccessTokenError }.to raise_error(YahooFantasy::MissingAccessTokenError)
-      expect { subject.class.api(:get, '/games') }.to raise_error(YahooFantasy::MissingAccessTokenError)
+  # context '.resource_path' do
+  #   it 'should return /test_resource for TestResource resource' do
+  #     expect(TestResource.resource_path).to eq('/test_resource')
+  #   end
+  # end
+
+  context '.get' do
+    it 'should call api with /test_resource/1' do
+      access_token = spy(OAuth2::AccessToken)
+      YahooFantasy::Resource::Base.access_token = access_token
+
+      TestResource.get(1)
+
+      expect(access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1', {})
+    end
+
+    it 'should call api with /test_resource/1;out=sub1,sub2 with String' do
+      access_token = spy(OAuth2::AccessToken)
+      YahooFantasy::Resource::Base.access_token = access_token
+
+      TestResource.get(1, subresource: 'sub1,sub2')
+
+      expect(access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1;out=sub1,sub2', {})
+    end
+
+    it 'should call api with /test_resource/1;out=sub1,sub2 with Array' do
+      access_token = spy(OAuth2::AccessToken)
+      YahooFantasy::Resource::Base.access_token = access_token
+
+      TestResource.get(1, subresource: %w[sub1 sub2])
+
+      expect(access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1;out=sub1,sub2', {})
+    end
+
+    it 'should return fantasy content when no block given' do
+      xml = File.read "#{__dir__}/../xml/game/fantasy_content_game.xml"
+      response = Faraday::Response.new(status: 200, response_headers: {}, body: xml)
+
+      access_token = double(OAuth2::AccessToken)
+      allow(access_token).to receive(:request).and_return(OAuth2::Response.new(response, parse: :yahoo_fantasy_content))
+
+      YahooFantasy::Resource::Base.access_token = access_token
+
+      yahoo_content = TestResource.get(1)
+
+      expect(yahoo_content.class).to be(YahooFantasy::Resource::FantasyContent)
     end
   end
 end

@@ -10,6 +10,9 @@ module YahooFantasy
     # The end goal is provide "type checking" (solely because I haven't wrapped my head around
     # non type checking yet) and Resource request validation.  Although, at this point the
     # Yahoo Fantasy API just ignores unknown filters.
+    #
+    # @todo add a Filter class instead of options Hash
+    #
     module Filterable
       class InvalidFilterError < StandardError; end
 
@@ -19,12 +22,28 @@ module YahooFantasy
 
       # Filter ClassMethods
       module ClassMethods
-        def filter(name, *options)
-          filters[name] = options
+        def filters
+          @filters.dup
         end
 
-        def filters
+        # Parses the requested filter Hash using the available filters to create a
+        # filter string.
+        #
+        # @example
+        #
+        # @param requested_filters [Hash<String,Array<String>>] requested filters
+        # @return [String] semi-colon separated filter string
+        def filter_string(requested = {})
+          return '' if requested.empty?
+
+          # reduce available filters provided in requested to a string
+        end
+
+        protected
+
+        def filter(name, options = {})
           @filters ||= {}
+          @filters[name] = options
         end
       end
     end

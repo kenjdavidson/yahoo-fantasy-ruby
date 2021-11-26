@@ -37,6 +37,39 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
     end
   end
 
+  context '.all' do
+    it 'should return YahooFantasy::Resource::Game::Games 371,406' do
+      xml = File.read "#{__dir__}/../../xml/game/fantasy_content_games_371_406.xml"
+      response = Faraday::Response.new(status: 200, response_headers: {}, body: xml)
+
+      access_token = double(OAuth2::AccessToken)
+      allow(access_token).to receive(:request).and_return(OAuth2::Response.new(response, parse: :yahoo_fantasy_content))
+
+      YahooFantasy::Resource::Game::Game.access_token = access_token
+      games = YahooFantasy::Resource::Game::Game.all(%w[371 406])
+
+      expect(games.size).to be(2)
+      expect(games[0].game_key).to eq('371')
+      expect(games[1].game_key).to eq('406')
+    end
+  end
+
+  context '.get' do
+    it 'should return YahooFantasy::Resource::Game::Game' do
+      xml = File.read "#{__dir__}/../../xml/game/fantasy_content_game.xml"
+      response = Faraday::Response.new(status: 200, response_headers: {}, body: xml)
+
+      access_token = double(OAuth2::AccessToken)
+      allow(access_token).to receive(:request).and_return(OAuth2::Response.new(response, parse: :yahoo_fantasy_content))
+
+      YahooFantasy::Resource::Game::Game.access_token = access_token
+      game = YahooFantasy::Resource::Game::Game.get(1)
+
+      expect(game.class).to be(YahooFantasy::Resource::Game::Game)
+      expect(game.game_key).to eq('406')
+    end
+  end
+
   context '#initialize' do
     subject { YahooFantasy::Resource::Game::Game.new(game_key: '404', game_id: 404, code: 'nfl') }
 

@@ -29,8 +29,8 @@ RSpec.describe YahooFantasy::Resource::League::League do
       end
     end
 
-    it 'has four (1) filters' do
-      expect(YahooFantasy::Resource::League::League.filters.length).to eq 1
+    it 'has four (2) filters' do
+      expect(YahooFantasy::Resource::League::League.filters.length).to eq 2
     end
   end
 
