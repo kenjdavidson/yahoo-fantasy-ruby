@@ -2,12 +2,13 @@
 
 Provides Ruby wrapping of the [Yahoo Fantasy Sports API](https://developer.yahoo.com/fantasysports/guide).
 
-> The main goal of this project is to provide a realistic environment/library for the sole purpose of me learning Ruby.   
+> I make no guarantees about this code working or without some poor Ruby choices.
 
-The library may:
+This was my first attempt at a Ruby library (at Ruby at all to be honest) and may:
 
 - Not work at all - although that would be a failure of the adventure
 - Come no where close to **best practices** with regards to designing Ruby libraries
+- Need a lot of love in order to get to a **realistic Ruby** place
 
 > If you come across this repo and you see anyting that I could have done better.  Please don't hesitate to shoot me a note or a pull request (with some whys and whats of the changes) so that I can continue my Ruby journey on the right path!!
 
@@ -15,25 +16,31 @@ The library may:
 
 > At this point in time the name `yahoo-fantasy` may change.   I guess the ruby part is a little superfluous, but it was the name of the folder I needed so I rolled with it.
 
+### Gem
+
 Add this line to your application's Gemfile:
 
 ```ruby
 gem 'yahoo-fantasy'
 ```
 
-or add to your `gemspec`:
+### Gemspec
+
+Add to your `gemspec`:
 
 ```
 spec.add_dependency "yahoo_fantasy_ruby"
 ```
 
-And then execute:
+Then install dependencies:
 
 ```
 $ bundle install
 ```
 
-Or install it yourself as:
+### Install Directly
+
+Install the gem directly:
 
 ```
 $ gem install yahoo-fantasy
@@ -98,7 +105,48 @@ fantasy_content.games.each do |game|
 end
 ```
 
-#### Games
+The `Base` resource also has methods:
+
+- `.get(key, options, &block)` to get a single resource
+- `.all(filters, options, &block)` to get a collection of resources
+
+Which will attempt to create the appropriate resource url from the provided arguments (need some love and handling) and will return a `YahooFantasy::Resource::FantasyContent` or what is returned from the `->(fantasy_content) {}` block provided.
+
+> This is where it would make more sense to provide `YahooFantasy::Api::Resource` and `YahooFantasy::Api::Collection` as mentioned elsewhere in here.  
+
+#### Game(s)
+
+The `YahooFantasy::Resource::Game::Game` resource provides some consistent and common access to the API.
+
+> Ya, I get the name `Game::Game` isn't optimal.  I've been playing around with the idea of `Game::Meta` (which is how Yahoo references it) or `Api::Game`.  I'll leave that for future Ken once I start actually using it.
+
+> Also available at `YahooFantasy::Games` shortcut.
+
+##### Resource
+
+[Game Resource](https://developer.yahoo.com/fantasysports/guide/#game-resource) details can be found on the Yahoo developer portal.
+
+For the most part the only the `game_key` is required when making a request, but there are subresources available:
+
+**Game metadata**
+
+```
+# Get Game metadata
+game = YahooFantasy::Resource::Game::Game.get('406')
+```
+
+**Game with subresources**
+
+```
+# Get the Game metadata with subresources
+game = YahooFantasy::Resource::Game::Game.get('406', subresources: %w[game_weeks stat_categories roster_positions leagues])
+```
+
+> The teams subresource is not currently available
+
+> The leagues subresource is available. BUT it's only available in terms of the logged in user.  At this point there is no way to request a subresource with further filters.   Although I do plan on getting this working once I get more comfortable with Ruby.
+
+##### Collection
 
 #### Leagues
 
