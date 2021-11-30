@@ -148,6 +148,8 @@ game = YahooFantasy::Resource::Game::Game.get('406', subresources: %w[game_weeks
 
 ##### Collection
 
+[Games collection](https://developer.yahoo.com/fantasysports/guide/#games-collection) provides access to multiple games using a set of specified filters.
+
 #### Leagues
 
 #### Teams
