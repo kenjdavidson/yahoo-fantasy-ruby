@@ -40,7 +40,7 @@ module YahooFantasy
         end
 
         def game_id
-          league_key.split('.').first.to_i
+          game_key.to_i
         end
 
         def resource_path

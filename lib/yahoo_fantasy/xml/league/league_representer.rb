@@ -20,7 +20,9 @@ module YahooFantasy
                             decorator: SettingsRepresenter
 
         # Standings
-        collection :standings, as: :team, wrap: 'standings/team'
+        collection :standings, as: :team, wrap: 'standings/teams',
+                               class: YahooFantasy::Resource::Team::Team,
+                               decorator: YahooFantasy::XML::Team::TeamRepresenter
       end
     end
   end

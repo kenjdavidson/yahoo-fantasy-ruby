@@ -27,6 +27,8 @@ module YahooFantasy
                       class: YahooFantasy::Resource::Game::Game
       property :league, decorator: YahooFantasy::XML::League::LeagueRepresenter,
                         class: YahooFantasy::Resource::League::League
+      property :team, decorator: YahooFantasy::XML::Team::TeamRepresenter,
+                      class: YahooFantasy::Resource::Team::Team
 
       collection :games, as: :game, wrap: :games,
                          decorator: YahooFantasy::XML::Game::GameRepresenter,

@@ -17,11 +17,5 @@ module YahooFantasy
     autoload :Game, 'yahoo_fantasy/resource/game'
     autoload :League, 'yahoo_fantasy/resource/league'
     autoload :Team, 'yahoo_fantasy/resource/team'
-
-    # @return [YahooFantasy::Resource::Game::Game] returns Game resource alias
-    Games = YahooFantasy::Resource::Game::Game
-
-    # @return [YahooFantasy::Resource::League::League] returns League resource alias
-    Leagues = YahooFantasy::Resource::League::League
   end
 end

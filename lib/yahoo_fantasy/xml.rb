@@ -12,5 +12,6 @@ module YahooFantasy
     autoload :FantasyContentRepresenter, 'yahoo_fantasy/xml/fantasy_content_representer'
     autoload :Game, 'yahoo_fantasy/xml/game'
     autoload :League, 'yahoo_fantasy/xml/league'
+    autoload :Team, 'yahoo_fantasy/xml/team'
   end
 end

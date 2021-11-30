@@ -3,11 +3,10 @@
 module YahooFantasy
   module Resource
     # Fantasy wrapper providing access to all data elements available from the Yahoo Fantasy API
-    # This could probably be a Struct or OpenStruct, but for now I'm not sure whether
-    # we'll want to extend the YahooFantasy::Resource::Base for anything
+    # All request (even exceptions) are wrapped in <fantasy-content>.
     #
     class FantasyContent
-      attr_accessor :lang, :uri, :copyright, :refresh_rate, :users, :games, :leagues, :game, :league
+      attr_accessor :lang, :uri, :copyright, :refresh_rate, :users, :games, :leagues, :teams, :game, :league, :team
 
       # Errors aren't returned with <fantasy_content> but instead <yahoo:error>, to get around
       # this we can pull the :error from <description> when it exists (since it doesn't)

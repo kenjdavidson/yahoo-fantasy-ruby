@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fantasy_content xml:lang="en-US" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/team/406.l.117376.t.4/roster" time="48.099040985107ms" copyright="Data provided by Yahoo! and STATS, LLC" refresh_rate="60" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
+    <team>
+        <team_key>406.l.117376.t.4</team_key>
+        <team_id>4</team_id>
+        <name>Chalupa Batman</name>
+        <is_owned_by_current_login>1</is_owned_by_current_login>
+        <url>https://football.fantasysports.yahoo.com/f1/117376/4</url>
+        <team_logos>
+            <team_logo>
+                <size>large</size>
+                <url>https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/25228801831_861d183f44.jpg</url>
+            </team_logo>
+        </team_logos>
+        <waiver_priority>9</waiver_priority>
+        <number_of_moves>18</number_of_moves>
+        <number_of_trades>1</number_of_trades>
+        <roster_adds>
+            <coverage_type>week</coverage_type>
+            <coverage_value>13</coverage_value>
+            <value>0</value>
+        </roster_adds>
+        <clinched_playoffs>1</clinched_playoffs>
+        <league_scoring_type>head</league_scoring_type>
+        <has_draft_grade>1</has_draft_grade>
+        <draft_grade>B</draft_grade>
+        <draft_recap_url>https://football.fantasysports.yahoo.com/f1/117376/4/draftrecap</draft_recap_url>
+        <managers>
+            <manager>
+                <manager_id>4</manager_id>
+                <nickname>Kenneth</nickname>
+                <guid>HJXEGSOPDMQLLZFJIQ2BCZA3Z4</guid>
+                <is_current_login>1</is_current_login>
+                <image_url>https://s.yimg.com/ag/images/bb794a81-8eb6-4614-b0e4-2399e94a9a38_64sq.jpg</image_url>
+                <felo_score>733</felo_score>
+                <felo_tier>gold</felo_tier>
+            </manager>
+        </managers>
+        <team_points>
+            <coverage_type>week</coverage_type>
+            <week>12</week>
+            <total>128.70</total>
+        </team_points>
+        <team_projected_points>
+            <coverage_type>week</coverage_type>
+            <week>12</week>
+            <total>138.10</total>
+        </team_projected_points>        
+    </team>
+</fantasy_content>
+<!-- fantasy-sports-api- -public-production-bf1-7965c59994-g2s9j Tue Nov 30 13:20:22 UTC 2021 -->

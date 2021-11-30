@@ -8,7 +8,7 @@ module YahooFantasy
       # Team Points
       # Yahoo points are provided based on coverage_type 'week' or 'date' and provide
       # the total.  Team points are available for both actual and projections.
-      Standings = Struct.new(:rank, :playoff_seed, :wins, :losses, :ties, :percentage, :streak_type, :streak,
+      Standings = Struct.new(:rank, :playoff_seed, :wins, :losses, :ties, :percentage, :streak_type, :streak_value,
                              :points_for, :points_against)
     end
   end

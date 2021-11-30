@@ -1,0 +1,31 @@
+name: Perform Tests
+
+on:
+  workflow_distpatch:
+  push: 
+    branches: 
+      - master
+  pull_request: 
+    branches:
+      - master
+
+jobs:
+  build-and-test:
+    runs-on: ubunto-latest
+    strategy:
+      matrix:
+        ruby: [ '2.7' ]
+
+    steps:
+      - name: Checkout ${{ github.ref_name }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+      - name: Setup Ruby ${{ matrix.ruby }}
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: $${ matrix.ruby }
+      - name: Bundle install
+        run: bundle install
+      - name: Run Rspec
+        run: bundle exec rspec

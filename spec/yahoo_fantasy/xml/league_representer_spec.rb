@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+# @todo update all these specs so that the expected values are pulled from the xml.css('xpath')
+#   to make testing a little more dynamic (and also allow for multiple xml files that generate)
+#   tests automatically.
+#
 RSpec.describe YahooFantasy::XML::League::LeagueRepresenter do
-  context 'request contains out=settings,standings,scoreboard' do
+  context 'request contains out=settings' do
     load_fantasy_content "#{__dir__}/league/fantasy_content_league.xml"
 
     before(:example) do
@@ -117,18 +121,41 @@ RSpec.describe YahooFantasy::XML::League::LeagueRepresenter do
       expect(stat_modifiers[0].stat_id).to eq(4)
       expect(stat_modifiers[0].value).to eq(0.04)
     end
+  end
+
+  context 'request contains out=settings' do
+    load_fantasy_content "#{__dir__}/league/406.l.117376_standings.xml"
 
     it 'should parse <standings>' do
       standings = fantasy_content.league.standings
 
       expect(standings).not_to eq(nil)
       expect(standings.count).to eq(16)
-    end
-
-    it 'should parse <scoreboard>' do
-      scoreboard = fantasy_content.league.scoreboard
-
-      expect(scoreboard).not_to eq(nil)
+      expect(standings[0].team_key).to eq('406.l.117376.t.2')
+      expect(standings[0].team_id).to eq(2)
+      expect(standings[0].name).to eq('Action Jackson')
+      expect(standings[0].url).to eq('https://football.fantasysports.yahoo.com/f1/117376/2')
+      expect(standings[0].team_logos.count).to eq(1)
+      expect(standings[0].waiver_priority).to eq(2)
+      expect(standings[0].number_of_moves).to eq(29)
+      expect(standings[0].number_of_trades).to eq(5)
+      expect(standings[0].clinched_playoffs).to eq(1)
+      expect(standings[0].league_scoring_type).to eq('head')
+      expect(standings[0].managers.count).to eq(1)
+      expect(standings[0].team_points).not_to eq(nil)
+      expect(standings[0].team_points.coverage_type).to eq('season')
+      expect(standings[0].team_points.season).to eq(2021)
+      expect(standings[0].team_points.total).to eq(1646.56)
+      expect(standings[0].team_standings.rank).to eq(1)
+      expect(standings[0].team_standings.playoff_seed).to eq(1)
+      expect(standings[0].team_standings.wins).to eq(9)
+      expect(standings[0].team_standings.losses).to eq(3)
+      expect(standings[0].team_standings.ties).to eq(0)
+      expect(standings[0].team_standings.percentage).to eq(0.750)
+      expect(standings[0].team_standings.streak_type).to eq('win')
+      expect(standings[0].team_standings.streak_value).to eq(4)
+      expect(standings[0].team_standings.points_for).to eq(1646.56)
+      expect(standings[0].team_standings.points_against).to eq(1444.52)
     end
   end
 end

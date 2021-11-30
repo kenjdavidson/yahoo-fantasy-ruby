@@ -59,6 +59,7 @@ module YahooFantasy
         # @param name [Symbol] name of the subresource
         # @param options [hash]
         # @option verb [Symbol] http verb for resource - defaults to :get
+        # @option filters [Array<Filter>] available filters for this subresource
         # @option endpoint [String] resource endpoint will be appended to parent resource
         # @option parser [Proc, Lambda] used to pull data from FantasyContent
         #
@@ -72,6 +73,15 @@ module YahooFantasy
         def define_subresource_methods(subresource)
           attr_accessor subresource.name
 
+          # This needs to be updated so that either `parser` or something else is called.  Mainly the one issue
+          # is the `/team/stats` resource which can return two subresources that need to be parsed into two instance
+          # varaibles `team_points` and `team_projected_points`.
+          #
+          # The only other option would be to replace the whole object with what found.  For example when you make a
+          # `/team/stats` request you get back the full `Team` object anyhow, and would just need to (effectively)
+          # loop through all the instance variables and set them.  This would negate the need for the
+          # `parser ->(fc) { fc.team.team_points }`.
+          #
           # @!method subresource!
           class_eval <<-CODE, __FILE__, __LINE__ + 1
             define_method "#{subresource.name}!" do |filters = {}|
