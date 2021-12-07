@@ -24,7 +24,7 @@ jobs:
       - name: Setup Ruby ${{ matrix.ruby }}
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: $${ matrix.ruby }
+          ruby-version: ${{ matrix.ruby }}
       - name: Bundle install
         run: bundle install
       - name: Run Rspec
