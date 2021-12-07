@@ -11,7 +11,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubunto-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         ruby: [ '2.7' ]
