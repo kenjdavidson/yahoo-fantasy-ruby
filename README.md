@@ -190,15 +190,21 @@ which I just find annoying, and although it seems like the indices are based on 
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
 ### Development Container
 
 Development is done within a [development container](https://code.visualstudio.com/docs/remote/containers) that can easily be used within **vscode** (and possibly/eventually) (Github Codespaces)[https://github.com/features/codespaces]:
 
 > Should make a `docker-compose` file at some point, but that's future Ken's problem
+
+The `devcontainer` post install script is configured to run `bin/setup` (described below).  
+
+> Note that when you first set this up, you may need to restart some of the plugins (solargraph, ruby test explorer, etc).   This is due to `bundle install` requiring `gemspec` requiring `YahooFantasy::VERSION`, but copying those files to the Image seems to go against the point of docker.  Not a huge deal, just remember to restart them using the command palette.
+
+### Manual
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 

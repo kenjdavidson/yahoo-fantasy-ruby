@@ -1,13 +1,13 @@
 name: Perform Tests
 
 on:
-  workflow_distpatch:
+  workflow_dispatch:
   push: 
     branches: 
-      - master
+      - main
   pull_request: 
     branches:
-      - master
+      - main
 
 jobs:
   build-and-test:
