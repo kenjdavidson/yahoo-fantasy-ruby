@@ -72,7 +72,7 @@ GEM
       oauth2 (~> 1.4)
       omniauth (>= 1.9, < 3)
     parallel (1.21.0)
-    parser (3.0.2.0)
+    parser (3.0.3.1)
       ast (~> 2.4.1)
     racc (1.6.0)
     rack (2.2.3)
@@ -80,7 +80,7 @@ GEM
       rack
     rainbow (3.0.0)
     rake (10.5.0)
-    regexp_parser (2.1.1)
+    regexp_parser (2.2.0)
     representable (3.1.1)
       declarative (< 0.1.0)
       trailblazer-option (>= 0.1.1, < 0.2.0)
@@ -110,11 +110,11 @@ GEM
       rubocop-ast (>= 1.12.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.13.0)
+    rubocop-ast (1.14.0)
       parser (>= 3.0.1.1)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
-    solargraph (0.44.0)
+    solargraph (0.44.2)
       backport (~> 1.2)
       benchmark
       bundler (>= 1.17.2)
@@ -136,7 +136,11 @@ GEM
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
     unicode-display_width (2.1.0)
-    yard (0.9.26)
+    webrick (1.7.0)
+    yard (0.9.27)
+      webrick (~> 1.7.0)
+    yard-struct (1.1.0)
+      yard (>= 0.4.0)
     zeitwerk (2.5.1)
 
 PLATFORMS
@@ -149,6 +153,7 @@ DEPENDENCIES
   rubocop (~> 1.22)
   solargraph (~> 0.44)
   yahoo-fantasy!
+  yard-struct (~> 1.1)
 
 BUNDLED WITH
-   2.2.31
+   2.2.32

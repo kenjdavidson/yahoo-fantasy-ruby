@@ -13,5 +13,6 @@ module YahooFantasy
     autoload :Game, 'yahoo_fantasy/xml/game'
     autoload :League, 'yahoo_fantasy/xml/league'
     autoload :Team, 'yahoo_fantasy/xml/team'
+    autoload :Player, 'yahoo_fantasy/xml/player'
   end
 end

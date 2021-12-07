@@ -55,7 +55,8 @@ module YahooFantasy
         # @param [String] path passed to the access_token#request.  The path can be in the form
         #   `https://somepath/someresource` or `/path`; if the latter it will have the base endpoint
         #   prefixed.
-        # @param [Hash] opts passed to the access_token#request
+        #
+        # @param opts [Hash] options passed to the access_token#request
         # @param [Block] if a block is provided the response is filtered through it
         # @return [FantasyContent,YahooFantasy::Resource::Base] the yahoo content response
         #

@@ -12,10 +12,7 @@ module OmniAuth
     # When providing `oob` as the redirect_uri this strategy will not redirect, it will set the
     # `session['omniauth.redirect_uri']` and call through to the next middleware.  If `oob` is
     # set, then you must provide either an `OmniAuth::Form` or handle the `/auth/yahoo` within
-    # your application accordingly
-    #
-    # @example
-    #
+    # your application accordingly.
     #
     # @see https://developer.yahoo.com/oauth2/guide/
     #

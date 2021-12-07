@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fantasy_content xml:lang="en-US" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/team/406.l.117376.t.4/standings" time="36.257028579712ms" copyright="Data provided by Yahoo! and STATS, LLC" refresh_rate="60" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
+    <team>
+        <team_key>406.l.117376.t.4</team_key>
+        <team_id>4</team_id>
+        <name>Chalupa Batman</name>
+        <is_owned_by_current_login>1</is_owned_by_current_login>
+        <url>https://football.fantasysports.yahoo.com/f1/117376/4</url>
+        <team_logos>
+            <team_logo>
+                <size>large</size>
+                <url>https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/25228801831_861d183f44.jpg</url>
+            </team_logo>
+        </team_logos>
+        <waiver_priority>11</waiver_priority>
+        <number_of_moves>19</number_of_moves>
+        <number_of_trades>1</number_of_trades>
+        <roster_adds>
+            <coverage_type>week</coverage_type>
+            <coverage_value>13</coverage_value>
+            <value>1</value>
+        </roster_adds>
+        <clinched_playoffs>1</clinched_playoffs>
+        <league_scoring_type>head</league_scoring_type>
+        <has_draft_grade>1</has_draft_grade>
+        <draft_grade>B</draft_grade>
+        <draft_recap_url>https://football.fantasysports.yahoo.com/f1/117376/4/draftrecap</draft_recap_url>
+        <managers>
+            <manager>
+                <manager_id>4</manager_id>
+                <nickname>Kenneth</nickname>
+                <guid>HJXEGSOPDMQLLZFJIQ2BCZA3Z4</guid>
+                <is_current_login>1</is_current_login>
+                <image_url>https://s.yimg.com/ag/images/bb794a81-8eb6-4614-b0e4-2399e94a9a38_64sq.jpg</image_url>
+                <felo_score>719</felo_score>
+                <felo_tier>gold</felo_tier>
+            </manager>
+        </managers>
+        <team_standings>
+            <rank>3</rank>
+            <playoff_seed>3</playoff_seed>
+            <outcome_totals>
+                <wins>9</wins>
+                <losses>3</losses>
+                <ties>0</ties>
+                <percentage>.750</percentage>
+            </outcome_totals>
+            <streak>
+                <type>win</type>
+                <value>1</value>
+            </streak>
+            <points_for>1579.20</points_for>
+            <points_against>1481.18</points_against>
+        </team_standings>
+    </team>
+</fantasy_content>
+<!-- fantasy-sports-api- -public-production-bf1-6cb556b5b6-x8c72 Thu Dec  2 19:10:01 UTC 2021 -->

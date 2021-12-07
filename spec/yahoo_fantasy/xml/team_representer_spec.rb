@@ -9,7 +9,7 @@ RSpec.describe YahooFantasy::XML::Team::TeamRepresenter do
 
     subject { fantasy_content.team }
 
-    it 'should parse single <team>' do
+    it 'should parse <team> metadata' do
       expect(subject).not_to eq(nil)
       expect(subject.team_key).to eq('406.l.117376.t.4')
       expect(subject.team_id).to eq(4)
@@ -57,10 +57,14 @@ RSpec.describe YahooFantasy::XML::Team::TeamRepresenter do
     end
   end
 
-  context 'request contains metadata' do
+  context 'request contains ;out=roster' do
     load_fantasy_content "#{__dir__}/team/406.l.117376.t.4_roster.xml"
 
     subject { fantasy_content.team.roster }
+
+    it 'should have roster' do
+      expect(subject).not_to eq(nil)
+    end
 
     it 'should have coverage_type week' do
       expect(subject.coverage_type).to eq('week')
@@ -77,6 +81,39 @@ RSpec.describe YahooFantasy::XML::Team::TeamRepresenter do
 
     it 'should have correct players' do
       expect(subject.players.count).to eq(18)
+      expect(subject.players[0].player_key).to eq('406.p.29369')
+      expect(subject.players[0].player_id).to eq(29_369)
+      expect(subject.players[0].name.full).to eq('Dak Prescott')
+    end
+  end
+
+  context 'request contains ;out=matchup' do
+    load_fantasy_content "#{__dir__}/team/406.l.117376.t.4_matchups.xml"
+
+    subject { fantasy_content.team.matchups }
+
+    it 'should have matchups' do
+      expect(subject).not_to eq(nil)
+      expect(subject.count).to eq(14)
+    end
+
+    it 'should have correct matchup[0]' do
+      expect(subject[0].week).to eq(1)
+      expect(subject[0].week_start).to eq('2021-09-09')
+      expect(subject[0].week_end).to eq('2021-09-13')
+      expect(subject[0].status).to eq('postevent')
+      expect(subject[0].is_playoffs).to eq(0)
+      expect(subject[0].is_consolation).to eq(0)
+      expect(subject[0].is_matchup_recap_available).to eq(1)
+    end
+
+    it 'has matchup[0] grades' do
+      expect(subject[0].matchup_grades).not_to eq(nil)
+      expect(subject[0].matchup_grades.count).to eq(2)
+      expect(subject[0].matchup_grades[0].team_key).to eq('406.l.117376.t.4')
+      expect(subject[0].matchup_grades[0].grade).to eq('A')
+      expect(subject[0].matchup_grades[1].team_key).to eq('406.l.117376.t.14')
+      expect(subject[0].matchup_grades[1].grade).to eq('C')
     end
   end
 end

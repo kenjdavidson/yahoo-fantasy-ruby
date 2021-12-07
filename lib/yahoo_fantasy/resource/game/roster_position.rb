@@ -5,10 +5,14 @@ module YahooFantasy
     module Game
       # Roster positions available in a game
       #
-      # @!attribute [rw] position the roster position name
-      # @!attribute abbreviation the roster position abbreviation
-      # @!attribute display_name the full display name
-      # @!attribute position_type the position type which this roster position is associated
+      # @!attribute
+      #   @return [String] position the roster position name
+      # @!attribute abbreviation 
+      #   @return [String] the roster position abbreviation
+      # @!attribute display_name 
+      #   @return [String] the full display name
+      # @!attribute position_type
+      #   @return [String] the position type which this roster position is associated
       #
       RosterPosition = Struct.new(:position, :abbreviation, :display_name, :position_type)
     end

@@ -16,10 +16,13 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-		"ruby.useBundler": true,
-		"ruby.rubocop.onSave": true,
-		"ruby.rubocop.useBundler": true,
-		"ruby.format": "rubocop",
+		"ruby.useBundler": false,
+		"ruby.rubocop.onSave": false,
+		"ruby.rubocop.useBundler": false,
+		"ruby.useLanguageServer": false,
+		"ruby.languageServer": {
+			"logLevel": "info"
+		},
 		"solargraph.useBundler": true,
 		"solargraph.completion": true,
 		"solargraph.hover": true,

@@ -16,6 +16,17 @@ module YahooFantasy
       # Eventually if it becomes a query like `YahooFantasy::Client.games('nfl')` it might make more sense
       # to be called Meta.
       #
+      # @!attribute leagues
+      #   @return [YahooFantasy::Resource::League::League] the game associated league(s)
+      # @!attribute game_weeks
+      #   @return [Array<YahooFantasy::Resource::Game::GameWeek>] the weeks for which this game is active
+      # @!attribute stat_categories
+      #   @return [Array<YahooFantasy::Resource::Game::Statistic>] the statistics availble for this game
+      # @!attribute position_types
+      #   @return [Array<YahooFantasy::Resource::Game::PositionType>] the positions types available within this game
+      # @!attribute roster_positions
+      #   @return [Array<YahooFantasy::Resource::Game::RosterPosition>] the roster positions within the position types
+      #
       class Game < YahooFantasy::Resource::Base
         filter :is_available
         filter :game_types
@@ -42,6 +53,8 @@ module YahooFantasy
           super(key, options, &:game)
         end
 
+        # Provies the appropriate resource path defined by `/game/#{game_key}`
+        # @return [String]
         def resource_path
           "/game/#{game_key}"
         end

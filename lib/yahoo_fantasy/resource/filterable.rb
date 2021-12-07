@@ -29,9 +29,7 @@ module YahooFantasy
         # Parses the requested filter Hash using the available filters to create a
         # filter string.
         #
-        # @example
-        #
-        # @param requested_filters [Hash<String,Array<String>>] requested filters
+        # @param requested [Hash<String,Array<String>>] requested filters
         # @return [String] semi-colon separated filter string
         def filter_string(requested = {})
           return '' if requested.empty?

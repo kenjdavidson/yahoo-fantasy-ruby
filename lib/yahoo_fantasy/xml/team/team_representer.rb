@@ -57,6 +57,16 @@ module YahooFantasy
           property :total, parse_filter: Parsers::FloatFilter
         end
 
+        property :roster, class: YahooFantasy::Resource::Team::Roster do
+          property :coverage_type
+          property :week, parse_filter: Parsers::IntegerFilter
+          property :date
+          property :is_editable, parse_filter: Parsers::IntegerFilter
+          collection :players, wrap: :players, as: :player,
+                               class: YahooFantasy::Resource::Player::Player,
+                               decorator: YahooFantasy::XML::Player::PlayerRepresenter
+        end
+
         property :team_standings, class: YahooFantasy::Resource::Team::Standings do
           property :rank, parse_filter: Parsers::IntegerFilter
           property :playoff_seed, parse_filter: Parsers::IntegerFilter
@@ -68,6 +78,30 @@ module YahooFantasy
           property :streak_value, wrap: :streak, as: :value, parse_filter: Parsers::IntegerFilter
           property :points_for, parse_filter: Parsers::FloatFilter
           property :points_against, parse_filter: Parsers::FloatFilter
+        end
+
+        collection :matchups, wrap: :matchups, as: :matchup,
+                              class: YahooFantasy::Resource::Team::Matchup do
+          property :week, parse_filter: Parsers::IntegerFilter
+          property :week_start
+          property :week_end
+          property :status
+          property :is_playoffs, parse_filter: Parsers::IntegerFilter
+          property :is_consolation, parse_filter: Parsers::IntegerFilter
+          property :is_matchup_recap_available, parse_filter: Parsers::IntegerFilter
+          property :matchup_recap_url
+          property :matchup_recap_title
+          property :is_tied, parse_filter: Parsers::IntegerFilter
+          property :winner_team_key
+
+          collection :matchup_grades, wrap: :matchup_grades, as: :matchup_grade,
+                                      class: YahooFantasy::Resource::Team::Matchup::Grade do
+                                        property :team_key
+                                        property :grade
+                                      end
+          # collection :teams, wrap: :teams, as: :team,
+          #                    class: YahooFantasy::Resource::Team::Team,
+          #                    decorator: YahooFantasy::XML::Team::TeamRepresenter
         end
 
         collection :team_logos, as: :team_logo, wrap: :team_logos,
