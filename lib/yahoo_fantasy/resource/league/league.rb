@@ -5,9 +5,14 @@ require 'yahoo_fantasy/resource/base'
 module YahooFantasy
   module Resource
     module League
-      # League Resource (and Collection) is documented at:
+      # Provides access and implementation of League resource and collections:
       #
+      # Resource:
+      # https://developer.yahoo.com/fantasysports/guide/#league-resource
       # https://web.archive.org/web/20130822105844/http://developer.yahoo.com/fantasysports/guide/league-resource.html#league-resource-desc
+      #
+      # Collections:
+      # https://developer.yahoo.com/fantasysports/guide/#leagues-collection
       # https://web.archive.org/web/20130822105532/http://developer.yahoo.com/fantasysports/guide/leagues-collection.html#leagues-collection-desc
       #
       # @!attribute settings

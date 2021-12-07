@@ -95,4 +95,31 @@ RSpec.describe YahooFantasy::Resource::League::League do
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/leagues;league_keys=406.l.12345;out=standings,players', {})
     end
   end
+
+  context '.get' do
+    before(:each) do
+      @access_token = spy(OAuth2::AccessToken)
+      YahooFantasy::Resource::Base.access_token = @access_token
+    end
+
+    it 'should request /league/406.l.12345' do
+      YahooFantasy::Resource::League::League.get('406.l.12345')
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/league/406.l.12345', {})
+    end
+
+    it 'should request subresources url' do
+      [
+        :settings,
+        :standings,
+        :scoreboard,
+        :teams
+        # [:players, YahooFantasy::Resource::Player],
+        # [:draft_results, YahooFantasy::Resource::League::DraftResults],
+        # [:transactions, YahooFantasy::Resource::League::Transation]
+      ].each do |sub|
+        YahooFantasy::Resource::League::League.get('406.l.12345', out: [sub])
+        expect(YahooFantasy::Resource::League::League.subresources.keys.include?(sub[0])).to eq(true), "expected /leagues/406.l.12345;out=#{sub[0]}"
+      end
+    end
+  end
 end

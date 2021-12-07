@@ -3,8 +3,16 @@
 module YahooFantasy
   module Resource
     module Game
-      # Game Resource (and by extension Collection) provides opininated functionality references by
+      # Provides access and implementation of Game resource and collection:
+      #
+      # Resource
+      #
+      # https://developer.yahoo.com/fantasysports/guide/#game-resource
       # https://web.archive.org/web/20130820114739/http://developer.yahoo.com/fantasysports/guide/game-resource.html
+      #
+      # Collection
+      #
+      # https://developer.yahoo.com/fantasysports/guide/#games-collection
       # https://web.archive.org/web/20130821002124/http://developer.yahoo.com/fantasysports/guide/games-collection.html#games-collection-desc
       #
       # I'm completely torn as to whether this should actually be called Meta, since

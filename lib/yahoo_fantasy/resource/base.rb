@@ -143,7 +143,7 @@ module YahooFantasy
         # @param out [Array<String,Hash>] outable resources
         #
         def out_params(out = [])
-          out.empty? ? '' : ";out=#{out.join(',')}"
+          ";out=#{out.is_a?(Array) ? out.join(',') : out.to_s}"
         end
       end
 

@@ -5,17 +5,33 @@ require 'yahoo_fantasy/resource/base'
 module YahooFantasy
   module Resource
     module Team
-      # Team definition
+      # Provides access and implementation of Team resource and collection:
+      #
+      # Resource:
+      # https://developer.yahoo.com/fantasysports/guide/#team-resource
+      #
+      # Collection:
+      #
+      # Note that at this point the `/stats` subresource isn't currently available as it
+      # is not a single entity.  The `/stats` response contains two entities:
+      # - team_points
+      # - team_projected_points
+      #
+      # which I wasn't aware of and at this point didn't fit in how I designed the subresource.
+      # I'm debating whether to just automatically add `;out=stats` to all requests since it seems
+      # like a pretty general think to request.
+      #
+      # @!attribute mathups
+      #   @return []
+      #
       class Team < YahooFantasy::Resource::Base
-        subresource :roster, parser: ->(fc) { fc.team.roster }
-        subresource :team_standings, endpoint: '/standings',
-                                     parser: ->(fc) { fc.team.team_standings }
-        subresource :matchups, parser: ->(fc) { fc.team.matchups }
+        filter :team_keys
 
-        # subresource :standings
-        # subresource :roster
-        # subresource :draftresults
-        # subresource :matchups
+        subresource :matchups, parser: ->(fc) { fc.team.matchups }
+        subresource :roster, parser: ->(fc) { fc.team.roster }
+        subresource :standings, parser: ->(fc) { fc.team.team_standings }
+        subresource :draft_results, endpoint: '/draftresults',
+                                    parser: ->(fc) { fc.team.draft_results }
 
         attr_reader :team_key
         attr_accessor :team_id,
