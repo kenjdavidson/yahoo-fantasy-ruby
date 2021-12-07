@@ -113,7 +113,7 @@ RSpec.describe YahooFantasy::Resource::Base do
     end
 
     it 'should return fantasy content when no block given' do
-      xml = File.read "#{__dir__}/../xml/game/fantasy_content_game.xml"
+      xml = File.read "#{__dir__}/../xml/game/406.xml"
       response = Faraday::Response.new(status: 200, response_headers: {}, body: xml)
 
       access_token = double(OAuth2::AccessToken)

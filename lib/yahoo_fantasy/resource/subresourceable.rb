@@ -9,6 +9,16 @@ module YahooFantasy
     # any `included Subresource` class needs to either extend Resource::Base or have it's own `api`
     # method makes this a little confusing in the grand scheme of things.
     #
+    # @example
+    #   class SubresourcedClass
+    #     include Subresourceable
+    #
+    #     subresource :sub_entities, verb: :Get,
+    #                                endpoint: '/subentities',
+    #                                filters: [:name],
+    #                                parser: ->(fc) { fc.resource.subentities }
+    #   end
+    #
     # @todo look into how this case is handled, where methods are required or assumed inside the
     #   including class.  I'm starting to think that the SubResource is the way to go - and that each
     #   sub resource should be defined with the name, verb, request proc, parse proc, etc.  This seems
@@ -17,11 +27,6 @@ module YahooFantasy
     # Eventually this module should solely be used for:
     # - maintaing the list of subresources
     # - generating the attr_accessor and accessor! methods
-    #
-    # @todo update so that resources can accept and apply parameters.  For example, when processing a 
-    #   Leagues subresource, we want to pass the request through to the {League.all} method.  But when we 
-    #   are working with something like scoreboard subresource, there are limited filters that are allowed,
-    #   but they should be allowed
     #
     module Subresourceable
       # Defines a Subresource
@@ -119,7 +124,7 @@ module YahooFantasy
       # @param filters [Hash{String => String,Array<String>}] hash of filters and their values
       #
       def subresource_filters(subresource, filters = {})
-        return '' if filters.empty?
+        return '' if filters.empty? || subresource.filters.empty?
 
         filter_string = filters.select { |k| subresource.filters.key?(k) }
                                .map { |k, v| "#{k}=#{[v].join(',')}" }

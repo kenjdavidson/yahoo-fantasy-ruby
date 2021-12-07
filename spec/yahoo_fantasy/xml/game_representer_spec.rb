@@ -5,7 +5,7 @@ require 'representable/debug'
 
 RSpec.describe YahooFantasy::XML::Game::GameRepresenter do
   context 'request contains out=game_weeks,position_types,roster_positions,stat_categories' do
-    load_fantasy_content "#{__dir__}/game/fantasy_content_game.xml"
+    load_fantasy_content "#{__dir__}/game/406.xml"
 
     it 'should parse <fantasy_content>' do
       expect(fantasy_content.lang).to eq('en-US')

@@ -28,10 +28,12 @@ module YahooFantasy
       #   @return [Array<YahooFantasy::Resource::Game::RosterPosition>] the roster positions within the position types
       #
       class Game < YahooFantasy::Resource::Base
+        filter :game_keys
         filter :is_available
         filter :game_types
         filter :game_codes
         filter :seasons
+        filter :out
 
         subresource :leagues, filters: YahooFantasy::Resource::League::League.filters,
                               parser: ->(fc) { fc.game.leagues }
@@ -44,8 +46,8 @@ module YahooFantasy
                       :is_offseason
 
         # @todo There's got to be a meta way to do this
-        def self.all(filters, options = {})
-          super(filters, options, &:games)
+        def self.all(options = {})
+          super(options, &:games)
         end
 
         # @todo There's got to be a meta way to do this
@@ -53,8 +55,9 @@ module YahooFantasy
           super(key, options, &:game)
         end
 
-        # Provies the appropriate resource path defined by `/game/#{game_key}`
+        # Provides the appropriate resource path defined by `/game/#{game_key}`
         # @return [String]
+        #
         def resource_path
           "/game/#{game_key}"
         end

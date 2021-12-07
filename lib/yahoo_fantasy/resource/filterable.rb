@@ -26,18 +26,36 @@ module YahooFantasy
           @filters.dup
         end
 
-        # Parses the requested filter Hash using the available filters to create a
-        # filter string.
-        #
-        # @param requested [Hash<String,Array<String>>] requested filters
-        # @return [String] semi-colon separated filter string
-        def filter_string(requested = {})
-          return '' if requested.empty?
+        protected
 
-          # reduce available filters provided in requested to a string
+        # Builds the filter String, which is pretty much the same as the key string.  Basically
+        # a semi-colon separated list key/value pairs of comma separated values.
+        #
+        # @param filters [Hash{String => Array<String>}] requested filters
+        # @return [String]
+        #
+        def filter_params(filters = {})
+          return '' if filters.empty? || self.filters.empty?
+
+          filter_query = filters.select { |k, _v| self.filters.key?(k) }
+                                .map { |k, v| build_parameter_string(k, v) }
+                                .join
+          filter_query = filter_query.to_s unless filter_query.empty?
+          filter_query
         end
 
-        protected
+        private
+
+        def build_parameter_string(key, values = [])
+          parameter = +";#{key}="
+          parameter << if values.is_a?(Array)
+                         values.join(',').to_s
+                       else
+                         values.to_s
+                       end
+
+          parameter
+        end
 
         def filter(name, options = {})
           @filters ||= {}

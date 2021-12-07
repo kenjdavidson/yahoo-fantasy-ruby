@@ -90,16 +90,15 @@ module YahooFantasy
         #
         # @param options [Hash] request options (@see OAuth2::AccessToken#request)
         # @option options [Hash{String => Array<String,Numeric>}] filters
-        # @option options [Array<String>] :keys
-        # @option options [Hash{String => String}] :filters
-        # @option options [Array<String>] :out
+        # @option options [Array<String>,String] out
         #
-        def all(filters, options = {}, &block)
-          opts = options.dup
-          request_path = collection_path
-          request_path << filter_params(filters)
-          request_path << out_params(options.delete(:subresources)) if opts.key?(:subresources)
-          api(:get, request_path, opts, &block)
+        def all(options = {}, &block)
+          request_path = +''
+          request_path << collection_path
+          request_path << filter_params(options.delete(:filters)) if options.key?(:filters)
+          request_path << out_params(options[:out]) if options.key?(:out)
+
+          api(:get, request_path, options, &block)
         end
 
         # Gets a single resource and subresources (outable).  At this point in
@@ -116,7 +115,7 @@ module YahooFantasy
         #
         def get(key, options = {}, &block)
           opts = options.dup
-          request_path = "#{resource_path}/#{key}".dup # Annoying frozen String
+          request_path = "#{resource_path}/#{key}"
           request_path << out_params(options.delete(:subresources)) if opts.key?(:subresources)
           api(:get, request_path, options, &block)
         end
@@ -136,62 +135,6 @@ module YahooFantasy
         #
         def resource_path
           @resource_path ||= "/#{to_s.split('::').last}".underscore.downcase
-        end
-
-        # @return [String] the resource key filter.  This filter uses the appropriate key_name
-        #   to build the keys
-        #
-        def key_params(keys = [])
-          return ";#{key_name}=#{keys.join(',')}" unless keys.empty?
-
-          ''
-        end
-
-        # Each resource is responsible for providing it's own key name, otherwise it will default
-        # to the class name.
-        #
-        # @example
-        #   class Game < Resource::Base; end
-        #   key_name = Game.key_name # => "game_keys"
-        #
-        # @return [String] they resources key name
-        #
-        def key_name
-          @key_name ||= to_s.split('::').last.to_s.underscore.downcase.to_sym
-        end
-
-        # Builds the filter String, which is pretty much the same as the key string.  Basically
-        # a semi-colon separated list key/value pairs of comma separated values.
-        #
-        # @param filters [Hash{String => Array<String>}]
-        # @return [String]
-        #
-        def filter_params(filters = {})
-          return '' if filters.nil? || filters.empty?
-
-          filter_string = filters.select { |k| self.filters.key?(k) }
-                                 .map { |k, v| "#{k}=#{[v].join(',')}" }
-                                 .join(';')
-          filter_string = ";#{filter_string}" unless filter_string.empty?
-          filter_string
-        end
-
-        # Builds the `;out=` string based on the provided out values.  At this point
-        # they should only be Strings.
-        #
-        # @param out [String,Array<String>] list of outable subresources
-        # @return [String] compiled out string
-        #
-        def out_params(out = [])
-          out_params = case out
-                       when String
-                         ";out=#{out}" unless out.empty?
-                       when Array
-                         ";out=#{out.join(',')}" unless out.empty?
-                       end
-
-          out_params = '' if out_params.nil?
-          out_params
         end
       end
 
