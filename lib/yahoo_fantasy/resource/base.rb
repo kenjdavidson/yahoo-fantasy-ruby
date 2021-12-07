@@ -96,7 +96,7 @@ module YahooFantasy
           request_path = +''
           request_path << collection_path
           request_path << filter_params(options.delete(:filters)) if options.key?(:filters)
-          request_path << out_params(options[:out]) if options.key?(:out)
+          request_path << out_params(options.delete(:out)) if options.key?(:out)
 
           api(:get, request_path, options, &block)
         end
@@ -110,13 +110,12 @@ module YahooFantasy
         #
         # @param key [String] the resource key
         # @param options [Hash] @see OAuth2::AccessToken#request
-        # @option options [String,Array<String>] :subresource list of outable subresources
+        # @option options [String,Array<String>] :out list of outable subresources
         # @return [YahooFantasy::Resource::FantasyContent] the yahoo fantasy result
         #
         def get(key, options = {}, &block)
-          opts = options.dup
-          request_path = "#{resource_path}/#{key}"
-          request_path << out_params(options.delete(:subresources)) if opts.key?(:subresources)
+          request_path = +"#{resource_path}/#{key}"
+          request_path << out_params(options.delete(:out)) if options.key?(:out)
           api(:get, request_path, options, &block)
         end
 
@@ -135,6 +134,16 @@ module YahooFantasy
         #
         def resource_path
           @resource_path ||= "/#{to_s.split('::').last}".underscore.downcase
+        end
+
+        # Out params are much like filters (I actually flip flop between keeping them in)
+        # but in the end I'd like to end up having the out parameters allow for the last
+        # to be Hash and provide out parameters for that.
+        #
+        # @param out [Array<String,Hash>] outable resources
+        #
+        def out_params(out = [])
+          out.empty? ? '' : ";out=#{out.join(',')}"
         end
       end
 

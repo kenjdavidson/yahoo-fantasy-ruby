@@ -1,15 +1,19 @@
 # frozen_string_literal: true
 
 RSpec.describe YahooFantasy::Resource::League::League do
+  subject { YahooFantasy::Resource::League::League }
+
   context 'class definition' do
     it 'has all accessors' do
+      @league = YahooFantasy::Resource::League::League.new
+
       %i[
         league_key league_id name url logo_url draft_status num_teams edit_key weekly_deadline
         league_update_timestamp scoring_type league_type renew renewed iris_group_chat_id allow_add_to_dl_extra_pos
         is_pro_league is_cash_league current_week start_week start_date end_week end_date game_code season
       ].each do |a|
-        expect(subject.respond_to?(a)).to eql(true), "expect respond to #{a}"
-        expect(subject.respond_to?("#{a}=")).to eql(true), "expect respond to #{a}="
+        expect(@league.respond_to?(a)).to eql(true), "expect respond to #{a}"
+        expect(@league.respond_to?("#{a}=")).to eql(true), "expect respond to #{a}="
       end
     end
 
@@ -29,8 +33,12 @@ RSpec.describe YahooFantasy::Resource::League::League do
       end
     end
 
-    it 'has four (2) filters' do
-      expect(YahooFantasy::Resource::League::League.filters.length).to eq 2
+    it 'has four (1) filters' do
+      expect(YahooFantasy::Resource::League::League.filters.length).to eq 1
+
+      %i[league_keys].each do |filter|
+        expect(subject.filters.keys.include?(filter)).to eq(true), "expected #{filter} filter"
+      end
     end
   end
 
@@ -63,6 +71,28 @@ RSpec.describe YahooFantasy::Resource::League::League do
 
     it 'should be correct' do
       expect(subject.resource_path).to eq('/league/404.l.12345')
+    end
+  end
+
+  context '.all' do
+    before(:each) do
+      @access_token = spy(OAuth2::AccessToken)
+      YahooFantasy::Resource::Base.access_token = @access_token
+    end
+
+    it 'should request /leagues;league_keys=406.l.12345' do
+      YahooFantasy::Resource::League::League.all(filters: { league_keys: %w[406.l.12345] })
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/leagues;league_keys=406.l.12345', {})
+    end
+
+    it 'should request /leagues;league_keys=406.l.12345;out=standings' do
+      YahooFantasy::Resource::League::League.all(filters: { league_keys: %w[406.l.12345] }, out: %w[standings])
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/leagues;league_keys=406.l.12345;out=standings', {})
+    end
+
+    it 'should request /leagues;league_keys=406.l.12345;out=standings,players' do
+      YahooFantasy::Resource::League::League.all(filters: { league_keys: %w[406.l.12345] }, out: %w[standings players])
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/leagues;league_keys=406.l.12345;out=standings,players', {})
     end
   end
 end

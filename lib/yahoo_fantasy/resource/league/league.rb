@@ -21,7 +21,6 @@ module YahooFantasy
       #
       class League < YahooFantasy::Resource::Base
         filter :league_keys
-        filter :league_ids
 
         subresource :settings, parser: ->(fc) { fc.league.settings }
         subresource :scoreboard, parser: ->(fc) { fc.league.scoreboard }
@@ -36,8 +35,8 @@ module YahooFantasy
 
         # @todo There's got to be a meta way to do this
         #
-        def self.all(filters, options = {})
-          super(filters, options, &:leagues)
+        def self.all(options = {})
+          super(options, &:leagues)
         end
 
         # @todo There's got to be a meta way to do this

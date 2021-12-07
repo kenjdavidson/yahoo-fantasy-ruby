@@ -128,18 +128,17 @@ The `YahooFantasy::Resource::Game::Game` resource provides some consistent and c
 
 For the most part the only the `game_key` is required when making a request, but there are subresources available:
 
-**Game metadata**
+**Filters**
+
+| Filter | Filter Parameter values | Usage |
+| --- | --- | --- |
+| out | Game subresources | `Game.get('406', out: %w[game_weeks])` |
+
+**Example(s)**
 
 ```
-# Get Game metadata
+# Get game 406 meta data
 game = YahooFantasy::Resource::Game::Game.get('406')
-```
-
-**Game with subresources**
-
-```
-# Get the Game metadata with subresources
-game = YahooFantasy::Resource::Game::Game.get('406', subresources: %w[game_weeks stat_categories roster_positions leagues])
 ```
 
 > The teams subresource is not currently available
@@ -149,6 +148,18 @@ game = YahooFantasy::Resource::Game::Game.get('406', subresources: %w[game_weeks
 ##### Collection
 
 [Games collection](https://developer.yahoo.com/fantasysports/guide/#games-collection) provides access to multiple games using a set of specified filters.
+
+**Filters**
+
+Collection filters are available on top of resource filters.
+
+| Filter | Filter Parameter values | Usage |
+| --- | --- | --- |
+| game_keys |  | `Games.all(filters: { game_keys: ['406'] })` |
+| is_available | `1` or `0` | `Games.all(filters: { is_available: 1 })` |
+| game_types | `full,pickem-team,pickem-group,pickem-team-list` | `Games.all(filters: { game_types: ['pickem-team'] })` |
+| game_codes | Any valid game code(s) | `Games.all(filters: { game_codes: ['nfl'] })` |
+| seasons | Any valid season(s) | `Games.all(filters: { seasons: [2020] })` |
 
 #### Leagues
 

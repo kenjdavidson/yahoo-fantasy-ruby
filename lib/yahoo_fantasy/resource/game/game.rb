@@ -33,7 +33,6 @@ module YahooFantasy
         filter :game_types
         filter :game_codes
         filter :seasons
-        filter :out
 
         subresource :leagues, filters: YahooFantasy::Resource::League::League.filters,
                               parser: ->(fc) { fc.game.leagues }

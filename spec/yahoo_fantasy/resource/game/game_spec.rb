@@ -28,10 +28,10 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
       end
     end
 
-    it 'has five (6) filters' do
-      expect(subject.filters.length).to eq(6)
+    it 'has five (5) filters' do
+      expect(subject.filters.length).to eq(5)
 
-      %i[game_keys is_available game_types game_codes seasons out].each do |filter|
+      %i[game_keys is_available game_types game_codes seasons].each do |filter|
         expect(subject.filters.keys.include?(filter)).to eq(true), "expected #{filter} filter"
       end
     end
@@ -89,7 +89,7 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
     end
 
     it 'should request /games;game_codes=nfl;out=leagues' do
-      YahooFantasy::Resource::Game::Game.all(filters: { game_codes: %w[nfl], out: %w[leagues] })
+      YahooFantasy::Resource::Game::Game.all(filters: { game_codes: %w[nfl] }, out: %w[leagues])
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes=nfl;out=leagues', {})
     end
   end
@@ -116,6 +116,11 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
     it 'should request /game/406' do
       YahooFantasy::Resource::Game::Game.get(406)
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/406', {})
+    end
+
+    it 'should request /game/406/out;leagues' do
+      YahooFantasy::Resource::Game::Game.get(406, out: %w[leagues])
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/406;out=leagues', {})
     end
   end
 
@@ -182,7 +187,7 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/stat_categories', {})
     end
 
-    it 'should call /stat_categories without filters' do
+    it 'should call /stat_categories ignoring filters' do
       subject.stat_categories!(filters: { filter1: 'ignored' })
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/stat_categories', {})
     end
@@ -207,7 +212,7 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/position_types', {})
     end
 
-    it 'should call /stat_categories without filters' do
+    it 'should call /stat_categories ignoring filters' do
       subject.position_types!(filters: { filter1: 'ignored' })
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/position_types', {})
     end
@@ -232,7 +237,7 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/roster_positions', {})
     end
 
-    it 'should call /roster_positions with filters' do
+    it 'should call /roster_positions ignoring filters' do
       subject.roster_positions!(filters: { filter1: 'ignored' })
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/roster_positions', {})
     end
