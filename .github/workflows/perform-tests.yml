@@ -25,7 +25,8 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-      - name: Bundle install
-        run: bundle install
-      - name: Run Rspec
-        run: bundle exec rspec
+      - name: Build and Test
+        run: |
+          gem install bundler:2.2.32
+          bundle install
+          bundle exec rspec
