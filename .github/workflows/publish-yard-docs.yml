@@ -1,0 +1,32 @@
+name: Publish Yard Docs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '2.7' ]
+
+    steps:
+      - name: Checkout ${{ github.ref_name }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+      - name: Setup Ruby ${{ matrix.ruby }}
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: Build and Yard
+        run: |
+          gem install bundler:2.2.32
+          bundle install
+          yard doc
+      - name: Publish Docs to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.TOKEN_GITHUB }}
+          publish_dir: ./docs
+          
