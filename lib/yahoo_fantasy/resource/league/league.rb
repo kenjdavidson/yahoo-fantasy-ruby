@@ -10,6 +10,15 @@ module YahooFantasy
       # https://web.archive.org/web/20130822105844/http://developer.yahoo.com/fantasysports/guide/league-resource.html#league-resource-desc
       # https://web.archive.org/web/20130822105532/http://developer.yahoo.com/fantasysports/guide/leagues-collection.html#leagues-collection-desc
       #
+      # @!attribute settings
+      #   @return [Settings] current league settings.
+      # @!attribute scoreboard
+      #   @return [Scoreboard] scoreboard for the requested week/date (based on sport).
+      # @!attribute standings
+      #   @return [Standings] the current league standings.
+      # @!attribute teams
+      #   @return [Resource::Team::Team] the leagues currently competing in the league
+      #
       class League < YahooFantasy::Resource::Base
         filter :league_keys
         filter :league_ids
@@ -26,23 +35,31 @@ module YahooFantasy
                       :is_pro_league, :is_cash_league, :current_week, :start_week, :start_date, :end_week, :end_date, :game_code, :season
 
         # @todo There's got to be a meta way to do this
+        #
         def self.all(filters, options = {})
           super(filters, options, &:leagues)
         end
 
         # @todo There's got to be a meta way to do this
+        #
         def self.get(key, options = {})
           super(key, options, &:league)
         end
 
+        # @return [String] the leagues current game_key
+        #
         def game_key
           league_key.split('.').first
         end
 
+        # @return [Number] the leagues current game_id
+        #
         def game_id
           game_key.to_i
         end
 
+        # @return [String] the resource path (prefix path for subresources)
+        #
         def resource_path
           "/league/#{league_key}"
         end

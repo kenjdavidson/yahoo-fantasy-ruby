@@ -149,7 +149,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 2.2)
   rake (~> 10.0)
-  rspec (~> 3.0)
+  rspec (~> 3.10)
   rubocop (~> 1.22)
   solargraph (~> 0.44)
   yahoo-fantasy!

@@ -8,7 +8,7 @@ module YahooFantasy
       # example the default QB Passing Touchdown modifier is 4 - meaning that a QB gets 4 pts for
       # every one touchdown.
       #
-      # Available at the uri /league/{league_key}/stat_modifiers or /league/{league_key};out=stat_modifiers
+      # Available at the uri /league/league_key/stat_modifiers or /league/league_key;out=stat_modifiers
       #
       StatModifier = Struct.new(:stat_id, :value)
     end

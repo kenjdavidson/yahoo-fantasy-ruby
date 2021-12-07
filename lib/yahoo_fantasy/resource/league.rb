@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'yahoo_fantasy/resource/base'
-
 module YahooFantasy
   module Resource
     module League

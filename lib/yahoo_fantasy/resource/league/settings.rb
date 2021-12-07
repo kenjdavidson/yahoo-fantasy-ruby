@@ -4,7 +4,7 @@ module YahooFantasy
   module Resource
     module League
       # League Settings subresource
-      # Available at the uri /league/{league_key}/settings or /league/{league_key};out=settings
+      # Available at the uri /league/league_key/settings or /league/league_key;out=settings
       #
       Settings = Struct.new(:draft_type, :is_auction_draft, :scoring_type, :uses_playoff,
                             :has_playoff_consolation_games, :playoff_start_week, :uses_playoff_reseeding,

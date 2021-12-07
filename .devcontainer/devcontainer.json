@@ -17,8 +17,8 @@
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"ruby.useBundler": false,
-		"ruby.rubocop.onSave": false,
-		"ruby.rubocop.useBundler": false,
+		"ruby.rubocop.onSave": true,
+		"ruby.rubocop.useBundler": true,
 		"ruby.useLanguageServer": false,
 		"ruby.languageServer": {
 			"logLevel": "info"
@@ -29,7 +29,15 @@
 		"solargraph.autoformat": true,
 		"solargraph.formatting": true,
 		"solargraph.definitions": true,
-		"solargraph.references": true
+		"solargraph.references": true,
+		"rubyTestExplorer.testFramework":"rspec",
+		"rubyTestExplorer.logpanel": true,
+		"rubyTestExplorer.rspecDirectory": "./spec/",
+		"rubyTestExplorer.filePattern": [
+			"*_test.rb",
+			"test_*.rb",
+			"*_spec.rb"
+		]
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.

@@ -7,9 +7,11 @@ module YahooFantasy
     module League
       # League Roster Positions
       #
-      # Available at the uri /league/{league_key}/roster_positions or /league/{league_key};out=roster_positions
+      # Available at the uri /league/league_key/roster_positions or /league/league_key;out=roster_positions
       #
-      RosterPosition = Struct.new(:position, :position_type, :count, :is_starting_position)
+      class RosterPosition
+        attr_accessor :position, :position_type, :count, :is_starting_position
+      end
     end
   end
 end

@@ -76,13 +76,13 @@ module YahooFantasy
     # Includes Yahoo OAuth2 specific options (which can be overwritten):
     # - `authorization_url` {Client::AUTHORIZE_URL}
     # - `token_url` {Client::TOKEN_URL}
-    # - `scope` {Client::DEFAULT_SCOPE}
+    # - `scope` Defaults to {Client::WRITE_SCOPE}
     # - `options[site]` {Client::SITE}
     # - `options[redirect_uri]` = `oob`
     #
     # @param client_id [String]
     # @param client_secret [String]
-    # @param options [Hash] {OAuth2::Client.new}
+    # @param options [Hash] (@see OAuth2::Client.new)
     #
     def initialize(client_id, client_secret, options = {}, &block)
       yahoo_options = {

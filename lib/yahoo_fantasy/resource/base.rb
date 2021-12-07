@@ -27,7 +27,7 @@ module YahooFantasy
       class << self
         # Set the OAuth2 (or #request) access token to be used for all requests by the current thread.
         #
-        # @param [OAuth2::AccessToken] access_token the access token providing a #request method
+        # @param access_token [OAuth2::AccessToken] access_token the access token providing a #request method
         #
         def access_token=(access_token)
           raise ArgumentError, 'access_token must respond to #request method' unless access_token.respond_to?(:request) || access_token.nil?
@@ -51,13 +51,12 @@ module YahooFantasy
         # FantasyContent object that can be parsed appropriately based on the request.  It's
         # possible to skip the parsing (returning the regular body content).
         #
-        # @param [String] verb passed to the access_token#request
-        # @param [String] path passed to the access_token#request.  The path can be in the form
+        # @param verb [String,Symbol] verb passed to the access_token#request
+        # @param path [String] path passed to the access_token#request.  The path can be in the form
         #   `https://somepath/someresource` or `/path`; if the latter it will have the base endpoint
         #   prefixed.
-        #
         # @param opts [Hash] options passed to the access_token#request
-        # @param [Block] if a block is provided the response is filtered through it
+        # @param block [Block] if a block is provided the response is filtered through it
         # @return [FantasyContent,YahooFantasy::Resource::Base] the yahoo content response
         #
         # @raise [MissingAccessTokenError] if no OAuth2::AccessToken has been provided

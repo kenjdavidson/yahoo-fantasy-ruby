@@ -18,6 +18,11 @@ module YahooFantasy
     # - maintaing the list of subresources
     # - generating the attr_accessor and accessor! methods
     #
+    # @todo update so that resources can accept and apply parameters.  For example, when processing a 
+    #   Leagues subresource, we want to pass the request through to the {League.all} method.  But when we 
+    #   are working with something like scoreboard subresource, there are limited filters that are allowed,
+    #   but they should be allowed
+    #
     module Subresourceable
       # Defines a Subresource
       #
@@ -44,7 +49,8 @@ module YahooFantasy
 
       # Subresources class methods
       module ClassMethods
-        # @return [Array] the available subresources
+        # @return [Array<Subresource>] the available subresources
+        #
         def subresources
           @subresources.dup
         end
@@ -83,6 +89,7 @@ module YahooFantasy
           # `parser ->(fc) { fc.team.team_points }`.
           #
           # @!method subresource!
+          #
           class_eval <<-CODE, __FILE__, __LINE__ + 1
             define_method "#{subresource.name}!" do |filters = {}|
               path = [subresource_path(subresource), subresource_filters(subresource, filters)].join
@@ -97,7 +104,7 @@ module YahooFantasy
         end
       end
 
-      # Joins the current resource path with the Base#resource_prefix
+      # Joins the current resource path with the {Base#resource_prefix}.
       #
       # @param subresource [Subresource] definition of the subresource
       #
@@ -110,6 +117,7 @@ module YahooFantasy
       #
       # @param subresource [Subresource] definition of the subresource
       # @param filters [Hash{String => String,Array<String>}] hash of filters and their values
+      #
       def subresource_filters(subresource, filters = {})
         return '' if filters.empty?
 
