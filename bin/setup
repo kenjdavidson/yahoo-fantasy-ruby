@@ -17,6 +17,4 @@ chdir APP_ROOT do
   system!('bundle install')
 
   # Comment out the rest of the script for now ...
-
-  # ...
 end
