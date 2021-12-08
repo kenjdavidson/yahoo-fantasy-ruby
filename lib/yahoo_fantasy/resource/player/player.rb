@@ -6,9 +6,12 @@ module YahooFantasy
       # Player meta data provided by the `/players` resource.
       #
       class Player < YahooFantasy::Resource::Base
-        attr_accessor :player_key,
-                      :player_id,
+        attr_accessor :player_key, # @!attribute player_key [String]
+                      :player_id,  # @!attribute player_id [Number]
                       :name,
+                      :status,
+                      :status_full,
+                      :injury_note,
                       :editorial_player_key,
                       :editorial_team_key,
                       :editorial_team_full_name,

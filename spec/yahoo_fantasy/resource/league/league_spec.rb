@@ -17,8 +17,8 @@ RSpec.describe YahooFantasy::Resource::League::League do
       end
     end
 
-    it 'has four (4) subresources' do
-      expect(YahooFantasy::Resource::League::League.subresources.length).to eq 4
+    it 'has six (6) subresources' do
+      expect(YahooFantasy::Resource::League::League.subresources.length).to eq(6)
 
       [
         [:settings, YahooFantasy::Resource::League::Settings],
@@ -33,7 +33,7 @@ RSpec.describe YahooFantasy::Resource::League::League do
       end
     end
 
-    it 'has four (1) filters' do
+    it 'has one (1) filters' do
       expect(YahooFantasy::Resource::League::League.filters.length).to eq 1
 
       %i[league_keys].each do |filter|
@@ -107,19 +107,47 @@ RSpec.describe YahooFantasy::Resource::League::League do
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/league/406.l.12345', {})
     end
 
-    it 'should request subresources url' do
+    it 'should request subresources url with out (array)' do
       [
         :settings,
         :standings,
         :scoreboard,
-        :teams
-        # [:players, YahooFantasy::Resource::Player],
-        # [:draft_results, YahooFantasy::Resource::League::DraftResults],
+        :teams,
+        :players,
+        :draft_results
         # [:transactions, YahooFantasy::Resource::League::Transation]
       ].each do |sub|
         YahooFantasy::Resource::League::League.get('406.l.12345', out: [sub])
-        expect(YahooFantasy::Resource::League::League.subresources.keys.include?(sub[0])).to eq(true), "expected /leagues/406.l.12345;out=#{sub[0]}"
+        expect(@access_token).to have_received(:request).with(:get, "https://fantasysports.yahooapis.com/fantasy/v2/league/406.l.12345;out=#{sub}", {})
       end
+    end
+
+    it 'should request subresources url with out (string)' do
+      [
+        :settings,
+        :standings,
+        :scoreboard,
+        :teams,
+        :players,
+        :draft_results
+        # [:transactions, YahooFantasy::Resource::League::Transation]
+      ].each do |sub|
+        YahooFantasy::Resource::League::League.get('406.l.12345', out: sub.to_s)
+        expect(@access_token).to have_received(:request).with(:get, "https://fantasysports.yahooapis.com/fantasy/v2/league/406.l.12345;out=#{sub}", {})
+      end
+    end
+  end
+
+  context '.draft_results' do
+    before(:each) do
+      @access_token = spy(OAuth2::AccessToken)
+      YahooFantasy::Resource::Base.access_token = @access_token
+    end
+
+    it 'should accept players output' do
+      league = YahooFantasy::Resource::League::League.new(league_key: '406.l.12345')
+      league.draft_results!(out: 'players')
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/league/406.l.12345/draftresults;out=players', {})
     end
   end
 end

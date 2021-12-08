@@ -18,5 +18,9 @@ module YahooFantasy
     autoload :League, 'yahoo_fantasy/resource/league'
     autoload :Team, 'yahoo_fantasy/resource/team'
     autoload :Player, 'yahoo_fantasy/resource/player'
+
+    module Draft
+      autoload :DraftResult, 'yahoo_fantasy/resource/draft/draft_result'
+    end
   end
 end

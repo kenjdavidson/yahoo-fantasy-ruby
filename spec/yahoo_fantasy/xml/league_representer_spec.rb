@@ -6,7 +6,7 @@
 #
 RSpec.describe YahooFantasy::XML::League::LeagueRepresenter do
   context 'request contains out=settings' do
-    load_fantasy_content "#{__dir__}/league/fantasy_content_league.xml"
+    load_fantasy_content "#{__dir__}/league/406.l.117376.xml"
 
     before(:example) do
       access_token = double('access_token', request: {})
@@ -146,16 +146,39 @@ RSpec.describe YahooFantasy::XML::League::LeagueRepresenter do
       expect(standings[0].team_points.coverage_type).to eq('season')
       expect(standings[0].team_points.season).to eq(2021)
       expect(standings[0].team_points.total).to eq(1646.56)
-      expect(standings[0].team_standings.rank).to eq(1)
-      expect(standings[0].team_standings.playoff_seed).to eq(1)
-      expect(standings[0].team_standings.wins).to eq(9)
-      expect(standings[0].team_standings.losses).to eq(3)
-      expect(standings[0].team_standings.ties).to eq(0)
-      expect(standings[0].team_standings.percentage).to eq(0.750)
-      expect(standings[0].team_standings.streak_type).to eq('win')
-      expect(standings[0].team_standings.streak_value).to eq(4)
-      expect(standings[0].team_standings.points_for).to eq(1646.56)
-      expect(standings[0].team_standings.points_against).to eq(1444.52)
+      expect(standings[0].standings.rank).to eq(1)
+      expect(standings[0].standings.playoff_seed).to eq(1)
+      expect(standings[0].standings.wins).to eq(9)
+      expect(standings[0].standings.losses).to eq(3)
+      expect(standings[0].standings.ties).to eq(0)
+      expect(standings[0].standings.percentage).to eq(0.750)
+      expect(standings[0].standings.streak_type).to eq('win')
+      expect(standings[0].standings.streak_value).to eq(4)
+      expect(standings[0].standings.points_for).to eq(1646.56)
+      expect(standings[0].standings.points_against).to eq(1444.52)
+    end
+  end
+
+  context 'request contains out=draftresults' do
+    load_fantasy_content "#{__dir__}/league/406.l.117376_draftresults.xml"
+
+    it 'should parse <draftresults>' do
+      draft_results = fantasy_content.league.draft_results
+
+      expect(draft_results).not_to eq(nil)
+      expect(draft_results.count).to eq(256)
+      expect(draft_results[0].pick).to eq(1)
+      expect(draft_results[0].round).to eq(1)
+      expect(draft_results[0].team_key).to eq('406.l.117376.t.12')
+      expect(draft_results[0].player_key).to eq('406.p.32736')
+    end
+
+    it 'should parse <draftresults>/<player>' do
+      draft_results = fantasy_content.league.draft_results
+      player = draft_results[0].player
+
+      expect(player).not_to eq(nil)
+      expect(player.player_key).to eq('406.p.32736')
     end
   end
 end

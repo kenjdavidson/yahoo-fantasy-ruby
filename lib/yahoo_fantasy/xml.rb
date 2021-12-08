@@ -10,9 +10,35 @@ module YahooFantasy
     autoload :Parsers, 'yahoo_fantasy/xml/parsers'
     autoload :BaseRepresenter, 'yahoo_fantasy/xml/base_representer'
     autoload :FantasyContentRepresenter, 'yahoo_fantasy/xml/fantasy_content_representer'
-    autoload :Game, 'yahoo_fantasy/xml/game'
-    autoload :League, 'yahoo_fantasy/xml/league'
-    autoload :Team, 'yahoo_fantasy/xml/team'
-    autoload :Player, 'yahoo_fantasy/xml/player'
+    autoload :UserRepresenter, 'yahoo_fantasy/xml/user_representer'
+    autoload :ProfileRepresenter, 'yahoo_fantasy/xml/profile_representer'
+
+    module Game
+      autoload :GameRepresenter, 'yahoo_fantasy/xml/game/game_representer'
+      autoload :GameWeekRepresenter, 'yahoo_fantasy/xml/game/game_week_representer'
+      autoload :PositionTypeRepresenter, 'yahoo_fantasy/xml/game/position_type_representer'
+      autoload :RosterPositionRepresenter, 'yahoo_fantasy/xml/game/roster_position_representer'
+      autoload :StatCategoryRepresenter, 'yahoo_fantasy/xml/game/stat_category_representer'
+    end
+
+    module League
+      autoload :LeagueRepresenter, 'yahoo_fantasy/xml/league/league_representer'
+      autoload :RosterPositionRepresenter, 'yahoo_fantasy/xml/league/roster_position_representer'
+      autoload :StatCategoryRepresenter, 'yahoo_fantasy/xml/league/stat_category_representer'
+      autoload :StatModifierRepresenter, 'yahoo_fantasy/xml/league/stat_modifier_representer'
+      autoload :SettingsRepresenter, 'yahoo_fantasy/xml/league/settings_representer'
+    end
+
+    module Team
+      autoload :TeamRepresenter, 'yahoo_fantasy/xml/team/team_representer'
+    end
+
+    module Player
+      autoload :PlayerRepresenter, 'yahoo_fantasy/xml/player/player_representer'
+    end
+
+    module Draft
+      autoload :DraftResultRepresenter, 'yahoo_fantasy/xml/draft/draft_result_representer'
+    end
   end
 end

@@ -30,6 +30,7 @@
 		"solargraph.formatting": true,
 		"solargraph.definitions": true,
 		"solargraph.references": true,
+		"solargraph.logLevel": "debug",
 		"rubyTestExplorer.testFramework":"rspec",
 		"rubyTestExplorer.logpanel": true,
 		"rubyTestExplorer.rspecDirectory": "./spec/",

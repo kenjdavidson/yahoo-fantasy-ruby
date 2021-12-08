@@ -23,6 +23,11 @@ module YahooFantasy
         collection :standings, as: :team, wrap: 'standings/teams',
                                class: YahooFantasy::Resource::Team::Team,
                                decorator: YahooFantasy::XML::Team::TeamRepresenter
+
+        # DraftResults
+        collection :draft_results, as: :draft_result, wrap: :draft_results,
+                                   class: YahooFantasy::Resource::Draft::DraftResult,
+                                   decorator: YahooFantasy::XML::Draft::DraftResultRepresenter
       end
     end
   end

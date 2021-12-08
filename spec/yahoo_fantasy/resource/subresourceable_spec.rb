@@ -4,6 +4,7 @@ RSpec.describe YahooFantasy::Resource::Subresourceable do
   let(:resourced_class) do
     Class.new(YahooFantasy::Resource::Base) do
       include YahooFantasy::Resource::Subresourceable
+      include YahooFantasy::Resource::Filterable
 
       subresource :subresource, filters: { filter1: {}, filter2: {} }
 
@@ -47,27 +48,6 @@ RSpec.describe YahooFantasy::Resource::Subresourceable do
     it 'creates appropriate Subresource path' do
       subresource = resourced_class.subresources[:subresource]
       expect(subject.subresource_path(subresource)).to eq('/resource/1/subresource')
-    end
-  end
-
-  context '.subresource_filters' do
-    subject { resourced_class.new }
-
-    it 'creates empty resource filters' do
-      subresource = resourced_class.subresources[:subresource]
-
-      expect(subject.subresource_filters(subresource)).to eq('')
-    end
-
-    it 'creates appropriate resource filters' do
-      subresource = resourced_class.subresources[:subresource]
-      filters = {
-        filter1: 'filter1',
-        filter2: 'filter2',
-        filter3: 'filter3'
-      }
-
-      expect(subject.subresource_filters(subresource, filters)).to eq(';filter1=filter1;filter2=filter2')
     end
   end
 end

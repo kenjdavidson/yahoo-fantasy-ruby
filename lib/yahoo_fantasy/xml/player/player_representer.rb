@@ -11,7 +11,17 @@ module YahooFantasy
         remove_namespaces!
 
         %i[
-          player_key editorial_player_key editorial_team_key editorial_team_name editorial_team_abbr display_position image_url position_type
+          player_key
+          status
+          status_full
+          injury_note
+          editorial_player_key
+          editorial_team_key
+          editorial_team_full_name
+          editorial_team_abbr
+          display_position
+          image_url
+          position_type
           primary_position
         ].each do |attr|
           string_properties attr

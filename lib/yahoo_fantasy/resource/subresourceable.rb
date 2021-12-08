@@ -43,7 +43,6 @@ module YahooFantasy
           @name = name
           @verb = options[:verb] || :get
           @endpoint = options[:endpoint] || "/#{name.downcase}"
-          @filters = options[:filters] || []
           @parser = options[:parser] || ->(fantasy_content) { fantasy_content }
         end
       end
@@ -59,8 +58,6 @@ module YahooFantasy
         def subresources
           @subresources.dup
         end
-
-        protected
 
         # Applies a new subresource, which performs the following:
         # - adds the provided Subresource to the available @subresources
@@ -96,8 +93,12 @@ module YahooFantasy
           # @!method subresource!
           #
           class_eval <<-CODE, __FILE__, __LINE__ + 1
-            define_method "#{subresource.name}!" do |filters = {}|
-              path = [subresource_path(subresource), subresource_filters(subresource, filters)].join
+            define_method "#{subresource.name}!" do |options = {}|
+              path = [
+                subresource_path(subresource),#{' '}
+                self.class.filter_params(options.delete(:filters)),
+                self.class.out_params(options.delete(:out))
+              ].join
               subresource_value = self.class.api(subresource.verb, path) do |fc|
                 subresource.parser.call(fc)
               end
@@ -107,6 +108,18 @@ module YahooFantasy
             end
           CODE
         end
+
+        # Out params are much like filters (I actually flip flop between keeping them in)
+        # but in the end I'd like to end up having the out parameters allow for the last
+        # to be Hash and provide out parameters for that.
+        #
+        # @param out [Array<String,Hash>] outable resources
+        #
+        def out_params(out = [])
+          return '' if out.nil? || out.empty?
+
+          ";out=#{out.is_a?(Array) ? out.join(',') : out.to_s}"
+        end
       end
 
       # Joins the current resource path with the {Base#resource_prefix}.
@@ -115,22 +128,6 @@ module YahooFantasy
       #
       def subresource_path(subresource)
         [resource_path, subresource.endpoint].join
-      end
-
-      # Filters are processed into a semi-colon separated string of comma separated values
-      # with `;filter_name=value1,value2,etc`.
-      #
-      # @param subresource [Subresource] definition of the subresource
-      # @param filters [Hash{String => String,Array<String>}] hash of filters and their values
-      #
-      def subresource_filters(subresource, filters = {})
-        return '' if filters.empty? || subresource.filters.empty?
-
-        filter_string = filters.select { |k| subresource.filters.key?(k) }
-                               .map { |k, v| "#{k}=#{[v].join(',')}" }
-                               .join(';')
-        filter_string = ";#{filter_string}" unless filter_string.empty?
-        filter_string
       end
     end
   end

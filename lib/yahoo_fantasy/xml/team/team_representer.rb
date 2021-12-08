@@ -67,7 +67,7 @@ module YahooFantasy
                                decorator: YahooFantasy::XML::Player::PlayerRepresenter
         end
 
-        property :team_standings, class: YahooFantasy::Resource::Team::Standings do
+        property :standings, as: :team_standings, class: YahooFantasy::Resource::Team::Standings do
           property :rank, parse_filter: Parsers::IntegerFilter
           property :playoff_seed, parse_filter: Parsers::IntegerFilter
           property :wins, wrap: :outcome_totals, parse_filter: Parsers::IntegerFilter

@@ -187,9 +187,9 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/stat_categories', {})
     end
 
-    it 'should call /stat_categories ignoring filters' do
-      subject.stat_categories!(filters: { filter1: 'ignored' })
-      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/stat_categories', {})
+    it 'should call /stat_categories with filters' do
+      subject.stat_categories!(filters: { filter1: 'filter1' })
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/stat_categories;filter1=filter1', {})
     end
   end
 
@@ -212,9 +212,9 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/position_types', {})
     end
 
-    it 'should call /stat_categories ignoring filters' do
-      subject.position_types!(filters: { filter1: 'ignored' })
-      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/position_types', {})
+    it 'should call /stat_categories with filters' do
+      subject.position_types!(filters: { filter1: 'filter1' })
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/position_types;filter1=filter1', {})
     end
   end
 
@@ -237,9 +237,9 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/roster_positions', {})
     end
 
-    it 'should call /roster_positions ignoring filters' do
-      subject.roster_positions!(filters: { filter1: 'ignored' })
-      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/roster_positions', {})
+    it 'should call /roster_positions with filters' do
+      subject.roster_positions!(filters: { filter1: 'filter1' })
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/game/404/roster_positions;filter1=filter1', {})
     end
   end
 end

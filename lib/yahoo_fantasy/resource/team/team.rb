@@ -11,6 +11,7 @@ module YahooFantasy
       # https://developer.yahoo.com/fantasysports/guide/#team-resource
       #
       # Collection:
+      # https://developer.yahoo.com/fantasysports/guide/#teams-collection
       #
       # Note that at this point the `/stats` subresource isn't currently available as it
       # is not a single entity.  The `/stats` response contains two entities:
@@ -22,7 +23,13 @@ module YahooFantasy
       # like a pretty general think to request.
       #
       # @!attribute mathups
-      #   @return []
+      #   @return [Array<Team::Matchup>]
+      # @!attribute roster
+      #   @return [Team::Roster]
+      # @!attribute standings
+      #   @return [Team::Standings]
+      # @!attribute draft_results
+      #   @return [Draft::DraftResults]
       #
       class Team < YahooFantasy::Resource::Base
         filter :team_keys

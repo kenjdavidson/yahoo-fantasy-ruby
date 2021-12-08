@@ -29,10 +29,21 @@ module YahooFantasy
                         class: YahooFantasy::Resource::League::League
       property :team, decorator: YahooFantasy::XML::Team::TeamRepresenter,
                       class: YahooFantasy::Resource::Team::Team
+      property :player, decorator: YahooFantasy::XML::Player::PlayerRepresenter,
+                        class: YahooFantasy::Resource::Player::Player
 
       collection :games, as: :game, wrap: :games,
                          decorator: YahooFantasy::XML::Game::GameRepresenter,
                          class: YahooFantasy::Resource::Game::Game
+      collection :leagues, as: :league, wrap: :leagues,
+                           decorator: YahooFantasy::XML::League::LeagueRepresenter,
+                           class: YahooFantasy::Resource::League::League
+      collection :teams, as: :team, wrap: :teams,
+                         decorator: YahooFantasy::XML::Team::TeamRepresenter,
+                         class: YahooFantasy::Resource::Team::Team
+      collection :players, as: :player, wrap: :players,
+                           decorator: YahooFantasy::XML::Player::PlayerRepresenter,
+                           class: YahooFantasy::Resource::Player::Player
     end
   end
 end

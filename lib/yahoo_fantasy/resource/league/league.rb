@@ -31,7 +31,9 @@ module YahooFantasy
         subresource :scoreboard, parser: ->(fc) { fc.league.scoreboard }
         subresource :standings, parser: ->(fc) { fc.league.standings }
         subresource :teams, parser: ->(fc) { fc.league.teams }
-        # subresoure :players,
+        subresource :players, parser: ->(fc) { fc.league.players }
+        subresource :draft_results, endpoint: '/draftresults',
+                                    parser: ->(fc) { fc.league.draft_results }
         # subresource :transactions,
 
         attr_accessor :league_key, :league_id, :name, :url, :logo_url, :draft_status, :num_teams, :edit_key, :weekly_deadline,

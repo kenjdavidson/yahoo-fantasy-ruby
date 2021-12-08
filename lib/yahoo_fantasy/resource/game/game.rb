@@ -42,8 +42,7 @@ module YahooFantasy
         filter :game_codes
         filter :seasons
 
-        subresource :leagues, filters: YahooFantasy::Resource::League::League.filters,
-                              parser: ->(fc) { fc.game.leagues }
+        subresource :leagues, parser: ->(fc) { fc.game.leagues }
         subresource :game_weeks, parser: ->(fc) { fc.game.game_weeks }
         subresource :stat_categories, parser: ->(fc) { fc.game.stats }
         subresource :position_types, parser: ->(fc) { fc.game.position_types }

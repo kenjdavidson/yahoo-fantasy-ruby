@@ -6,7 +6,9 @@ module YahooFantasy
     # All request (even exceptions) are wrapped in <fantasy-content>.
     #
     class FantasyContent
-      attr_accessor :lang, :uri, :copyright, :refresh_rate, :users, :games, :leagues, :teams, :game, :league, :team
+      attr_accessor :lang, :uri, :copyright, :refresh_rate, :users,
+                    :games, :leagues, :teams, :players,
+                    :game, :league, :team, :player
 
       # Errors aren't returned with <fantasy_content> but instead <yahoo:error>, to get around
       # this we can pull the :error from <description> when it exists (since it doesn't)

@@ -135,16 +135,6 @@ module YahooFantasy
         def resource_path
           @resource_path ||= "/#{to_s.split('::').last}".underscore.downcase
         end
-
-        # Out params are much like filters (I actually flip flop between keeping them in)
-        # but in the end I'd like to end up having the out parameters allow for the last
-        # to be Hash and provide out parameters for that.
-        #
-        # @param out [Array<String,Hash>] outable resources
-        #
-        def out_params(out = [])
-          ";out=#{out.is_a?(Array) ? out.join(',') : out.to_s}"
-        end
       end
 
       # Defines a new instance using the provied attributes.  Unknown attributes
