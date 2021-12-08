@@ -5,9 +5,11 @@ module YahooFantasy
     module Player
       # Player meta data provided by the `/players` resource.
       #
+      # @!attribute player_key
+      #   @return [String]
       class Player < YahooFantasy::Resource::Base
-        attr_accessor :player_key, # @!attribute player_key [String]
-                      :player_id,  # @!attribute player_id [Number]
+        attr_accessor :player_key,
+                      :player_id,
                       :name,
                       :status,
                       :status_full,
@@ -27,8 +29,11 @@ module YahooFantasy
                       :eligible_positions,
                       :has_player_notes,
                       :player_notes_last_timestamp,
-                      :selected_position,
-                      :is_editable
+                      # @return [String] the primary position of the player
+                      :selected_position
+
+        # @return [Number]
+        attr_accessor :is_editable
 
         def droppable?
           is_undroppable.zero?

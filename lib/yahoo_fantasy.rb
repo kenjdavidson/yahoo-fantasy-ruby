@@ -48,3 +48,7 @@ OAuth2::Response.register_parser(:yahoo_fantasy_content, []) do |body|
   fc = YahooFantasy::Resource::FantasyContent.new
   YahooFantasy::XML::FantasyContentRepresenter.new(fc).from_xml(body)
 end
+
+fc = YahooFantasy::Resource::FantasyContent.new
+player = fc.player
+puts player.selec

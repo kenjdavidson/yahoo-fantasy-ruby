@@ -17,7 +17,8 @@ module YahooFantasy
         end
 
         collection :players, wrap: :players, as: :player,
-                             decorator: YahooFantasy::XML::Player::PlayerRepresenter
+                             decorator: YahooFantasy::XML::Player::PlayerRepresenter,
+                             class: YahooFantasy::Resource::Player::Player
       end
     end
   end

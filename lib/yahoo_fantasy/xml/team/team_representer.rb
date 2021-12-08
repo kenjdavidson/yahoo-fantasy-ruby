@@ -120,6 +120,10 @@ module YahooFantasy
           property :felo_score, parse_filter: Parsers::IntegerFilter
           property :felo_tier
         end
+
+        collection :draft_results, as: :draft_result, wrap: :draft_results,
+                                   class: YahooFantasy::Resource::Draft::DraftResult,
+                                   decorator: YahooFantasy::XML::Draft::DraftResultRepresenter
       end
     end
   end

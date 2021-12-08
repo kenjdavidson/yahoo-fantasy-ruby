@@ -3,13 +3,13 @@
 require 'representable'
 require 'representable/debug'
 
-RSpec.describe YahooFantasy::XML::Team::TeamRepresenter do
-  context 'request contains metadata' do
+RSpec.describe 'TeamRepresenter' do
+  context '/team' do
     load_fantasy_content "#{__dir__}/team/406.l.117376.t.4.xml"
 
     subject { fantasy_content.team }
 
-    it 'should parse <team> metadata' do
+    it 'should parse metadata' do
       expect(subject).not_to eq(nil)
       expect(subject.team_key).to eq('406.l.117376.t.4')
       expect(subject.team_id).to eq(4)
@@ -57,7 +57,7 @@ RSpec.describe YahooFantasy::XML::Team::TeamRepresenter do
     end
   end
 
-  context 'request contains ;out=roster' do
+  context '/team/roster' do
     load_fantasy_content "#{__dir__}/team/406.l.117376.t.4_roster.xml"
 
     subject { fantasy_content.team.roster }
@@ -87,7 +87,7 @@ RSpec.describe YahooFantasy::XML::Team::TeamRepresenter do
     end
   end
 
-  context 'request contains ;out=matchup' do
+  context '/team/matchups' do
     load_fantasy_content "#{__dir__}/team/406.l.117376.t.4_matchups.xml"
 
     subject { fantasy_content.team.matchups }
@@ -114,6 +114,32 @@ RSpec.describe YahooFantasy::XML::Team::TeamRepresenter do
       expect(subject[0].matchup_grades[0].grade).to eq('A')
       expect(subject[0].matchup_grades[1].team_key).to eq('406.l.117376.t.14')
       expect(subject[0].matchup_grades[1].grade).to eq('C')
+    end
+  end
+
+  context '/team/draftresults;out=players' do
+    load_fantasy_content "#{__dir__}/team/406.l.117376.t.4_draftresults.xml"
+
+    subject { fantasy_content.team.matchups }
+
+    it 'should parse 16 draft_results' do
+      draft_results = fantasy_content.team.draft_results
+
+      expect(draft_results).not_to eq(nil)
+      expect(draft_results.count).to eq(16)
+      expect(draft_results[0].pick).to eq(3)
+      expect(draft_results[0].round).to eq(1)
+      expect(draft_results[0].team_key).to eq('406.l.117376.t.4')
+      expect(draft_results[0].player_key).to eq('406.p.31883')
+    end
+
+    it 'should parse draft_result player' do
+      draft_results = fantasy_content.team.draft_results
+      player = draft_results[0].player
+
+      expect(player).not_to eq(nil)
+      expect(player.player_key).to eq('406.p.31883')
+      expect(player.player_id).to eq(31_883)
     end
   end
 end
