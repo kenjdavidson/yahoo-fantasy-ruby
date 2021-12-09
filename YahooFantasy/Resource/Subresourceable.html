@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: YahooFantasy::Resource::Subresourceable
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "YahooFantasy::Resource::Subresourceable";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../YahooFantasy.html" title="YahooFantasy (module)">YahooFantasy</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Resource.html" title="YahooFantasy::Resource (module)">Resource</a></span></span>
+     &raquo; 
+    <span class="title">Subresourceable</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: YahooFantasy::Resource::Subresourceable
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+  <dl>
+    <dt>Included in:</dt>
+    <dd><span class='object_link'><a href="Base.html" title="YahooFantasy::Resource::Base (class)">Base</a></span></dd>
+  </dl>
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/yahoo_fantasy/resource/subresourceable.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>look into how this case is handled, where methods are required or assumed inside the including class.  I&#39;m starting to think that the SubResource is the way to go - and that each sub resource should be defined with the name, verb, request proc, parse proc, etc.  This seems more logical with no dependency leakage.</p>
+</div>
+  </div>
+
+
+<p>Provides standard mixin functionality for subresources.  All resources and collections within the Yahoo Fantasy API space allows for zero or more subresources.</p>
+
+<p>The only benefit I see from pulling this out of the Resource::Base is file size.  The fact that any `included Subresource` class needs to either extend Resource::Base or have it&#39;s own `api` method makes this a little confusing in the grand scheme of things.</p>
+
+<p>Eventually this module should solely be used for:</p>
+<ul><li>
+<p>maintaing the list of subresources</p>
+</li><li>
+<p>generating the attr_accessor and accessor! methods</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'>SubresourcedClass</span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'>Subresourceable</span>
+
+  <span class='id identifier rubyid_subresource'>subresource</span> <span class='symbol'>:sub_entities</span><span class='comma'>,</span> <span class='label'>verb:</span> <span class='symbol'>:Get</span><span class='comma'>,</span>
+                             <span class='label'>endpoint:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/subentities</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                             <span class='label'>filters:</span> <span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='comma'>,</span>
+                             <span class='label'>parser:</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_fc'>fc</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_fc'>fc</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_subentities'>subentities</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Subresourceable/ClassMethods.html" title="YahooFantasy::Resource::Subresourceable::ClassMethods (module)">ClassMethods</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Subresourceable/Subresource.html" title="YahooFantasy::Resource::Subresourceable::Subresource (class)">Subresource</a></span>
+    
+  
+</p>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#subresource_path-instance_method" title="#subresource_path (instance method)">#<strong>subresource_path</strong>(subresource)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Joins the current resource path with the Base#resource_prefix.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="subresource_path-instance_method">
+  
+    #<strong>subresource_path</strong>(subresource)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Joins the current resource path with the Base#resource_prefix.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>subresource</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Subresourceable/Subresource.html" title="YahooFantasy::Resource::Subresourceable::Subresource (class)">Subresource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>definition of the subresource</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/subresourceable.rb', line 129</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_subresource_path'>subresource_path</span><span class='lparen'>(</span><span class='id identifier rubyid_subresource'>subresource</span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span><span class='id identifier rubyid_resource_path'>resource_path</span><span class='comma'>,</span> <span class='id identifier rubyid_subresource'>subresource</span><span class='period'>.</span><span class='id identifier rubyid_endpoint'>endpoint</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Dec  9 20:18:55 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-2.7.5).
+</div>
+
+    </div>
+  </body>
+</html>

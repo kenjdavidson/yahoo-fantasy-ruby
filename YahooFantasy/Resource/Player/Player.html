@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: YahooFantasy::Resource::Player::Player
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "YahooFantasy::Resource::Player::Player";
+  relpath = '../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../YahooFantasy.html" title="YahooFantasy (module)">YahooFantasy</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Resource.html" title="YahooFantasy::Resource (module)">Resource</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Player.html" title="YahooFantasy::Resource::Player (module)">Player</a></span></span>
+     &raquo; 
+    <span class="title">Player</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: YahooFantasy::Resource::Player::Player
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../Base.html" title="YahooFantasy::Resource::Base (class)">Base</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Base.html" title="YahooFantasy::Resource::Base (class)">Base</a></span></li>
+          
+            <li class="next">YahooFantasy::Resource::Player::Player</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/yahoo_fantasy/resource/player/player.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Player meta data provided by the `/players` resource.</p>
+
+<p>Resource: <a href="https://developer.yahoo.com/fantasysports/guide/#player-resource">developer.yahoo.com/fantasysports/guide/#player-resource</a></p>
+
+<p>Collection: <a href="https://developer.yahoo.com/fantasysports/guide/#players-collection">developer.yahoo.com/fantasysports/guide/#players-collection</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+  <h2>Constant Summary</h2>
+  
+  <h3 class="inherited">Constants inherited
+     from <span class='object_link'><a href="../Base.html" title="YahooFantasy::Resource::Base (class)">Base</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Base.html#BASE_PATH-constant" title="YahooFantasy::Resource::Base::BASE_PATH (constant)">Base::BASE_PATH</a></span></p>
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bye_weeks-instance_method" title="#bye_weeks (instance method)">#<strong>bye_weeks</strong>  &#x21d2; Array&lt;Number&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display_position-instance_method" title="#display_position (instance method)">#<strong>display_position</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editorial_player_key-instance_method" title="#editorial_player_key (instance method)">#<strong>editorial_player_key</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editorial_team_abbr-instance_method" title="#editorial_team_abbr (instance method)">#<strong>editorial_team_abbr</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editorial_team_full_name-instance_method" title="#editorial_team_full_name (instance method)">#<strong>editorial_team_full_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editorial_team_key-instance_method" title="#editorial_team_key (instance method)">#<strong>editorial_team_key</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eligible_positions-instance_method" title="#eligible_positions (instance method)">#<strong>eligible_positions</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_player_notes-instance_method" title="#has_player_notes (instance method)">#<strong>has_player_notes</strong>  &#x21d2; Number </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#headshot-instance_method" title="#headshot (instance method)">#<strong>headshot</strong>  &#x21d2; YahooFantasy::Resource::Player::Headshot </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#image_url-instance_method" title="#image_url (instance method)">#<strong>image_url</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#injury_note-instance_method" title="#injury_note (instance method)">#<strong>injury_note</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_editable-instance_method" title="#is_editable (instance method)">#<strong>is_editable</strong>  &#x21d2; Number </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_undroppable-instance_method" title="#is_undroppable (instance method)">#<strong>is_undroppable</strong>  &#x21d2; Number </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#player_advanced_stats-instance_method" title="#player_advanced_stats (instance method)">#<strong>player_advanced_stats</strong>  &#x21d2; Player::PlayerStats </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#player_id-instance_method" title="#player_id (instance method)">#<strong>player_id</strong>  &#x21d2; Number </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#player_key-instance_method" title="#player_key (instance method)">#<strong>player_key</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#player_notes_last_timestamp-instance_method" title="#player_notes_last_timestamp (instance method)">#<strong>player_notes_last_timestamp</strong>  &#x21d2; Number </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#player_stats-instance_method" title="#player_stats (instance method)">#<strong>player_stats</strong>  &#x21d2; Player::PlayerStats </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position_type-instance_method" title="#position_type (instance method)">#<strong>position_type</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#primary_position-instance_method" title="#primary_position (instance method)">#<strong>primary_position</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selected_position-instance_method" title="#selected_position (instance method)">#<strong>selected_position</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The primary position of the player.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#statistics-instance_method" title="#statistics (instance method)">#<strong>statistics</strong>  &#x21d2; Array&lt;Statistic&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status-instance_method" title="#status (instance method)">#<strong>status</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status_full-instance_method" title="#status_full (instance method)">#<strong>status_full</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#uniform_number-instance_method" title="#uniform_number (instance method)">#<strong>uniform_number</strong>  &#x21d2; Number </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#droppable%3F-instance_method" title="#droppable? (instance method)">#<strong>droppable?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#player_notes%3F-instance_method" title="#player_notes? (instance method)">#<strong>player_notes?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Base.html" title="YahooFantasy::Resource::Base (class)">Base</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Base.html#access_token-class_method" title="YahooFantasy::Resource::Base.access_token (method)">access_token</a></span>, <span class='object_link'><a href="../Base.html#access_token=-class_method" title="YahooFantasy::Resource::Base.access_token= (method)">access_token=</a></span>, <span class='object_link'><a href="../Base.html#access_token%3F-class_method" title="YahooFantasy::Resource::Base.access_token? (method)">access_token?</a></span>, <span class='object_link'><a href="../Base.html#all-class_method" title="YahooFantasy::Resource::Base.all (method)">all</a></span>, <span class='object_link'><a href="../Base.html#api-class_method" title="YahooFantasy::Resource::Base.api (method)">api</a></span>, <span class='object_link'><a href="../Base.html#api-instance_method" title="YahooFantasy::Resource::Base#api (method)">#api</a></span>, <span class='object_link'><a href="../Base.html#base_path-class_method" title="YahooFantasy::Resource::Base.base_path (method)">base_path</a></span>, <span class='object_link'><a href="../Base.html#build_uri-class_method" title="YahooFantasy::Resource::Base.build_uri (method)">build_uri</a></span>, <span class='object_link'><a href="../Base.html#collection_path-class_method" title="YahooFantasy::Resource::Base.collection_path (method)">collection_path</a></span>, <span class='object_link'><a href="../Base.html#get-class_method" title="YahooFantasy::Resource::Base.get (method)">get</a></span>, <span class='object_link'><a href="../Base.html#initialize-instance_method" title="YahooFantasy::Resource::Base#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="../Base.html#resource_name-class_method" title="YahooFantasy::Resource::Base.resource_name (method)">resource_name</a></span>, <span class='object_link'><a href="../Base.html#resource_path-class_method" title="YahooFantasy::Resource::Base.resource_path (method)">resource_path</a></span>, <span class='object_link'><a href="../Base.html#resource_path-instance_method" title="YahooFantasy::Resource::Base#resource_path (method)">#resource_path</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Subresourceable.html" title="YahooFantasy::Resource::Subresourceable (module)">Subresourceable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Subresourceable.html#subresource_path-instance_method" title="YahooFantasy::Resource::Subresourceable#subresource_path (method)">#subresource_path</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="../Base.html#initialize-instance_method" title="YahooFantasy::Resource::Base#initialize (method)">YahooFantasy::Resource::Base</a></span></p>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="bye_weeks=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="bye_weeks-instance_method">
+  
+    #<strong>bye_weeks</strong>  &#x21d2; <tt>Array&lt;Number&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Number&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_bye_weeks'>bye_weeks</span>
+  <span class='ivar'>@bye_weeks</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="display_position=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="display_position-instance_method">
+  
+    #<strong>display_position</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_display_position'>display_position</span>
+  <span class='ivar'>@display_position</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="editorial_player_key=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="editorial_player_key-instance_method">
+  
+    #<strong>editorial_player_key</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 71</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_editorial_player_key'>editorial_player_key</span>
+  <span class='ivar'>@editorial_player_key</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="editorial_team_abbr=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="editorial_team_abbr-instance_method">
+  
+    #<strong>editorial_team_abbr</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 80</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_editorial_team_abbr'>editorial_team_abbr</span>
+  <span class='ivar'>@editorial_team_abbr</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="editorial_team_full_name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="editorial_team_full_name-instance_method">
+  
+    #<strong>editorial_team_full_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 77</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_editorial_team_full_name'>editorial_team_full_name</span>
+  <span class='ivar'>@editorial_team_full_name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="editorial_team_key=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="editorial_team_key-instance_method">
+  
+    #<strong>editorial_team_key</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 74</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_editorial_team_key'>editorial_team_key</span>
+  <span class='ivar'>@editorial_team_key</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="eligible_positions=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="eligible_positions-instance_method">
+  
+    #<strong>eligible_positions</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 107</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_eligible_positions'>eligible_positions</span>
+  <span class='ivar'>@eligible_positions</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="has_player_notes=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="has_player_notes-instance_method">
+  
+    #<strong>has_player_notes</strong>  &#x21d2; <tt>Number</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Number</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_has_player_notes'>has_player_notes</span>
+  <span class='ivar'>@has_player_notes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="headshot=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="headshot-instance_method">
+  
+    #<strong>headshot</strong>  &#x21d2; <tt><span class='object_link'><a href="Headshot.html" title="YahooFantasy::Resource::Player::Headshot (class)">YahooFantasy::Resource::Player::Headshot</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Headshot.html" title="YahooFantasy::Resource::Player::Headshot (class)">YahooFantasy::Resource::Player::Headshot</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 92</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_headshot'>headshot</span>
+  <span class='ivar'>@headshot</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="image_url=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="image_url-instance_method">
+  
+    #<strong>image_url</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 95</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_image_url'>image_url</span>
+  <span class='ivar'>@image_url</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="injury_note=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="injury_note-instance_method">
+  
+    #<strong>injury_note</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_injury_note'>injury_note</span>
+  <span class='ivar'>@injury_note</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="is_editable=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="is_editable-instance_method">
+  
+    #<strong>is_editable</strong>  &#x21d2; <tt>Number</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Number</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 119</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_editable'>is_editable</span>
+  <span class='ivar'>@is_editable</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="is_undroppable=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="is_undroppable-instance_method">
+  
+    #<strong>is_undroppable</strong>  &#x21d2; <tt>Number</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Number</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_undroppable'>is_undroppable</span>
+  <span class='ivar'>@is_undroppable</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 59</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="player_advanced_stats=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="player_advanced_stats-instance_method">
+  
+    #<strong>player_advanced_stats</strong>  &#x21d2; <tt><span class='object_link'><a href="PlayerStats.html" title="YahooFantasy::Resource::Player::PlayerStats (class)">Player::PlayerStats</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PlayerStats.html" title="YahooFantasy::Resource::Player::PlayerStats (class)">Player::PlayerStats</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 125</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_player_advanced_stats'>player_advanced_stats</span>
+  <span class='ivar'>@player_advanced_stats</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="player_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="player_id-instance_method">
+  
+    #<strong>player_id</strong>  &#x21d2; <tt>Number</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Number</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_player_id'>player_id</span>
+  <span class='ivar'>@player_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="player_key=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="player_key-instance_method">
+  
+    #<strong>player_key</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_player_key'>player_key</span>
+  <span class='ivar'>@player_key</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="player_notes_last_timestamp=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="player_notes_last_timestamp-instance_method">
+  
+    #<strong>player_notes_last_timestamp</strong>  &#x21d2; <tt>Number</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Number</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+113
+114
+115</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 113</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_player_notes_last_timestamp'>player_notes_last_timestamp</span>
+  <span class='ivar'>@player_notes_last_timestamp</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="player_stats=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="player_stats-instance_method">
+  
+    #<strong>player_stats</strong>  &#x21d2; <tt><span class='object_link'><a href="PlayerStats.html" title="YahooFantasy::Resource::Player::PlayerStats (class)">Player::PlayerStats</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PlayerStats.html" title="YahooFantasy::Resource::Player::PlayerStats (class)">Player::PlayerStats</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122
+123
+124</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 122</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_player_stats'>player_stats</span>
+  <span class='ivar'>@player_stats</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="position_type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="position_type-instance_method">
+  
+    #<strong>position_type</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 101</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_position_type'>position_type</span>
+  <span class='ivar'>@position_type</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="primary_position=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="primary_position-instance_method">
+  
+    #<strong>primary_position</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_primary_position'>primary_position</span>
+  <span class='ivar'>@primary_position</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="selected_position=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="selected_position-instance_method">
+  
+    #<strong>selected_position</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the primary position of the player.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the primary position of the player</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+116
+117
+118</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 116</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_selected_position'>selected_position</span>
+  <span class='ivar'>@selected_position</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="statistics=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="statistics-instance_method">
+  
+    #<strong>statistics</strong>  &#x21d2; <tt>Array&lt;Statistic&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Statistic&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 50</span>
+
+<span class='id identifier rubyid_subresource'>subresource</span> <span class='symbol'>:statistics</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/stats</span><span class='tstring_end'>&#39;</span></span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="status=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status-instance_method">
+  
+    #<strong>status</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 62</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_status'>status</span>
+  <span class='ivar'>@status</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="status_full=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status_full-instance_method">
+  
+    #<strong>status_full</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 65</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_status_full'>status_full</span>
+  <span class='ivar'>@status_full</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="uniform_number=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="uniform_number-instance_method">
+  
+    #<strong>uniform_number</strong>  &#x21d2; <tt>Number</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Number</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_uniform_number'>uniform_number</span>
+  <span class='ivar'>@uniform_number</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="droppable?-instance_method">
+  
+    #<strong>droppable?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127
+128
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 127</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_droppable?'>droppable?</span>
+  <span class='op'>!</span><span class='id identifier rubyid_is_undroppable'>is_undroppable</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="player_notes?-instance_method">
+  
+    #<strong>player_notes?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+131
+132
+133</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/player/player.rb', line 131</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_player_notes?'>player_notes?</span>
+  <span class='op'>!</span><span class='id identifier rubyid_has_player_notes'>has_player_notes</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Dec  9 20:18:56 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-2.7.5).
+</div>
+
+    </div>
+  </body>
+</html>

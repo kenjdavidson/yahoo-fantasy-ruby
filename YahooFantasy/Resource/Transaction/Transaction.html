@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: YahooFantasy::Resource::Transaction::Transaction
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "YahooFantasy::Resource::Transaction::Transaction";
+  relpath = '../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../YahooFantasy.html" title="YahooFantasy (module)">YahooFantasy</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Resource.html" title="YahooFantasy::Resource (module)">Resource</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Transaction.html" title="YahooFantasy::Resource::Transaction (module)">Transaction</a></span></span>
+     &raquo; 
+    <span class="title">Transaction</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: YahooFantasy::Resource::Transaction::Transaction
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../Base.html" title="YahooFantasy::Resource::Base (class)">Base</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Base.html" title="YahooFantasy::Resource::Base (class)">Base</a></span></li>
+          
+            <li class="next">YahooFantasy::Resource::Transaction::Transaction</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/yahoo_fantasy/resource/transaction/transaction.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Transactions are available in the context of a league.</p>
+
+<p>Resource <a href="https://developer.yahoo.com/fantasysports/guide/#transaction-resource">developer.yahoo.com/fantasysports/guide/#transaction-resource</a></p>
+
+<p>Transaction Key Format When generating transactions it&#39;s important to get the transaction key to be correct:</p>
+
+<p>Subresources The following subresources are available:</p>
+<ul><li>
+<p>/meta which is the general information</p>
+</li><li>
+<p>/players which can be accessed by `;out=players` to gather name info</p>
+</li></ul>
+
+<p>Context Transactions are available in a number of contexts</p>
+<ul><li>
+<p>The transaction context is used with :get,:put,:post,:delete for performing operations</p>
+</li><li>
+<p>The league context provides all league transactions</p>
+</li><li>
+<p>The team context provides all a teams transactions</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code># Completed transactions
+[code|id].l.[league_id].tr.[claim_id]
+# Waiver claims
+[code|id].l.[league_id].w.c.[claim_id]
+# Pending trades
+[code|id].l.[league_id].w.c.[pending_trade_id]</code></pre>
+    
+  </div>
+
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Transaction/WaiverEdit.html" title="YahooFantasy::Resource::Transaction::Transaction::WaiverEdit (class)">WaiverEdit</a></span>
+    
+  
+</p>
+
+
+
+  <h2>Constant Summary</h2>
+  
+  <h3 class="inherited">Constants inherited
+     from <span class='object_link'><a href="../Base.html" title="YahooFantasy::Resource::Base (class)">Base</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Base.html#BASE_PATH-constant" title="YahooFantasy::Resource::Base::BASE_PATH (constant)">Base::BASE_PATH</a></span></p>
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#players-instance_method" title="#players (instance method)">#<strong>players</strong>  &#x21d2; Array&lt;YahooFantasy::Resource::Transaction::Player] </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Array&lt;YahooFantasy::Resource::Transaction::Player].</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status-instance_method" title="#status (instance method)">#<strong>status</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timestamp-instance_method" title="#timestamp (instance method)">#<strong>timestamp</strong>  &#x21d2; Number </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transaction_id-instance_method" title="#transaction_id (instance method)">#<strong>transaction_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transaction_key-instance_method" title="#transaction_key (instance method)">#<strong>transaction_key</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type-instance_method" title="#type (instance method)">#<strong>type</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Value of add|drop|add_drop|trade.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Base.html" title="YahooFantasy::Resource::Base (class)">Base</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Base.html#access_token-class_method" title="YahooFantasy::Resource::Base.access_token (method)">access_token</a></span>, <span class='object_link'><a href="../Base.html#access_token=-class_method" title="YahooFantasy::Resource::Base.access_token= (method)">access_token=</a></span>, <span class='object_link'><a href="../Base.html#access_token%3F-class_method" title="YahooFantasy::Resource::Base.access_token? (method)">access_token?</a></span>, <span class='object_link'><a href="../Base.html#all-class_method" title="YahooFantasy::Resource::Base.all (method)">all</a></span>, <span class='object_link'><a href="../Base.html#api-class_method" title="YahooFantasy::Resource::Base.api (method)">api</a></span>, <span class='object_link'><a href="../Base.html#api-instance_method" title="YahooFantasy::Resource::Base#api (method)">#api</a></span>, <span class='object_link'><a href="../Base.html#base_path-class_method" title="YahooFantasy::Resource::Base.base_path (method)">base_path</a></span>, <span class='object_link'><a href="../Base.html#build_uri-class_method" title="YahooFantasy::Resource::Base.build_uri (method)">build_uri</a></span>, <span class='object_link'><a href="../Base.html#collection_path-class_method" title="YahooFantasy::Resource::Base.collection_path (method)">collection_path</a></span>, <span class='object_link'><a href="../Base.html#get-class_method" title="YahooFantasy::Resource::Base.get (method)">get</a></span>, <span class='object_link'><a href="../Base.html#initialize-instance_method" title="YahooFantasy::Resource::Base#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="../Base.html#resource_name-class_method" title="YahooFantasy::Resource::Base.resource_name (method)">resource_name</a></span>, <span class='object_link'><a href="../Base.html#resource_path-class_method" title="YahooFantasy::Resource::Base.resource_path (method)">resource_path</a></span>, <span class='object_link'><a href="../Base.html#resource_path-instance_method" title="YahooFantasy::Resource::Base#resource_path (method)">#resource_path</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Subresourceable.html" title="YahooFantasy::Resource::Subresourceable (module)">Subresourceable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Subresourceable.html#subresource_path-instance_method" title="YahooFantasy::Resource::Subresourceable#subresource_path (method)">#subresource_path</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="../Base.html#initialize-instance_method" title="YahooFantasy::Resource::Base#initialize (method)">YahooFantasy::Resource::Base</a></span></p>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="players=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="players-instance_method">
+  
+    #<strong>players</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Player.html" title="YahooFantasy::Resource::Transaction::Player (class)">YahooFantasy::Resource::Transaction::Player</a></span>]</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Array&lt;YahooFantasy::Resource::Transaction::Player].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Player.html" title="YahooFantasy::Resource::Transaction::Player (class)">YahooFantasy::Resource::Transaction::Player</a></span>]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Array&lt;YahooFantasy::Resource::Transaction::Player]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/transaction/transaction.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_players'>players</span>
+  <span class='ivar'>@players</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="status=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status-instance_method">
+  
+    #<strong>status</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/transaction/transaction.rb', line 48</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_status'>status</span>
+  <span class='ivar'>@status</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="timestamp=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="timestamp-instance_method">
+  
+    #<strong>timestamp</strong>  &#x21d2; <tt>Number</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Number</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/transaction/transaction.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_timestamp'>timestamp</span>
+  <span class='ivar'>@timestamp</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="transaction_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="transaction_id-instance_method">
+  
+    #<strong>transaction_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/transaction/transaction.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_transaction_id'>transaction_id</span>
+  <span class='ivar'>@transaction_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="transaction_key=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="transaction_key-instance_method">
+  
+    #<strong>transaction_key</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/transaction/transaction.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_transaction_key'>transaction_key</span>
+  <span class='ivar'>@transaction_key</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="type-instance_method">
+  
+    #<strong>type</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns value of add|drop|add_drop|trade.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>value of add|drop|add_drop|trade</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yahoo_fantasy/resource/transaction/transaction.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_type'>type</span>
+  <span class='ivar'>@type</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Dec  9 20:18:57 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-2.7.5).
+</div>
+
+    </div>
+  </body>
+</html>
