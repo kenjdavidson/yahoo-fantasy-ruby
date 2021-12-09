@@ -6,7 +6,14 @@ module YahooFantasy
   module Resource
     module Team
       # Logo definition for  team
-      Logo = Struct.new(:image_size, :url)
+      #
+      class Logo
+        # @return [String]
+        attr_accessor :url
+
+        # @return [String]
+        attr_accessor :size
+      end
     end
   end
 end

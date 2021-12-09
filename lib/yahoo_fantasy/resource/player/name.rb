@@ -3,14 +3,24 @@
 module YahooFantasy
   module Resource
     module Player
-      # Name
+      # Player name
       #
-      # <first> is provided by given
-      # <last> is provided by surname
-      #
-      # to get around Struct#first warnings
-      #
-      Name = Struct.new(:full, :given, :surname, :ascii_given, :ascii_surname)
+      class Name
+        # @return [String]
+        attr_accessor :full
+
+        # @return [String]
+        attr_accessor :first
+
+        # @return [String]
+        attr_accessor :last
+
+        # @return [String]
+        attr_accessor :ascii_first
+
+        # @return [String]
+        attr_accessor :ascii_last
+      end
     end
   end
 end

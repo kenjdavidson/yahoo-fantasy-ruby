@@ -35,15 +35,15 @@ module YahooFantasy
 
         property :name, class: YahooFantasy::Resource::Player::Name do
           property :full
-          property :given, as: :first
-          property :surname, as: :last
-          property :ascii_given, as: :ascii_first
-          property :ascii_surname, as: :ascii_last
+          property :first
+          property :last
+          property :ascii_first
+          property :ascii_last
         end
 
         property :headshot, class: YahooFantasy::Resource::Player::Headshot do
           property :url
-          property :image_size, as: :size
+          property :size
         end
 
         collection :bye_weeks, wrap: :bye_weeks, as: :week, parse_filter: Parsers::IntegerArray

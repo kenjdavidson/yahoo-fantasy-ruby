@@ -24,7 +24,7 @@ RSpec.describe 'TeamRepresenter' do
     it 'should parse team logos' do
       expect(subject.team_logos).not_to eq(nil)
       expect(subject.team_logos.count).to eq(1)
-      expect(subject.team_logos[0].image_size).to eq('large')
+      expect(subject.team_logos[0].size).to eq('large')
       expect(subject.team_logos[0].url).to eq('https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/25228801831_861d183f44.jpg')
     end
 

@@ -106,8 +106,8 @@ module YahooFantasy
 
         collection :team_logos, as: :team_logo, wrap: :team_logos,
                                 class: YahooFantasy::Resource::Team::Logo do
-          property :image_size, as: :size
           property :url
+          property :size
         end
 
         collection :managers, as: :manager, wrap: :managers,

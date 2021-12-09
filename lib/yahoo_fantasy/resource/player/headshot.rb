@@ -5,7 +5,13 @@ module YahooFantasy
     module Player
       # Player picture.
       #
-      Headshot = Struct.new(:url, :image_size)
+      class Headshot
+        # @return [String]
+        attr_accessor :url
+
+        # @return [String]
+        attr_accessor :size
+      end
     end
   end
 end

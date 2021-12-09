@@ -14,13 +14,51 @@ module YahooFantasy
     autoload :Subresourceable, 'yahoo_fantasy/resource/subresourceable'
     autoload :Base, 'yahoo_fantasy/resource/base'
     autoload :FantasyContent, 'yahoo_fantasy/resource/fantasy_content'
-    autoload :Game, 'yahoo_fantasy/resource/game'
-    autoload :League, 'yahoo_fantasy/resource/league'
-    autoload :Team, 'yahoo_fantasy/resource/team'
-    autoload :Player, 'yahoo_fantasy/resource/player'
+
+    module Game
+      autoload :GameWeek, 'yahoo_fantasy/resource/game/game_week'
+      autoload :PositionType, 'yahoo_fantasy/resource/game/position_type'
+      autoload :RosterPosition, 'yahoo_fantasy/resource/game/roster_position'
+      autoload :Game, 'yahoo_fantasy/resource/game/game'
+    end
+
+    module League
+      autoload :Settings, 'yahoo_fantasy/resource/league/settings'
+      autoload :RosterPosition, 'yahoo_fantasy/resource/league/roster_position'
+      autoload :Stat, 'yahoo_fantasy/resource/league/stat'
+      autoload :Scoreboard, 'yahoo_fantasy/resource/league/scoreboard'
+      autoload :League, 'yahoo_fantasy/resource/league/league'
+    end
+
+    module Team
+      autoload :Logo, 'yahoo_fantasy/resource/team/logo'
+      autoload :Manager, 'yahoo_fantasy/resource/team/manager'
+      autoload :SeasonPoints, 'yahoo_fantasy/resource/team/points'
+      autoload :WeekPoints, 'yahoo_fantasy/resource/team/points'
+      autoload :DatePoints, 'yahoo_fantasy/resource/team/points'
+      autoload :RosterAdds, 'yahoo_fantasy/resource/team/roster_adds'
+      autoload :Standings, 'yahoo_fantasy/resource/team/standings'
+      autoload :Roster, 'yahoo_fantasy/resource/team/roster'
+      autoload :Matchup, 'yahoo_fantasy/resource/team/matchup'
+      autoload :Team, 'yahoo_fantasy/resource/team/team'
+    end
+
+    module Player
+      autoload :Headshot, 'yahoo_fantasy/resource/player/headshot'
+      autoload :Name, 'yahoo_fantasy/resource/player/name'
+      autoload :Player, 'yahoo_fantasy/resource/player/player'
+    end
 
     module Draft
       autoload :DraftResult, 'yahoo_fantasy/resource/draft/draft_result'
     end
+
+    # Stat definition are available in multiple contexts (game, league, player, etc).
+    #
+    Stat = Struct.new(:stat_id, :name, :display_name, :sort_order, :position_types)
+
+    # Stat modifier provides a link between the Stat and the value applied to the stat.
+    # Available in multiple contexts (game, league, player, etc).
+    StatModifier = Struct.new(:stat_id, :value)
   end
 end
