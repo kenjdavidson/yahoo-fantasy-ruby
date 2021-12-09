@@ -111,6 +111,7 @@ RSpec.describe YahooFantasy::XML::League::LeagueRepresenter do
       expect(stat_categories[0].display_name).to eq('Pass Yds')
       expect(stat_categories[0].sort_order).to eq(1)
       expect(stat_categories[0].position_type).to eq('O')
+      expect(stat_categories[0].stat_position_types[0].position_type).to eq('O')
     end
 
     it 'should parse <settings>/<stat_modifiers>' do

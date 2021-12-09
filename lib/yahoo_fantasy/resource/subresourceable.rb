@@ -95,7 +95,7 @@ module YahooFantasy
           class_eval <<-CODE, __FILE__, __LINE__ + 1
             define_method "#{subresource.name}!" do |options = {}|
               path = [
-                subresource_path(subresource),#{' '}
+                subresource_path(subresource),
                 self.class.filter_params(options.delete(:filters)),
                 self.class.out_params(options.delete(:out))
               ].join

@@ -15,15 +15,31 @@ module YahooFantasy
                            :pickem_enabled, :max_weekly_adds
 
         collection :roster_positions, as: :roster_position, wrap: :roster_positions,
-                                      class: YahooFantasy::Resource::League::RosterPosition,
-                                      decorator: League::RosterPositionRepresenter
+                                      class: YahooFantasy::Resource::League::RosterPosition do
+          property :position
+          property :position_type
+          property :count, parse_filter: Parsers::IntegerFilter
+          property :is_starting_position, parse_filter: Parsers::IntegerFilter
+        end
 
         collection :stat_categories, as: :stat, wrap: 'stat_categories/stats',
-                                     class: YahooFantasy::Resource::League::Stat,
-                                     decorator: League::StatCategoryRepresenter
+                                     class: YahooFantasy::Resource::League::StatCategory do
+          property :stat_id, parse_filter: Parsers::IntegerFilter
+          property :enabled, parse_filter: Parsers::IntegerFilter
+          property :name
+          property :display_name
+          property :sort_order, parse_filter: Parsers::IntegerFilter
+          property :position_type
+          property :is_only_display_stat, parse_filter: Parsers::IntegerFilter
+          collection :stat_position_types, as: :stat_position_type, wrap: :stat_position_types,
+                                           class: YahooFantasy::Resource::League::StatPositionType do
+            property :position_type
+            property :is_only_display_stat
+          end
+        end
 
         collection :stat_modifiers, as: :stat, wrap: 'stat_modifiers/stats',
-                                    class: YahooFantasy::Resource::League::StatModifier,
+                                    class: YahooFantasy::Resource::StatModifier,
                                     decorator: League::StatModifierRepresenter
       end
     end

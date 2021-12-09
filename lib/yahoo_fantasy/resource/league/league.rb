@@ -63,12 +63,6 @@ module YahooFantasy
         def game_id
           game_key.to_i
         end
-
-        # @return [String] the resource path (prefix path for subresources)
-        #
-        def resource_path
-          "/league/#{league_key}"
-        end
       end
     end
   end

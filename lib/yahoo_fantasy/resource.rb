@@ -15,6 +15,11 @@ module YahooFantasy
     autoload :Base, 'yahoo_fantasy/resource/base'
     autoload :FantasyContent, 'yahoo_fantasy/resource/fantasy_content'
 
+    module User
+      autoload :User, 'yahoo_fantasy/resource/user/user'
+      autoload :Profile, 'yahoo_fantasy/resource/user/user'
+    end
+
     module Game
       autoload :GameWeek, 'yahoo_fantasy/resource/game/game_week'
       autoload :PositionType, 'yahoo_fantasy/resource/game/position_type'
@@ -46,6 +51,7 @@ module YahooFantasy
     module Player
       autoload :Headshot, 'yahoo_fantasy/resource/player/headshot'
       autoload :Name, 'yahoo_fantasy/resource/player/name'
+      autoload :PlayerStats, 'yahoo_fantasy/resource/player/player_stats'
       autoload :Player, 'yahoo_fantasy/resource/player/player'
     end
 
@@ -53,8 +59,17 @@ module YahooFantasy
       autoload :DraftResult, 'yahoo_fantasy/resource/draft/draft_result'
     end
 
+    module Transaction
+      autoload :Data, 'yahoo_fantasy/resource/transaction/data'
+      autoload :Player, 'yahoo_fantasy/resource/transaction/player'
+      autoload :Transaction, 'yahoo_fantasy/resource/transaction/transaction'
+    end
+
+    # Stat category provides context/details required for managing stats.  The stat category
+    # supplies the available position types for which this stat is available.
+    StatCategory = Struct.new(:stat_id, :name, :display_name, :sort_order, :position_types, :enabled)
+
     # Stat definition are available in multiple contexts (game, league, player, etc).
-    #
     Stat = Struct.new(:stat_id, :name, :display_name, :sort_order, :position_types)
 
     # Stat modifier provides a link between the Stat and the value applied to the stat.

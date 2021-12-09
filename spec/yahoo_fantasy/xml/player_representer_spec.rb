@@ -4,7 +4,7 @@
 #   to make testing a little more dynamic (and also allow for multiple xml files that generate)
 #   tests automatically.
 #
-RSpec.describe YahooFantasy::XML::League::LeagueRepresenter do
+RSpec.describe YahooFantasy::XML::Player::PlayerRepresenter do
   context 'request /player;out=meta or /player' do
     load_fantasy_content "#{__dir__}/player/406.p.31883.xml"
 
@@ -66,6 +66,41 @@ RSpec.describe YahooFantasy::XML::League::LeagueRepresenter do
 
       expect(player.eligible_positions.count).to eq(1)
       expect(player.eligible_positions[0]).to eq('WR')
+    end
+  end
+
+  context 'request /player/stats' do
+    load_fantasy_content "#{__dir__}/player/406.p.31883_stats.xml"
+
+    before(:example) do
+      access_token = double('access_token', request: {})
+      YahooFantasy::Resource::Base.access_token = access_token
+    end
+
+    it 'should parse player_stats' do
+      player_stats = fantasy_content.player.player_stats
+
+      expect(player_stats).not_to eq(nil)
+      expect(player_stats.coverage_type).to eq('season')
+      expect(player_stats.season).to eq(2021)
+      expect(player_stats.date).to eq(nil)
+      expect(player_stats.week).to eq(nil)
+      expect(player_stats.stats.count).to eq(31)
+      expect(player_stats.stats[0].stat_id).to eq(0)
+      expect(player_stats.stats[0].value).to eq(10)
+    end
+
+    it 'should parse advanced_player_stats' do
+      player_stats = fantasy_content.player.player_advanced_stats
+
+      expect(player_stats).not_to eq(nil)
+      expect(player_stats.coverage_type).to eq('season')
+      expect(player_stats.season).to eq(2021)
+      expect(player_stats.date).to eq(nil)
+      expect(player_stats.week).to eq(nil)
+      expect(player_stats.stats.count).to eq(13)
+      expect(player_stats.stats[0].stat_id).to eq(1001)
+      expect(player_stats.stats[0].value).to eq(0)
     end
   end
 end

@@ -39,7 +39,7 @@ module YahooFantasy
         # Stat Categories - is wrapped in an extra level of <stat_category><stat> which
         # needs to be accounted for.
         collection :stat_categories, as: :stat, wrap: 'stat_categories/stats',
-                                     class: YahooFantasy::Resource::Game::Statistic,
+                                     class: YahooFantasy::Resource::StatCategory,
                                      decorator: Game::StatCategoryRepresenter
       end
     end

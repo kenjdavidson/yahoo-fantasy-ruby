@@ -32,6 +32,9 @@ module YahooFantasy
       property :player, decorator: YahooFantasy::XML::Player::PlayerRepresenter,
                         class: YahooFantasy::Resource::Player::Player
 
+      collection :users, as: :user, wrap: :users,
+                         decorator: YahooFantasy::XML::User::UserRepresenter,
+                         class: YahooFantasy::Resource::User::User
       collection :games, as: :game, wrap: :games,
                          decorator: YahooFantasy::XML::Game::GameRepresenter,
                          class: YahooFantasy::Resource::Game::Game
@@ -44,6 +47,9 @@ module YahooFantasy
       collection :players, as: :player, wrap: :players,
                            decorator: YahooFantasy::XML::Player::PlayerRepresenter,
                            class: YahooFantasy::Resource::Player::Player
+      collection :transactions, as: :transaction, wrap: :transactions,
+                                decorator: YahooFantasy::XML::Transaction::TransactionRepresenter,
+                                class: YahooFantasy::Resource::Transaction::Transaction
     end
   end
 end

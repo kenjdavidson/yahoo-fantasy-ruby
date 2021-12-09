@@ -30,6 +30,8 @@ module YahooFantasy
       #   @return [Team::Standings]
       # @!attribute draft_results
       #   @return [Draft::DraftResults]
+      # @!attribute transactions
+      #   @return [Array<Transaction::Transaction>]
       #
       class Team < YahooFantasy::Resource::Base
         filter :team_keys
@@ -39,6 +41,7 @@ module YahooFantasy
         subresource :standings, parser: ->(fc) { fc.team.team_standings }
         subresource :draft_results, endpoint: '/draftresults',
                                     parser: ->(fc) { fc.team.draft_results }
+        subresource :transactions, parser: ->(fc) { fc.team.transactions }
 
         attr_reader :team_key
         attr_accessor :team_id,

@@ -46,7 +46,15 @@ module YahooFantasy
           property :size
         end
 
-        collection :bye_weeks, wrap: :bye_weeks, as: :week, parse_filter: Parsers::IntegerArray
+        property :player_stats, class: YahooFantasy::Resource::Player::PlayerStats,
+                                decorator: YahooFantasy::XML::Player::PlayerStatsRepresenter
+
+        property :player_advanced_stats, class: YahooFantasy::Resource::Player::PlayerStats,
+                                         decorator: YahooFantasy::XML::Player::PlayerStatsRepresenter
+
+        collection :bye_weeks, wrap: :bye_weeks, as: :week,
+                               parse_filter: Parsers::IntegerArray
+
         collection :eligible_positions, wrap: :eligible_positions, as: :position
       end
     end

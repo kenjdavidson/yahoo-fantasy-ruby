@@ -87,16 +87,28 @@ module YahooFantasy
         #
         # @todo maybe move this into a ::Collections
         # @todo fix for rubocop
+        # @todo implement request building logic where levels of resources can be applied
+        #   in order to get something like:
+        #   Game.where(game_key: '1234')
+        #       .include(settings)
+        #       .include(leagues)
+        #       .include(teams)
+        #       .all()
         #
         # @param options [Hash] request options (@see OAuth2::AccessToken#request)
         # @option options [Hash{String => Array<String,Numeric>}] filters
         # @option options [Array<String>,String] out
+        # @option options [String] query if you'd like to provide a custom query string, this gets
+        #   applied after filters and out options.
+        # @return [YahooFantasy::Resource::FantasyContent] the fantasy content response
+        # @yield [YahooFantasy::Resource::FantasyContent] gives the fantasy content back for parsing
         #
         def all(options = {}, &block)
           request_path = +''
           request_path << collection_path
           request_path << filter_params(options.delete(:filters)) if options.key?(:filters)
           request_path << out_params(options.delete(:out)) if options.key?(:out)
+          request_path << options.delete(:query) if options.key?(:query)
 
           api(:get, request_path, options, &block)
         end
@@ -111,29 +123,38 @@ module YahooFantasy
         # @param key [String] the resource key
         # @param options [Hash] @see OAuth2::AccessToken#request
         # @option options [String,Array<String>] :out list of outable subresources
-        # @return [YahooFantasy::Resource::FantasyContent] the yahoo fantasy result
+        # @option options [String] query if you'd like to provide a custom query string, this gets
+        #   applied after filters and out options.
+        # @return [YahooFantasy::Resource::FantasyContent] the fantasy content response
+        # @yield [YahooFantasy::Resource::FantasyContent] gives the fantasy content back for parsing
         #
         def get(key, options = {}, &block)
           request_path = +"#{resource_path}/#{key}"
           request_path << out_params(options.delete(:out)) if options.key?(:out)
+          request_path << options.delete(:query) if options.key?(:query)
+
           api(:get, request_path, options, &block)
         end
-
-        protected
 
         # @return [String] thre resource path, at this point this is just the lowercase name
         #   of the resource class but eventually it should be customizable
         # @todo this probably needs to be customizable
         #
         def collection_path
-          @collection_path ||= "/#{to_s.split('::').last}".pluralize.underscore.downcase
+          @collection_path ||= "/#{resource_name}".pluralize
         end
 
         # @return [String] the resource path, at this point this is just the lowercase name
         #   of the resource class but eventually it should be customizable
         #
         def resource_path
-          @resource_path ||= "/#{to_s.split('::').last}".underscore.downcase
+          @resource_path ||= "/#{resource_name}"
+        end
+
+        # @return [String] the default resource name of the current class downcased and
+        #   underscored (singular)
+        def resource_name
+          @resource_name ||= to_s.split('::').last.underscore.downcase
         end
       end
 
@@ -158,13 +179,16 @@ module YahooFantasy
         self.class.api(verb, path, opts, &block)
       end
 
-      # Default implementation provides the classes `resource_path` value.  This would generally be
-      # an abstract/interface method in Java and would require overridding in all subclasses.
+      # Default resource path is provided by looking up `/resource_name/resource_key`.
+      #
+      # @example
+      #   class YahooFantasy::Resource::Game::Game.resource_path # => /game/[game_key]
       #
       # @return [String] the resource path
       #
       def resource_path
-        self.class.resource_path
+        key = instance_variable_get("@#{self.class.resource_name}_key")
+        "#{self.class.resource_path}/#{key}"
       end
     end
   end

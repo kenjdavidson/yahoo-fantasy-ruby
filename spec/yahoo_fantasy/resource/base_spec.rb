@@ -72,58 +72,71 @@ RSpec.describe YahooFantasy::Resource::Base do
     end
   end
 
-  # context '.collection_path' do
-  #   it 'should return /test_resources for TestResource' do
-  #     expect(TestResource.collection_path).to eq('/test_resources')
-  #   end
-  # end
+  context '.all' do
+    before do
+      @access_token = spy(OAuth2::AccessToken)
+      YahooFantasy::Resource::Base.access_token = @access_token
+    end
 
-  # context '.resource_path' do
-  #   it 'should return /test_resource for TestResource resource' do
-  #     expect(TestResource.resource_path).to eq('/test_resource')
-  #   end
-  # end
+    it 'should call /test_resources' do
+      TestResource.all
+
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resources', {})
+    end
+
+    it 'should call /test_resources;resource_keys=1234,5678' do
+      TestResource.all(filters: { resource_keys: %w[1234 4567] })
+
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resources;resource_keys=1234,4567', {})
+    end
+
+    it 'should call /test_resources;resource_keys=1234,5678;out=subresource' do
+      TestResource.all(filters: { resource_keys: %w[1234 4567] }, out: %w[subresource])
+
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resources;resource_keys=1234,4567;out=subresource', {})
+    end
+  end
 
   context '.get' do
-    it 'should call api with /test_resource/1' do
-      access_token = spy(OAuth2::AccessToken)
-      YahooFantasy::Resource::Base.access_token = access_token
+    before do
+      @access_token = spy(OAuth2::AccessToken)
+      YahooFantasy::Resource::Base.access_token = @access_token
+    end
 
+    it 'should call api with /test_resource/1' do
       TestResource.get(1)
 
-      expect(access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1', {})
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1', {})
     end
 
     it 'should call api with /test_resource/1;out=sub1,sub2 with String' do
-      access_token = spy(OAuth2::AccessToken)
-      YahooFantasy::Resource::Base.access_token = access_token
-
       TestResource.get(1, out: 'sub1,sub2')
 
-      expect(access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1;out=sub1,sub2', {})
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1;out=sub1,sub2', {})
     end
 
     it 'should call api with /test_resource/1;out=sub1,sub2 with Array' do
-      access_token = spy(OAuth2::AccessToken)
-      YahooFantasy::Resource::Base.access_token = access_token
-
       TestResource.get(1, out: %w[sub1 sub2])
 
-      expect(access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1;out=sub1,sub2', {})
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1;out=sub1,sub2', {})
     end
+  end
 
-    it 'should return fantasy content when no block given' do
-      xml = File.read "#{__dir__}/../xml/game/406.xml"
-      response = Faraday::Response.new(status: 200, response_headers: {}, body: xml)
+  context '.resource_name' do
+    it 'should be test_resource' do
+      expect(TestResource.resource_name).to eq('test_resource')
+    end
+  end
 
-      access_token = double(OAuth2::AccessToken)
-      allow(access_token).to receive(:request).and_return(OAuth2::Response.new(response, parse: :yahoo_fantasy_content))
+  context '.collection_path' do
+    it 'should be /test_resource' do
+      expect(TestResource.collection_path).to eq('/test_resources')
+    end
+  end
 
-      YahooFantasy::Resource::Base.access_token = access_token
-
-      yahoo_content = TestResource.get(1)
-
-      expect(yahoo_content.class).to be(YahooFantasy::Resource::FantasyContent)
+  context '.resource_name' do
+    it 'should be /test_resource' do
+      expect(TestResource.resource_path).to eq('/test_resource')
     end
   end
 end

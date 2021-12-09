@@ -21,7 +21,7 @@ RSpec.describe YahooFantasy::Resource::Game::Game do
         [:leagues, YahooFantasy::Resource::League::League],
         [:game_weeks, YahooFantasy::Resource::Game::GameWeek],
         [:roster_positions, YahooFantasy::Resource::Game::RosterPosition],
-        [:stat_categories, YahooFantasy::Resource::Game::Statistic],
+        [:stat_categories, YahooFantasy::Resource::StatCategory],
         [:position_types, YahooFantasy::Resource::Game::PositionType]
       ].each do |sub|
         expect(subject.subresources.keys.include?(sub[0])).to eq(true), "expected #{sub[0]} subresource"

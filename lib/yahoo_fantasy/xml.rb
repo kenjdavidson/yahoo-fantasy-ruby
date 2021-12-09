@@ -13,6 +13,10 @@ module YahooFantasy
     autoload :UserRepresenter, 'yahoo_fantasy/xml/user_representer'
     autoload :ProfileRepresenter, 'yahoo_fantasy/xml/profile_representer'
 
+    module User
+      autoload :UserRepresenter, 'yahoo_fantasy/xml/user/user_representer'
+    end
+
     module Game
       autoload :GameRepresenter, 'yahoo_fantasy/xml/game/game_representer'
       autoload :GameWeekRepresenter, 'yahoo_fantasy/xml/game/game_week_representer'
@@ -34,11 +38,16 @@ module YahooFantasy
     end
 
     module Player
+      autoload :PlayerStatsRepresenter, 'yahoo_fantasy/xml/player/player_stats_representer'
       autoload :PlayerRepresenter, 'yahoo_fantasy/xml/player/player_representer'
     end
 
     module Draft
       autoload :DraftResultRepresenter, 'yahoo_fantasy/xml/draft/draft_result_representer'
+    end
+
+    module Transaction
+      autoload :TransactionRepresenter, 'yahoo_fantasy/xml/transaction/transaction_representer'
     end
   end
 end

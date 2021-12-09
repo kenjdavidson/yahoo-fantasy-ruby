@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fantasy_content xml:lang="en-US" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/transactions;transaction_keys=406.l.117376.tr.584" time="19.593954086304ms" copyright="Data provided by Yahoo! and STATS, LLC" refresh_rate="60" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
+    <transactions count="1">
+        <transaction>
+            <transaction_key>406.l.117376.tr.584</transaction_key>
+            <transaction_id>584</transaction_id>
+            <type>add/drop</type>
+            <status>successful</status>
+            <timestamp>1638224605</timestamp>
+            <players count="2">
+                <player>
+                    <player_key>406.p.32814</player_key>
+                    <player_id>32814</player_id>
+                    <name>
+                        <full>DeeJay Dallas</full>
+                        <first>DeeJay</first>
+                        <last>Dallas</last>
+                        <ascii_first>DeeJay</ascii_first>
+                        <ascii_last>Dallas</ascii_last>
+                    </name>
+                    <editorial_team_abbr>Sea</editorial_team_abbr>
+                    <display_position>RB</display_position>
+                    <position_type>O</position_type>
+                    <transaction_data>
+                        <type>add</type>
+                        <source_type>freeagents</source_type>
+                        <destination_type>team</destination_type>
+                        <destination_team_key>406.l.117376.t.4</destination_team_key>
+                        <destination_team_name>Chalupa Batman</destination_team_name>
+                    </transaction_data>
+                </player>
+                <player>
+                    <player_key>406.p.32608</player_key>
+                    <player_id>32608</player_id>
+                    <name>
+                        <full>D'Ernest Johnson</full>
+                        <first>D'Ernest</first>
+                        <last>Johnson</last>
+                        <ascii_first>D'Ernest</ascii_first>
+                        <ascii_last>Johnson</ascii_last>
+                    </name>
+                    <editorial_team_abbr>Cle</editorial_team_abbr>
+                    <display_position>RB</display_position>
+                    <position_type>O</position_type>
+                    <transaction_data>
+                        <type>drop</type>
+                        <source_type>team</source_type>
+                        <source_team_key>406.l.117376.t.4</source_team_key>
+                        <source_team_name>Chalupa Batman</source_team_name>
+                        <destination_type>waivers</destination_type>
+                    </transaction_data>
+                </player>
+            </players>
+        </transaction>
+    </transactions>
+</fantasy_content>
+<!-- fantasy-sports-api- -public-production-bf1-5b698477fc-62kg8 Thu Dec  9 17:02:52 UTC 2021 -->

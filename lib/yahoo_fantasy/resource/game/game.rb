@@ -60,13 +60,6 @@ module YahooFantasy
         def self.get(key, options = {})
           super(key, options, &:game)
         end
-
-        # Provides the appropriate resource path defined by `/game/#{game_key}`
-        # @return [String]
-        #
-        def resource_path
-          "/game/#{game_key}"
-        end
       end
     end
   end

@@ -3,6 +3,9 @@
 module YahooFantasy
   module Resource
     module Player
+      # Player statistics provides the `stat_id` and the `value` (number of) the stat they have
+      # over the provided coverage type.
+      #
       class PlayerStats
         # @return [String] coverage type of season|date|week
         attr_accessor :coverage_type

@@ -12,35 +12,35 @@ module YahooFantasy
       # https://developer.yahoo.com/fantasysports/guide/#players-collection
       #
       class Player < YahooFantasy::Resource::Base
-        filter :player_keys, type: String
+        filter :player_keys, type: ::String
 
-        filter :position, type: String
+        filter :position, type: ::String
 
-        filter :status, type: String,
+        filter :status, type: ::String,
                         values: %w[A FA W T K],
                         definitions: ['All Available', 'Free Agent', 'Waivers', 'Taken', 'Keeper']
 
-        filter :search, type: String
+        filter :search, type: ::String
 
-        filter :sort, type: String, values: %w[NAME OR AR PTS],
+        filter :sort, type: ::String, values: %w[NAME OR AR PTS],
                       definitions: ['Last,First', 'Overall Rank', 'Actual Rank', 'Points']
 
-        filter :sort_type, type: String, values: %w[season week date]
+        filter :sort_type, type: ::String, values: %w[season week date]
 
         # Used with `sort_type=season`
-        filter :sort_season, type: Number
+        filter :sort_season, type: ::Integer
 
         # Used with `sort_type=date` for baseball, basketball, and hockey
-        filter :sort_date, type: String
+        filter :sort_date, type: ::String
 
         # Used with `sort_type=week` for Footbal
-        filter :sort_week, type: Number
+        filter :sort_week, type: ::Integer
 
         # Any integer greater/equal to 0
-        filter :start, type: Number
+        filter :start, type: ::Integer
 
         # Any integer greater than 0
-        filter :count, type: Number
+        filter :count, type: ::Integer
 
         # Statistics can bet requeseted by using the `out: [:stats]` during the request
         # or calling `player.statistics`.
@@ -118,11 +118,11 @@ module YahooFantasy
         # @return [Number]
         attr_accessor :is_editable
 
-        # @return [PlayerStats]
+        # @return [Player::PlayerStats]
         attr_accessor :player_stats
 
-        # @return [PlayerStats]
-        attr_accessor :advanced_player_stats
+        # @return [Player::PlayerStats]
+        attr_accessor :player_advanced_stats
 
         def droppable?
           !is_undroppable.zero?

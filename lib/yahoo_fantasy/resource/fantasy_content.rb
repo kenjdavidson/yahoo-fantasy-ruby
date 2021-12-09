@@ -10,6 +10,7 @@ module YahooFantasy
                     :games,
                     :leagues,
                     :teams,
+                    :transactions,
                     :players,
                     :game,
                     :league,
