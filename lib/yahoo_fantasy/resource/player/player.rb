@@ -124,6 +124,18 @@ module YahooFantasy
         # @return [Player::PlayerStats]
         attr_accessor :player_advanced_stats
 
+        # @see YahooFantasy::Resource::Base#get
+        # @return [Array<YahooFantasy::Resource::Player::Player>]
+        def self.all(options = {})
+          super(options, &:players)
+        end
+
+        # @see YahooFantasy::Resource::Base#get
+        # @return [YahooFantasy::Resource::Player::Player]
+        def self.get(key, options = {})
+          super(key, options, &:player)
+        end
+
         def droppable?
           !is_undroppable.zero?
         end

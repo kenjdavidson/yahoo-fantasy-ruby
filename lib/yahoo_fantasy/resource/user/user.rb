@@ -19,6 +19,18 @@ module YahooFantasy
 
         attr_accessor :guid, :profile
 
+        # @see YahooFantasy::Resource::Base#get
+        # @return [Array<YahooFantasy::Resource::User::User>]
+        def self.all(options = {})
+          super(options, &:users)
+        end
+
+        # @see YahooFantasy::Resource::Base#get
+        # @return [YahooFantasy::Resource::User::User]
+        def self.get(key, options = {})
+          super(key, options, &:users[0])
+        end
+
         # Override the {Base#collection_path} to hardwire the use_login parameter.
         def self.collection_path
           '/users;use_login=1'

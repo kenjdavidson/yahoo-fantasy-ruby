@@ -8,6 +8,8 @@ module YahooFantasy
       # - Reject
       # - Allowing/Disallowing
       #
+      # TradeAction(s) are processed by Yahoo using `:put`.
+      #
       class TradeAction
         class << self
           %w[accept reject allow disallow].each do |req|

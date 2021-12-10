@@ -58,7 +58,7 @@ RSpec.describe 'TeamRepresenter' do
   end
 
   context '/team/roster' do
-    load_fantasy_content "#{__dir__}/team/406.l.117376.t.4_roster.xml"
+    load_fantasy_content "#{__dir__}/406.l.117376.t.4_roster.xml"
 
     subject { fantasy_content.team.roster }
 
@@ -88,7 +88,7 @@ RSpec.describe 'TeamRepresenter' do
   end
 
   context '/team/matchups' do
-    load_fantasy_content "#{__dir__}/team/406.l.117376.t.4_matchups.xml"
+    load_fantasy_content "#{__dir__}/406.l.117376.t.4_matchups.xml"
 
     subject { fantasy_content.team.matchups }
 
@@ -118,7 +118,7 @@ RSpec.describe 'TeamRepresenter' do
   end
 
   context '/team/draftresults;out=players' do
-    load_fantasy_content "#{__dir__}/team/406.l.117376.t.4_draftresults.xml"
+    load_fantasy_content "#{__dir__}/406.l.117376.t.4_draftresults.xml"
 
     subject { fantasy_content.team.matchups }
 

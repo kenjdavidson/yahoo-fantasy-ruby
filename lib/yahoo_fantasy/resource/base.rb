@@ -100,8 +100,10 @@ module YahooFantasy
         # @option options [Array<String>,String] out
         # @option options [String] query if you'd like to provide a custom query string, this gets
         #   applied after filters and out options.
-        # @return [YahooFantasy::Resource::FantasyContent] the fantasy content response
+        # @return [YahooFantasy::Resource::FantasyContent] the fantasy content response, unless a block is
+        #   provided, in which case the block should parse the appropriate content from the FantasyContent
         # @yield [YahooFantasy::Resource::FantasyContent] gives the fantasy content back for parsing
+        # @yieldreturn [fantasy::Resource::Base] generally a parsed resource for which you are requesting
         #
         def all(options = {}, &block)
           request_path = +''

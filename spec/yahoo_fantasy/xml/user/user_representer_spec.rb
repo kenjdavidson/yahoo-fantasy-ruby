@@ -5,7 +5,7 @@ require 'representable/debug'
 
 RSpec.describe 'TransactionRepresenter' do
   context '/user;out=profile' do
-    load_fantasy_content "#{__dir__}/user/user_profile.xml"
+    load_fantasy_content "#{__dir__}/user_profile.xml"
 
     subject { fantasy_content.users[0] }
 

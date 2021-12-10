@@ -51,12 +51,14 @@ module YahooFantasy
         attr_accessor :game_key, :game_id, :name, :code, :type, :url, :season, :is_registration_over, :is_game_over,
                       :is_offseason
 
-        # @todo There's got to be a meta way to do this
+        # @see YahooFantasy::Resource::Base#all
+        # @return [Array<YahooFantasy::Resource::Game::Game>]
         def self.all(options = {})
           super(options, &:games)
         end
 
-        # @todo There's got to be a meta way to do this
+        # @see YahooFantasy::Resource::Base#get
+        # @return [YahooFantasy::Resource::Game::Game]
         def self.get(key, options = {})
           super(key, options, &:game)
         end

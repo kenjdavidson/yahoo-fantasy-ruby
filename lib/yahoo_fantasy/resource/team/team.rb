@@ -71,6 +71,18 @@ module YahooFantasy
         attr_accessor :team_points,
                       :team_projected_points
 
+        # @see YahooFantasy::Resource::Base#get
+        # @return [Array<YahooFantasy::Resource::Team::Team>]
+        def self.all(options = {})
+          super(options, &:teams)
+        end
+
+        # @see YahooFantasy::Resource::Base#get
+        # @return [YahooFantasy::Resource::Team::Team]
+        def self.get(key, options = {})
+          super(key, options, &:team)
+        end
+
         # Set the `team_key` and appropriate parent keys
         # @todo provide validation based on `[\d+].l.[\d+].t.[\d+]`
         #

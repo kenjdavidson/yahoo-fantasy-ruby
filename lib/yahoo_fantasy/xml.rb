@@ -48,6 +48,7 @@ module YahooFantasy
 
     module Transaction
       autoload :TransactionRepresenter, 'yahoo_fantasy/xml/transaction/transaction_representer'
+      autoload :TradeActionRepresenter, 'yahoo_fantasy/xml/transaction/trade_action_representer'
     end
   end
 end

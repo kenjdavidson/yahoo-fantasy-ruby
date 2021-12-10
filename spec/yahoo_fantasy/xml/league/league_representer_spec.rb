@@ -125,7 +125,7 @@ RSpec.describe YahooFantasy::XML::League::LeagueRepresenter do
   end
 
   context 'request contains out=settings' do
-    load_fantasy_content "#{__dir__}/league/406.l.117376_standings.xml"
+    load_fantasy_content "#{__dir__}/406.l.117376_standings.xml"
 
     it 'should parse <standings>' do
       standings = fantasy_content.league.standings
@@ -161,7 +161,7 @@ RSpec.describe YahooFantasy::XML::League::LeagueRepresenter do
   end
 
   context 'request contains out=draftresults' do
-    load_fantasy_content "#{__dir__}/league/406.l.117376_draftresults.xml"
+    load_fantasy_content "#{__dir__}/406.l.117376_draftresults.xml"
 
     it 'should parse <draftresults>' do
       draft_results = fantasy_content.league.draft_results
