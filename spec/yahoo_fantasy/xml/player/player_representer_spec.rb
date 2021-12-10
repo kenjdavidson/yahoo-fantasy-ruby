@@ -6,7 +6,7 @@
 #
 RSpec.describe YahooFantasy::XML::Player::PlayerRepresenter do
   context 'request /player;out=meta or /player' do
-    load_fantasy_content "#{__dir__}/player/406.p.31883.xml"
+    load_fantasy_content "#{__dir__}/406.p.31883.xml"
 
     before(:example) do
       access_token = double('access_token', request: {})

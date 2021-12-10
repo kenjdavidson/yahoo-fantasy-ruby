@@ -1,33 +1,30 @@
 # frozen_string_literal: true
 
 RSpec.describe YahooFantasy::Resource::Subresourceable do
-  let(:resourced_class) do
-    Class.new(YahooFantasy::Resource::Base) do
+  before do
+    test_resource = Class.new(YahooFantasy::Resource::Base) do
       include YahooFantasy::Resource::Subresourceable
       include YahooFantasy::Resource::Filterable
 
       subresource :subresource, filters: { filter1: {}, filter2: {} }
-
-      def resource_path
-        '/resource/1'
-      end
     end
+    stub_const('TestResource', test_resource)
   end
 
-  context 'SubresourcedClass definition' do
+  context '.subresource' do
     subject { resourced_class }
 
     it 'has two subresources' do
-      expect(resourced_class.subresources.keys.length).to eq 1
+      expect(TestResource.subresources.keys.length).to eq 1
     end
 
     it 'has a subresource named :subresource1 defined' do
-      expect(resourced_class.subresources.keys.include?(:subresource)).to eq true
+      expect(TestResource.subresources.keys.include?(:subresource)).to eq true
     end
   end
 
   context 'subresource accessor methods' do
-    subject { resourced_class.new }
+    subject { TestResource.new }
 
     it 'responds to subresource' do
       expect(subject.respond_to?(:subresource)).to eq(true)
@@ -43,11 +40,25 @@ RSpec.describe YahooFantasy::Resource::Subresourceable do
   end
 
   context '.subresource_path' do
-    subject { resourced_class.new }
+    subject { TestResource.new(test_resource_key: '123') }
 
     it 'creates appropriate Subresource path' do
-      subresource = resourced_class.subresources[:subresource]
-      expect(subject.subresource_path(subresource)).to eq('/resource/1/subresource')
+      subresource = TestResource.subresources[:subresource]
+      expect(subject.subresource_path(subresource)).to eq('/test_resource//subresource')
+    end
+  end
+
+  context '.out_params' do
+    it 'returns empty if no out parameters' do
+      expect(TestResource.out_params).to eq('')
+    end
+
+    it 'returns string out parameters' do
+      expect(TestResource.out_params('subresource1,subresource2')).to eq(';out=subresource1,subresource2')
+    end
+
+    it 'returns Arrau out parameters' do
+      expect(TestResource.out_params(%w[subresource1 subresource2])).to eq(';out=subresource1,subresource2')
     end
   end
 end

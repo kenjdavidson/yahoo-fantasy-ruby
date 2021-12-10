@@ -58,17 +58,21 @@ RSpec.describe YahooFantasy::Resource::Base do
   end
 
   context '.api' do
+    before do
+      @access_token = spy(OAuth2::AccessToken)
+      YahooFantasy::Resource::Base.access_token = @access_token
+    end
+
     it 'raises YahooFantasy::MissingAccessTokenError when no AccessToken' do
+      YahooFantasy::Resource::Base.access_token = nil
+
       expect { YahooFantasy::Resource::Base.api(:get, '/games') }.to raise_error(YahooFantasy::MissingAccessTokenError)
     end
 
     it 'should call OAuth2::AccessToken#request method for GET /path with no options' do
-      access_token = spy(OAuth2::AccessToken)
-
-      YahooFantasy::Resource::Base.access_token = access_token
       YahooFantasy::Resource::Base.api(:get, '/path')
 
-      expect(access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/path', {})
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/path', {})
     end
   end
 
@@ -95,6 +99,12 @@ RSpec.describe YahooFantasy::Resource::Base do
 
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resources;resource_keys=1234,4567;out=subresource', {})
     end
+
+    it 'should call /test_resources;resource_keys=1234,4567/query;output=custom' do
+      TestResource.all(filters: { resource_keys: %w[1234 4567] }, query: '/query;output=custom')
+
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resources;resource_keys=1234,4567/query;output=custom', {})
+    end
   end
 
   context '.get' do
@@ -103,22 +113,28 @@ RSpec.describe YahooFantasy::Resource::Base do
       YahooFantasy::Resource::Base.access_token = @access_token
     end
 
-    it 'should call api with /test_resource/1' do
+    it 'should call /test_resource/1' do
       TestResource.get(1)
 
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1', {})
     end
 
-    it 'should call api with /test_resource/1;out=sub1,sub2 with String' do
+    it 'should call /test_resource/1;out=sub1,sub2 with String' do
       TestResource.get(1, out: 'sub1,sub2')
 
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1;out=sub1,sub2', {})
     end
 
-    it 'should call api with /test_resource/1;out=sub1,sub2 with Array' do
+    it 'should call /test_resource/1;out=sub1,sub2 with Array' do
       TestResource.get(1, out: %w[sub1 sub2])
 
       expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1;out=sub1,sub2', {})
+    end
+
+    it 'should call /test_resource/1/query;output=custom' do
+      TestResource.get(1, query: '/query;output=custom')
+
+      expect(@access_token).to have_received(:request).with(:get, 'https://fantasysports.yahooapis.com/fantasy/v2/test_resource/1/query;output=custom', {})
     end
   end
 
@@ -134,7 +150,7 @@ RSpec.describe YahooFantasy::Resource::Base do
     end
   end
 
-  context '.resource_name' do
+  context '.resource_path' do
     it 'should be /test_resource' do
       expect(TestResource.resource_path).to eq('/test_resource')
     end

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fantasy_content xml:lang="en-US" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1;out=profile" time="27.704000473022ms" copyright="Data provided by Yahoo! and STATS, LLC" refresh_rate="60" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
+    <users count="1">
+        <user>
+            <guid>HJXEGSOPDMQLLZFJIQ2BCZA3Z4</guid>
+            <profile>
+                <display_name>Kenneth</display_name>
+                <fantasy_profile_url>https://profiles.sports.yahoo.com/user/HJXEGSOPDMQLLZFJIQ2BCZA3Z4</fantasy_profile_url>
+                <image_url>https://s.yimg.com/ag/images/bb794a81-8eb6-4614-b0e4-2399e94a9a38_64sq.jpg</image_url>
+                <unique_username>kenneth-G7BP4</unique_username>
+            </profile>
+        </user>
+    </users>
+</fantasy_content>
+<!-- fantasy-sports-api- -public-production-bf1-5b698477fc-tv5qd Fri Dec 10 15:04:41 UTC 2021 -->

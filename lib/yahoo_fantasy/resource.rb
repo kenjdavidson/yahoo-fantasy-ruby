@@ -9,6 +9,16 @@ module YahooFantasy
   # YahooFantasy::Resource#api method is left available in order to provide your own
   # custom request logic.
   #
+  # The currently available resources and collections are:
+  # - {Resource::User::User}
+  # - {Resource::Game::Game}
+  # - {Resource::League::League}
+  # - {Resource::Team::Team}
+  # - {Resource::Player::Player}
+  #
+  # With some partial support for:
+  # - {Resource::Transaction:Transaction}
+  #
   module Resource
     autoload :Filterable, 'yahoo_fantasy/resource/filterable'
     autoload :Subresourceable, 'yahoo_fantasy/resource/subresourceable'
@@ -63,6 +73,7 @@ module YahooFantasy
       autoload :Data, 'yahoo_fantasy/resource/transaction/data'
       autoload :Player, 'yahoo_fantasy/resource/transaction/player'
       autoload :Transaction, 'yahoo_fantasy/resource/transaction/transaction'
+      autoload :TradeAction, 'yahoo_fantasy/resource/transaction/trade_action'
     end
 
     # Stat category provides context/details required for managing stats.  The stat category

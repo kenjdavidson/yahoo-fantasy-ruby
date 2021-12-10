@@ -44,30 +44,40 @@ module YahooFantasy
   class Client < OAuth2::Client
     SITE = 'https://api.login.yahoo.com/'
 
-    # Yahoo OAuth2 authorize url - users are/shoudl be directed here when they are requesting
-    # a login
+    # Yahoo OAuth2 authorize url
     #
     AUTHORIZE_URL = '/oauth2/request_auth'
 
-    # Yahoo OAuth2 token url - url in which an access code is exchanged for an access token
+    # Yahoo OAuth2 token url
     #
     TOKEN_URL = '/oauth2/get_token'
 
-    # Open Id user info url
+    # Open Id user info url.
+    # More information regarding this endpoint can be found at
+    # https://developer.yahoo.com/oauth2/guide/openid_connect/
     #
     USERINFO_URL = '/openid/v1/userinfo'
 
     # Yahoo Fantasy write scope (default)
+    # More information regarding available scopes can be found at
+    # https://developer.yahoo.com/oauth2/guide/yahoo_scopes/
     #
     WRITE_SCOPE = 'fspt-w'
 
     # Yahoo Fantasy read scope
+    # More information regarding available scopes can be found at
+    # https://developer.yahoo.com/oauth2/guide/yahoo_scopes/
     #
     READ_SCOPE = 'fspt-r'
 
     # Out of Bounds redirect uri
-    # Setting out of bounds causes Yahoo to provide the token code on screen instead
-    # of through a redirect.
+    # This option isn't documented anywhere (anymore) except for in their example PHP code.  You
+    # used to need to put `oob` into your application redirect_uri config.  Now, you don't need
+    # to do this, but when you do supply `oob` the user follows a different flow:
+    # - They must open the {Client::AUTHORIZE_URL}, generally in a new window
+    # - They login as normal
+    # - They will be provided with the `code` that you need to accept and manually post to your
+    #   callback url
     #
     OOB = 'oob'
 
@@ -79,6 +89,9 @@ module YahooFantasy
     # - `scope` Defaults to {Client::WRITE_SCOPE}
     # - `options[site]` {Client::SITE}
     # - `options[redirect_uri]` = `oob`
+    #
+    # If a block is provided, it will be passed through to the {OAuth2::Client} for
+    # use during the connection creation.
     #
     # @param client_id [String]
     # @param client_secret [String]

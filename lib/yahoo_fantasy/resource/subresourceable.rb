@@ -12,12 +12,20 @@ module YahooFantasy
     # @example
     #   class SubresourcedClass
     #     include Subresourceable
+    #     include Filterable
     #
     #     subresource :sub_entities, verb: :Get,
     #                                endpoint: '/subentities',
     #                                filters: [:name],
     #                                parser: ->(fc) { fc.resource.subentities }
     #   end
+    #
+    # Note that `Subresourceable` is required to also be `Filterable`.  I'm not sure of the
+    # best way to manage this:
+    # - Have `Subresourceable` include `Filterable` (top choice)
+    # - Just have this assumed requirement?
+    # - Have `Subresourceable` implement it's own `filter_params` and then have that overridden
+    #     by anything that includes `Filterable` as well?
     #
     # @todo look into how this case is handled, where methods are required or assumed inside the
     #   including class.  I'm starting to think that the SubResource is the way to go - and that each
@@ -89,8 +97,6 @@ module YahooFantasy
           # `/team/stats` request you get back the full `Team` object anyhow, and would just need to (effectively)
           # loop through all the instance variables and set them.  This would negate the need for the
           # `parser ->(fc) { fc.team.team_points }`.
-          #
-          # @!method subresource!
           #
           class_eval <<-CODE, __FILE__, __LINE__ + 1
             define_method "#{subresource.name}!" do |options = {}|
