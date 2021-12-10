@@ -35,7 +35,6 @@ RSpec.describe 'TransactionRepresenter' do
       transaction = subject[0]
 
       expect(transaction.players[0].player_key).to eq('406.p.32814')
-      expect(transaction.players[0].player_id).to eq(32_814)
       expect(transaction.players[0].name.full).to eq('DeeJay Dallas')
     end
 
@@ -43,7 +42,6 @@ RSpec.describe 'TransactionRepresenter' do
       transaction = subject[0]
 
       expect(transaction.players[1].player_key).to eq('406.p.32608')
-      expect(transaction.players[1].player_id).to eq(32_608)
       expect(transaction.players[1].name.full).to eq('D\'Ernest Johnson')
     end
   end

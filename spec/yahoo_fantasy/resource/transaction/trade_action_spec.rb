@@ -10,7 +10,7 @@ RSpec.describe YahooFantasy::Resource::Transaction::TradeAction do
     end
 
     it 'returns a TradeAction accept request' do
-      request = subject.accept('123.t.123', 'I accept')
+      request = subject.accept('123.t.123', trade_note: 'I accept')
 
       expect(request.transaction_key).to eq('123.t.123')
       expect(request.type).to eq('pending_trade')
@@ -28,7 +28,7 @@ RSpec.describe YahooFantasy::Resource::Transaction::TradeAction do
     end
 
     it 'returns a TradeAction reject request' do
-      request = subject.reject('123.t.123', 'I reject')
+      request = subject.reject('123.t.123', trade_note: 'I reject')
 
       expect(request.transaction_key).to eq('123.t.123')
       expect(request.type).to eq('pending_trade')

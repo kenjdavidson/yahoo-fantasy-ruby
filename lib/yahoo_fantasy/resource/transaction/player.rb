@@ -13,11 +13,17 @@ module YahooFantasy
       #   @return [String]
       # @!attribute name
       #   @return [YahooFantasy::Resource::Player::Name]
-      # @!attribute transaction_data
+      # @!attribute data
       #   @return [YahooFantasy::Resource::Transaction::Data]
       #
       class Player
-        attr_accessor :player_key, :player_id, :name, :transaction_data
+        attr_accessor :player_key, :name, :data
+
+        def initialize(player_key, name: nil, data: nil)
+          @player_key = player_key
+          @name = name
+          @data = data
+        end
       end
     end
   end

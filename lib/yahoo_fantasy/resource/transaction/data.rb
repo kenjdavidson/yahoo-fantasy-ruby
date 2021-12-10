@@ -18,6 +18,26 @@ module YahooFantasy
       #
       class Data
         attr_accessor :type, :source_type, :source_team_key, :destination_type, :destination_team_key
+
+        class << self
+          # Builds an add using the appropriate team key
+          # @param team_key [String] the destination team key
+          def add(team_key)
+            Data.new.tap do |d|
+              d.type = 'add'
+              d.destination_team_key = team_key
+            end
+          end
+
+          # Builds a drop using the appropriate team key
+          # @param team_key [String] the source team key
+          def drop(team_key)
+            Data.new.tap do |d|
+              d.type = 'drop'
+              d.source_team_key = team_key
+            end
+          end
+        end
       end
     end
   end

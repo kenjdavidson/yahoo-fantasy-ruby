@@ -10,6 +10,16 @@ require 'oauth2'
 # @author kenjdavidson
 #
 module YahooFantasy
+  # Quick and dirty initialization of classes
+  module Initializable
+    def initialize(params = {})
+      params.each do |key, value|
+        setter = "#{key}="
+        send(setter, value) if respond_to?(setter.to_sym, false)
+      end
+    end
+  end
+
   require 'yahoo_fantasy/version'
 
   # YahooFantasyError providing access to the parsed YahooFantasy::Resource::FantasyContent

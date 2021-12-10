@@ -8,7 +8,7 @@ RSpec.describe YahooFantasy::XML::Transaction::TradeActionRepresenter do
 
   context 'accept request' do
     it 'should serialize with trade_note' do
-      request = YahooFantasy::Resource::Transaction::TradeAction.accept('248.l.55438.pt.11', 'Dude, that is a totally fair trade.')
+      request = YahooFantasy::Resource::Transaction::TradeAction.accept('248.l.55438.pt.11', trade_note: 'Dude, that is a totally fair trade.')
 
       xml = subject.new(request).to_xml
 
@@ -49,7 +49,7 @@ RSpec.describe YahooFantasy::XML::Transaction::TradeActionRepresenter do
 
   context 'reject request' do
     it 'should serialize with trade_note' do
-      request = YahooFantasy::Resource::Transaction::TradeAction.reject('248.l.55438.pt.11', 'No way Jose!')
+      request = YahooFantasy::Resource::Transaction::TradeAction.reject('248.l.55438.pt.11', trade_note: 'No way Jose!')
 
       xml = subject.new(request).to_xml
 
@@ -110,7 +110,7 @@ RSpec.describe YahooFantasy::XML::Transaction::TradeActionRepresenter do
   end
 
   context 'disallow trade request' do
-    it 'should serialize' do
+    it 'should serialize xml' do
       request = YahooFantasy::Resource::Transaction::TradeAction.disallow('248.l.55438.pt.11')
 
       xml = subject.new(request).to_xml

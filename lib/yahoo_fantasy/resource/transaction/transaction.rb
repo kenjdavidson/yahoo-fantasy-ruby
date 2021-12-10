@@ -34,6 +34,10 @@ module YahooFantasy
         WaiverEdit = Struct.new(:transaction_key, :type, :waiver_priority, :uses_faab)
 
         filter :transaction_keys
+        filter :type, type: String, values: %w[add drop commish trade]
+        filter :team_key, type: String
+        filter :type_with_team_key, type: String, values: %w[waiver pending_trade]
+        filter :count, type: Integer
 
         # @return [String]
         attr_accessor :transaction_key
