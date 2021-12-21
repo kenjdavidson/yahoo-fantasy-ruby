@@ -19,10 +19,8 @@ module YahooFantasy
       class Player
         attr_accessor :player_key, :name, :data
 
-        def initialize(player_key, name: nil, data: nil)
+        def initialize(player_key)
           @player_key = player_key
-          @name = name
-          @data = data
         end
       end
     end

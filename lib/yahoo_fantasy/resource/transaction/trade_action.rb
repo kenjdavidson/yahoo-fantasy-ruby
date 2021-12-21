@@ -19,41 +19,57 @@ module YahooFantasy
       # No action is require for a delete, as it uses the HTTP verb :delete against the transaction resource
       class TradeAction
         class << self
-          %w[accept reject allow disallow vote_against].each do |req|
-            define_method(req) do |transaction_key, trade_note: nil, voter_team_key: nil|
-              TradeAction.new(transaction_key, 'pending_trade', req, trade_note: trade_note, voter_team_key: voter_team_key)
+          %w[pending_trade].each do |req|
+            define_method(req) do |trader_team_key, trader_player_key, tradee_team_key, tradee_player_key, &block|
+              TradeAction.new(req, trader_team_key, trader_player_key, tradee_team_key, tradee_player_key, &block)
             end
           end
         end
 
         # @return [String]
-        attr_reader :transaction_key
+        attr_reader :trader_team_key
+
+        # @return [String]
+        attr_reader :tradee_team_key
 
         # @return [String]
         attr_reader :type
 
-        # @return [String]
-        attr_reader :action
-
         # @return [String] any notes to provide along with the action
         attr_accessor :trade_note
 
+        # @return [Array<Player>] list of players with transaction data
+        attr_accessor :players
+
         # Defines a new trade action.
         #
-        # @param transaction_key [String]
-        # @param type [String] `pending_trade`
-        # @param action [String] `accept|reject|allow|disallow`
-        # @param trade_note [String] defaults to blank
-        # @param voter_team_key [String] the team key required for against votes.
-        # @raise StandardError if no voter_team_key provided for vote against
-        def initialize(transaction_key, type, action, trade_note: nil, voter_team_key: nil)
-          raise 'Voter team key is required for voting against trade' if action.eql?('vote_against') && voter_team_key.nil?
-
-          @transaction_key = transaction_key
+        # @param type [String] `pending_trade` at this point there is only one type
+        # @param trader_team_key [String]
+        # @param trader_player_key [String]
+        # @param tradee_team_key [String]
+        # @param tradee_player_key [String]
+        #
+        def initialize(type, trader_team_key, trader_player_key, tradee_team_key, tradee_player_key)
           @type = type
-          @action = action
-          @trade_note = trade_note.to_s unless trade_note.nil?
-          @voter_team_key = voter_team_key.to_s unless voter_team_key.nil?
+          @trader_team_key = trader_team_key
+          @tradee_team_key = tradee_team_key
+          @players = build_players_data(trader_player_key, tradee_player_key)
+        end
+
+        private
+
+        def build_players_data(trader_player_key, tradee_player_key)
+          [
+            build_player_data(trader_player_key, trader_team_key, tradee_team_key),
+            build_player_data(tradee_player_key, tradee_team_key, trader_team_key)
+          ]
+        end
+
+        def build_player_data(player_key, trader_team_key, tradee_team_key)
+          data = Data.trade(trader_team_key, tradee_team_key)
+          Player.new(player_key).tap do |p|
+            p.data = data
+          end
         end
       end
     end

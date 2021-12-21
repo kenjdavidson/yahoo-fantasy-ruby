@@ -6,9 +6,10 @@ require 'representable/debug'
 RSpec.describe YahooFantasy::XML::Transaction::TradeActionRepresenter do
   subject { YahooFantasy::XML::Transaction::TradeActionRepresenter }
 
-  context 'accept request' do
-    it 'should serialize with trade_note' do
-      request = YahooFantasy::Resource::Transaction::TradeAction.accept('248.l.55438.pt.11', trade_note: 'Dude, that is a totally fair trade.')
+  context 'pending_trade request' do
+    it 'should serialize correctly' do
+      request = YahooFantasy::Resource::Transaction::TradeAction.pending_trade('{team1}', '{player1}', '{team2}', '{player2}')
+      request.trade_note = 'Let me have em!'
 
       xml = subject.new(request).to_xml
 
@@ -16,112 +17,28 @@ RSpec.describe YahooFantasy::XML::Transaction::TradeActionRepresenter do
         <?xml version='1.0'?>
         <fantasy_content>
           <transaction>
-            <transaction_key>248.l.55438.pt.11</transaction_key>
             <type>pending_trade</type>
-            <action>accept</action>
-            <trade_note>Dude, that is a totally fair trade.</trade_note>
-          </transaction>
-        </fantasy_content>
-      XML
-
-      expect(xml).to eq(expected)
-    end
-
-    it 'should serialize without trade_note' do
-      request = YahooFantasy::Resource::Transaction::TradeAction.accept('248.l.55438.pt.11')
-
-      xml = subject.new(request).to_xml
-
-      expected = <<~XML
-        <?xml version='1.0'?>
-        <fantasy_content>
-          <transaction>
-            <transaction_key>248.l.55438.pt.11</transaction_key>
-            <type>pending_trade</type>
-            <action>accept</action>
-          </transaction>
-        </fantasy_content>
-      XML
-
-      expect(xml).to eq(expected)
-    end
-  end
-
-  context 'reject request' do
-    it 'should serialize with trade_note' do
-      request = YahooFantasy::Resource::Transaction::TradeAction.reject('248.l.55438.pt.11', trade_note: 'No way Jose!')
-
-      xml = subject.new(request).to_xml
-
-      expected = <<~XML
-        <?xml version='1.0'?>
-        <fantasy_content>
-          <transaction>
-            <transaction_key>248.l.55438.pt.11</transaction_key>
-            <type>pending_trade</type>
-            <action>reject</action>
-            <trade_note>No way Jose!</trade_note>
-          </transaction>
-        </fantasy_content>
-      XML
-
-      expect(xml).to eq(expected)
-    end
-
-    it 'should serialize without trade_note' do
-      request = YahooFantasy::Resource::Transaction::TradeAction.reject('248.l.55438.pt.11')
-
-      xml = subject.new(request).to_xml
-
-      expected = <<~XML
-        <?xml version='1.0'?>
-        <fantasy_content>
-          <transaction>
-            <transaction_key>248.l.55438.pt.11</transaction_key>
-            <type>pending_trade</type>
-            <action>reject</action>
-          </transaction>
-        </fantasy_content>
-      XML
-
-      expect(xml).to eq(expected)
-    end
-  end
-
-  context 'allow trade request' do
-    it 'should serialize' do
-      request = YahooFantasy::Resource::Transaction::TradeAction.allow('248.l.55438.pt.11')
-
-      xml = subject.new(request).to_xml
-
-      expected = <<~XML
-        <?xml version='1.0'?>
-        <fantasy_content>
-          <transaction>
-            <transaction_key>248.l.55438.pt.11</transaction_key>
-            <type>pending_trade</type>
-            <action>allow</action>
-          </transaction>
-        </fantasy_content>
-      XML
-
-      expect(xml).to eq(expected)
-    end
-  end
-
-  context 'disallow trade request' do
-    it 'should serialize xml' do
-      request = YahooFantasy::Resource::Transaction::TradeAction.disallow('248.l.55438.pt.11')
-
-      xml = subject.new(request).to_xml
-
-      expected = <<~XML
-        <?xml version='1.0'?>
-        <fantasy_content>
-          <transaction>
-            <transaction_key>248.l.55438.pt.11</transaction_key>
-            <type>pending_trade</type>
-            <action>disallow</action>
+            <trader_team_key>{team1}</trader_team_key>
+            <tradee_team_key>{team2}</tradee_team_key>
+            <trade_note>Let me have em!</trade_note>
+            <players>
+              <player>
+                <player_key>{player1}</player_key>
+                <transaction_data>
+                  <type>pending_trade</type>
+                  <source_team_key>{team1}</source_team_key>
+                  <destination_team_key>{team2}</destination_team_key>
+                </transaction_data>
+              </player>
+              <player>
+                <player_key>{player2}</player_key>
+                <transaction_data>
+                  <type>pending_trade</type>
+                  <source_team_key>{team2}</source_team_key>
+                  <destination_team_key>{team1}</destination_team_key>
+                </transaction_data>
+              </player>
+            </players>
           </transaction>
         </fantasy_content>
       XML

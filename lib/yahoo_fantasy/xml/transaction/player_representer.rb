@@ -14,7 +14,8 @@ module YahooFantasy
           property :ascii_last
         end
 
-        property :data, class: YahooFantasy::Resource::Transaction::Data,
+        property :data, as: :transaction_data,
+                        class: YahooFantasy::Resource::Transaction::Data,
                         decorator: YahooFantasy::XML::Transaction::DataRepresenter
       end
     end

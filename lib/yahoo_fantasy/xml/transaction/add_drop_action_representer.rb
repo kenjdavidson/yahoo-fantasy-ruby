@@ -16,10 +16,10 @@ module YahooFantasy
         property :player, class: YahooFantasy::Resource::Transaction::Player,
                           decorator: YahooFantasy::XML::Transaction::PlayerRepresenter,
                           skip_render: ->(represented) { represented.nil? }
-        property :players, as: :player, wrap: :players,
-                           class: YahooFantasy::Resource::Transaction::Player,
-                           decorator: YahooFantasy::XML::Transaction::PlayerRepresenter,
-                           skip_render: ->(represented) { represented.nil? }
+        collection :players, as: :player, wrap: :players,
+                             class: YahooFantasy::Resource::Transaction::Player,
+                             decorator: YahooFantasy::XML::Transaction::PlayerRepresenter,
+                             skip_render: ->(represented) { represented.nil? }
       end
     end
   end

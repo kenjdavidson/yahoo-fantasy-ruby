@@ -37,6 +37,14 @@ module YahooFantasy
               d.source_team_key = team_key
             end
           end
+
+          def trade(trader_key, tradee_key)
+            Data.new.tap do |d|
+              d.type = 'pending_trade'
+              d.source_team_key = trader_key
+              d.destination_team_key = tradee_key
+            end
+          end
         end
       end
     end

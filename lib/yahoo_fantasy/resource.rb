@@ -73,9 +73,10 @@ module YahooFantasy
       autoload :Data, 'yahoo_fantasy/resource/transaction/data'
       autoload :Player, 'yahoo_fantasy/resource/transaction/player'
       autoload :Transaction, 'yahoo_fantasy/resource/transaction/transaction'
-      autoload :TradeAction, 'yahoo_fantasy/resource/transaction/trade_action'
+      autoload :TradeVoteAction, 'yahoo_fantasy/resource/transaction/trade_vote_action'
       autoload :WaiverAction, 'yahoo_fantasy/resource/transaction/waiver_action'
       autoload :AddDropAction, 'yahoo_fantasy/resource/transaction/add_drop_action'
+      autoload :TradeAction, 'yahoo_fantasy/resource/transaction/trade_action'
     end
 
     # Stat category provides context/details required for managing stats.  The stat category

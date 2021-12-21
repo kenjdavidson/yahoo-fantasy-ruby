@@ -15,8 +15,19 @@ module YahooFantasy
       class AddDropAction
         class << self
           %w[add drop add_drop].each do |type|
-            define_method(type) do |options = {}, &block|
-              AddDropAction.new(type, options, &block)
+            define_method(type) do |team_key, player_key, &block|
+              AddDropAction.new(type, team_key,
+                                player_key: player_key,
+                                &block)
+            end
+          end
+
+          %w[add_drop].each do |type|
+            define_method(type) do |team_key, add_player_key, drop_player_key, &block|
+              AddDropAction.new(type.gsub('_', '/'), team_key,
+                                add_player_key: add_player_key,
+                                drop_player_key: drop_player_key,
+                                &block)
             end
           end
         end
@@ -40,25 +51,43 @@ module YahooFantasy
 
         # Create a new request
         #
-        # @param type [String] should be `add|drop`
-        # @param player [Transaction::Player] the player to be added along with appropriate
-        #   {Transaction::Data}
-        # @param players [Array<Transaction::Player>] the players to be add/drop(ed) along with the
-        #   appropriate {Transaction::Data}
+        # @param type [String] should be `add|drop|add/drop`
+        # @param team_key [String]
+        # @param options [Hash] options for appropriate action
+        # @option faab [Float]
+        # @option player_key [String]
+        # @option add_player_key [String]
+        # @option drop_player_key [String]
         # @yield [self] if a block is provided
+        #
         # @raise StandardError if add|drop and no player is provided
         # @raise StandardError if add/drop and no players are provided
         #
-        def initialize(type, options = {})
-          raise 'player add|drop actions' if %w[add drop].any?(type) && !options.key?(:player)
-          raise 'players are required for add/drop action' if 'add/drop'.eql?(type) && !options.contains?(:players)
+        def initialize(type, team_key, options = {})
+          raise 'invalid action type' unless %w[add drop add/drop].any?(type)
 
           @type = type
           @faab_bid = options[:faab]
-          @player = options[:player] if %w[add drop].any?(type)
-          @players = options[:players] if 'add/drop'.eql?(type)
+          @player = build_player_data(type, team_key, options[:player_key]) if %w[add drop].any?(type)
+          @players = build_players_data(team_key, options[:add_player_key], options[:drop_player_key]) if 'add/drop'.eql?(type)
 
           instance_eval(&block) if block_given?
+        end
+
+        private
+
+        def build_players_data(team_key, add_player_key, drop_player_key)
+          [
+            build_player_data('add', team_key, add_player_key),
+            build_player_data('drop', team_key, drop_player_key)
+          ]
+        end
+
+        def build_player_data(type, team_key, player_key)
+          data = 'add'.eql?(type) ? Data.add(team_key) : Data.drop(team_key)
+          Player.new(player_key).tap do |p|
+            p.data = data
+          end
         end
       end
     end

@@ -8,10 +8,7 @@ RSpec.describe YahooFantasy::XML::Transaction::AddDropActionRepresenter do
 
   context 'add request' do
     it 'should serialize correctly' do
-      add = YahooFantasy::Resource::Transaction::Data.add('{team_key}')
-      player = YahooFantasy::Resource::Transaction::Player.new('{player_key', data: add)
-
-      request = YahooFantasy::Resource::Transaction::AddDropAction.add(player: player)
+      request = YahooFantasy::Resource::Transaction::AddDropAction.add('{team_key}', '{player_key}')
 
       xml = subject.new(request).to_xml
 
@@ -37,10 +34,7 @@ RSpec.describe YahooFantasy::XML::Transaction::AddDropActionRepresenter do
 
   context 'drop request' do
     it 'should serialize correctly' do
-      drop = YahooFantasy::Resource::Transaction::Data.drop('{team_key}')
-      player = YahooFantasy::Resource::Transaction::Player.new('{player_key', data: drop)
-
-      request = YahooFantasy::Resource::Transaction::AddDropAction.drop(player: player)
+      request = YahooFantasy::Resource::Transaction::AddDropAction.drop('{team_key}', '{player_key}')
 
       xml = subject.new(request).to_xml
 
@@ -66,12 +60,7 @@ RSpec.describe YahooFantasy::XML::Transaction::AddDropActionRepresenter do
 
   context 'add/drop request' do
     it 'should serialize correctly' do
-      add = YahooFantasy::Resource::Transaction::Data.add('{team_key}')
-      add_player = YahooFantasy::Resource::Transaction::Player.new('{player_key', data: add)
-      drop = YahooFantasy::Resource::Transaction::Data.drop('{team_key}')
-      drop_player = YahooFantasy::Resource::Transaction::Player.new('{player_key', data: drop)
-
-      request = YahooFantasy::Resource::Transaction::AddDropAction.add_drop(players: [add_player, drop_player])
+      request = YahooFantasy::Resource::Transaction::AddDropAction.add_drop('{team_key}', '{add_player_key}', '{drop_player_key}')
 
       xml = subject.new(request).to_xml
 
@@ -82,14 +71,14 @@ RSpec.describe YahooFantasy::XML::Transaction::AddDropActionRepresenter do
             <type>add/drop</type>
             <players>
               <player>
-                <player_key>{player_key}</player_key>
+                <player_key>{add_player_key}</player_key>
                 <transaction_data>
                   <type>add</type>
                   <destination_team_key>{team_key}</destination_team_key>
                 </transaction_data>
               </player>
               <player>
-                <player_key>{player_key}</player_key>
+                <player_key>{drop_player_key}</player_key>
                 <transaction_data>
                   <type>drop</type>
                   <source_team_key>{team_key}</source_team_key>

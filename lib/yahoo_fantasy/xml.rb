@@ -50,9 +50,10 @@ module YahooFantasy
       autoload :TransactionRepresenter, 'yahoo_fantasy/xml/transaction/transaction_representer'
       autoload :PlayerRepresenter, 'yahoo_fantasy/xml/transaction/player_representer'
       autoload :DataRepresenter, 'yahoo_fantasy/xml/transaction/data_representer'
-      autoload :TradeActionRepresenter, 'yahoo_fantasy/xml/transaction/trade_action_representer'
+      autoload :TradeVoteActionRepresenter, 'yahoo_fantasy/xml/transaction/trade_vote_action_representer'
       autoload :WaiverActionRepresenter, 'yahoo_fantasy/xml/transaction/waiver_action_representer'
       autoload :AddDropActionRepresenter, 'yahoo_fantasy/xml/transaction/add_drop_action_representer'
+      autoload :TradeActionRepresenter, 'yahoo_fantasy/xml/transaction/trade_action_representer'
     end
   end
 end

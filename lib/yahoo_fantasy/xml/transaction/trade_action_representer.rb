@@ -3,7 +3,7 @@
 module YahooFantasy
   module XML
     module Transaction
-      # Serialize TradeAction to XML
+      # Serialize WaiverAction to XML
       #
       # Each item is delivered by wrapping in a <transaction> instead of the class name,
       # there are also no namespaces.
@@ -11,10 +11,14 @@ module YahooFantasy
       class TradeActionRepresenter < YahooFantasy::XML::BaseRepresenter
         self.representation_wrap = :transaction
 
-        property :transaction_key
         property :type
-        property :action
-        property :trade_note, skip_render: ->(represented) { represented.nil? }
+        property :trader_team_key
+        property :tradee_team_key
+        property :trade_note
+
+        collection :players, as: :player, wrap: :players,
+                             class: YahooFantasy::Resource::Transaction::Player,
+                             decorator: YahooFantasy::XML::Transaction::PlayerRepresenter
       end
     end
   end
