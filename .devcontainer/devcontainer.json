@@ -52,6 +52,7 @@
 		"hoovercj.ruby-linter",
 		"miguel-savignano.ruby-symbols",
 		"wingrunr21.vscode-ruby",
+		"ms-vscode.test-adapter-converter",
 		"connorshea.vscode-ruby-test-adapter"
 	],
 	
