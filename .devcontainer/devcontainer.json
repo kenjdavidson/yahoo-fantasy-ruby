@@ -39,7 +39,16 @@
 			"*_test.rb",
 			"test_*.rb",
 			"*_spec.rb"
-		]
+		],
+		"css.validate": false,
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": true,
+			"strings": true
+		},
+		"files.associations": {
+			"*.html.erb": "html"
+		}
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -53,7 +62,8 @@
 		"miguel-savignano.ruby-symbols",
 		"wingrunr21.vscode-ruby",
 		"ms-vscode.test-adapter-converter",
-		"connorshea.vscode-ruby-test-adapter"
+		"connorshea.vscode-ruby-test-adapter",
+		"bradlc.vscode-tailwindcss"
 	],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

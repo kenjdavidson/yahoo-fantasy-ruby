@@ -10,7 +10,53 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class='bg-white'>
+    <div class="min-h-screen flex flex-col">
+      <nav class="bg-gray-800" data-controller="class-toggle" data-class-toggle-toggle-id-value="mobile-menu">
+        <%= render "shared/fullnav" %>
+      </nav>
+
+      <% if content_for? :page_title %>
+      <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-bold text-gray-900">
+            <%= yield :page_title %>
+          </h1>
+        </div>
+      </header>
+      <% end %>
+
+      <main class="flex-1">
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <%= yield %>
+        </div>
+      </main>
+
+      <footer class="bg-gray-800 divide-y-1 text-gray-300">
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex flex-col md:flex-row">
+          <div class="basis-1/4">
+            <p>
+              
+            </p>
+          </div>
+          <div class="basis-3/4 flex flex-col md:flex-row justify-evenly">
+            <div class="grow">
+              <h5 class="text-gray-50 uppercase font-medium">Links</h5>
+            </div>
+            <div class="grow">
+              <h5 class="text-gray-50 uppercase font-medium">Documentation</h5>
+            </div>
+            <div class="grow">
+              <h5 class="text-gray-50 uppercase font-medium">Legal</h5>
+              <p><a href="/privacy">Privacy</a></p>
+              <p><a href="/terms">Terms of Use</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <p class="text-center text-gray-300"><span class="text-purple-500 font-bold italic">Y!</span><span class="text-white font-medium">Fantasy</span> Ruby (Rails) Example</p>
+        </div>
+      </footer>
+    </div>  
   </body>
 </html>

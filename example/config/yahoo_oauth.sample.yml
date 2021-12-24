@@ -1,0 +1,14 @@
+default: &default
+  client_id: <%= ENV[:yahoo_client_id] %>
+  client_secret: <%= ENV[:yahoo_client_secret] %>
+  redirect_uri: oob
+  scope: fspt-w
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
