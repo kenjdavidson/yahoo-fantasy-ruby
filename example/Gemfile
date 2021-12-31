@@ -25,6 +25,11 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# In order to get around the :post only setting for rails.
+# This could be skipped by adding :get to the OmniAuth.config.allowed_request_methods
+gem 'omniauth', '~> 2.0.4'
+gem 'omniauth-rails_csrf_protection', '~> 1.0.0'
+
 # Include local Yahoo Fantasy gem
 gem 'yahoo-fantasy', path: '../'
 

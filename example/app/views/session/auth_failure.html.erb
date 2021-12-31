@@ -1,0 +1,8 @@
+<% content_for :page_title do %>
+    Authentication Failure
+<% end %>
+
+<h1>Unabled to Login</h1>
+<p>There was an issue attempting to log into Yahoo!  It was most likely a problem on my side, but I'd try to login again just to be safe.</p>
+<p><%= error %></p>
+<p><%= link_to 'Login with Yahoo!', auth_yahoo_path, method: :post %></p>

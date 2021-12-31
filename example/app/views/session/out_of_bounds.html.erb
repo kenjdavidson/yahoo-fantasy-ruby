@@ -1,14 +1,24 @@
+<% content_for :page_title do %>
+    Login with Yahoo!
+<% end %>
+
 <div>
     <div>
         <h5>Login with Yahoo!</h5>
         <p>In order to login with Yahoo! please follow the steps below:</p>
         <ol>
-            <li>Continue to the link <a href="" aria-label="Link to yahoo" target="_blank"></a>.</li>
-            <li>When asked to login, validate the login request and complete.  You will provided with a <b>code</b> once your login is completed.</li>
-            <li>Enter the login code in the form and click <b>Accept</b></li>
+            <li>Continue to <a href="<%= redirect_url %>" aria-label="Link to yahoo" target="_blank">Yahoo! Login</a>.</li>
+            <li>You'll be asked to log in using your Yahoo! account name and password.</li>
+            <li>You'll then be provided a <b>SHaring approval code</b> which you'll need to copy.</li>
+            <li>Enter the login code in the form and click <b>Login</b></li>
         </ol>
     </div>
     <div>
-        <% form_for %>
+        <%= form_with url: callback_path, method: :post do |form| %>
+        <%=   form.hidden_field :state, value: state %>
+        <%=   form.label :code, "Code:" %>    
+        <%=   form.text_field :code %>
+        <%=   form.submit "Login" %>
+        <% end %>
     </div>
 </div>

@@ -6,11 +6,11 @@ Rails.application.routes.draw do
   get '/privacy', to: 'static_pages#privacy'
   get '/terms', to: 'static_pages#terms'
 
-  # SessionController handles the user/session management from OmniAuth
-  # In this particular case, /auth/yahoo is passed through to the session#code
-  # which will display a simple form providing the user a link and an input to
-  # continue.
-  get '/auth/yahoo', to: 'session#oob'
+  # OmniAuth/OAuth2 handles logging in.  To kick this off you must provide a link to
+  # the POST /auth/yahoo_oauth to kick off the functionality.
+  get '/auth/failure', to: 'session#auth_failure'
+  get '/auth/yahoo', to: 'static_pages#index'
+  post '/auth/yahoo', to: 'session#out_of_bounds'
   post '/auth/yahoo/callback', to: 'session#create'
   delete '/auth/logout', to: 'session#destroy'
 end
