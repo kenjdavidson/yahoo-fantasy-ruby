@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'oauth2'
+require 'yahoo_fantasy/yahoo_fantasy_error'
 
 module YahooFantasy
   # YahooFantasy::Client
@@ -146,7 +147,9 @@ module YahooFantasy
 
       super(verb, url, request_options)
     rescue OAuth2::Error => e
-      raise YahooFantasy::YahooFantasyError, e.response.parsed
+      raise YahooFantasy::YahooFantasyError, e.response.parsed if e.response.parsed.is_a? YahooFantasy::Resource::FantasyContent
+
+      raise e
     end
   end
 end

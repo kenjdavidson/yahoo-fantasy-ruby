@@ -149,5 +149,21 @@ RSpec.describe YahooFantasy::Client do
 
       expect { @client.request(:get, url) }.to raise_error(YahooFantasy::YahooFantasyError, 'Invalid game key provided - 1111111')
     end
+
+    it 'raises error on 400 invalid redirect uri' do
+      url = 'http://yahoo-fantasy-test'
+      body = "{ error: 'INVALID_REDIRECT_URI', error_description: 'Redirect URI doesn\'t match with registered URI' }"
+      response = double('Faraday::Response',
+                        status: 400,
+                        headers: {},
+                        body: body)
+      connection = double('Faraday::Connection',
+                          build_url: url,
+                          run_request: response)
+
+      @client.connection = connection
+
+      expect { @client.request(:get, url) }.to raise_error(OAuth2::Error, 'INVALID_REDIRECT_URI Redirect URI doesn\'t match with registered URI')
+    end
   end
 end
