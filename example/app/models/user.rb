@@ -11,4 +11,9 @@
 #
 class User < ApplicationRecord
   has_one :credential, dependent: :destroy
+
+  def update_credential(credential)
+    self.credential = credential
+    save
+  end
 end
